@@ -282,5 +282,3 @@ fetch('http://localhost/civil-registrar/api/employees.php') // Adjust the URL ba
     });
 
 </script>
-
-

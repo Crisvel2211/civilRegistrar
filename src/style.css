@@ -6,3 +6,12 @@
 .transition-width {
     transition: width 0.3s ease;
 }
+#resident-list {
+    position: absolute; /* Make sure the list is positioned correctly */
+    max-height: 200px; /* Limit height */
+    overflow-y: auto; /* Enable scrolling */
+    z-index: 10; /* Ensure it appears above other elements */
+}
+#resident-list li {
+    list-style-type: none; /* Remove bullet points */
+}

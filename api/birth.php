@@ -10,7 +10,11 @@ if ($method === 'GET') {
         // Retrieve a single birth registration by ID
         $id = intval($_GET['id']);
         
-        $sql = "SELECT * FROM birth_registration WHERE id = $id";
+        // Update the SQL query to join with the users table to get the name
+        $sql = "SELECT br.*, u.name AS user_name 
+                FROM birth_registration br
+                JOIN users u ON br.userId = u.id 
+                WHERE br.id = $id";
         $result = $conn->query($sql);
         
         if ($result && $result->num_rows > 0) {
@@ -28,21 +32,25 @@ if ($method === 'GET') {
     $employeeId = isset($_GET['employee_id']) ? intval($_GET['employee_id']) : null;
     $status = isset($_GET['status']) ? $conn->real_escape_string($_GET['status']) : '';
 
-    $sql = "SELECT * FROM birth_registration WHERE 1=1";
+    // Update the SQL query to include the join
+    $sql = "SELECT br.*, u.name AS user_name 
+            FROM birth_registration br
+            JOIN users u ON br.userId = u.id 
+            WHERE 1=1";
 
     // Filter by employee ID if provided
     if ($employeeId) {
-        $sql .= " AND employee_id = $employeeId";
+        $sql .= " AND br.employee_id = $employeeId";
     }
 
-    // Filter by search query
+    // Filter by resident name instead of first name and last name
     if ($search) {
-        $sql .= " AND (child_first_name LIKE '%$search%' OR child_last_name LIKE '%$search%')";
+        $sql .= " AND (CONCAT(u.name) LIKE '%$search%')";
     }
 
     // Filter by status if provided
     if ($status) {
-        $sql .= " AND status = '$status'";
+        $sql .= " AND br.status = '$status'";
     }
 
     $result = $conn->query($sql);
@@ -54,6 +62,7 @@ if ($method === 'GET') {
         echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
     }
 }
+
 
 
 

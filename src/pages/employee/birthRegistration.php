@@ -25,10 +25,9 @@ $updateProfileContent = "
                 <thead class='bg-gray-200'>
                     <tr>
                         <th class='px-4 py-2'>ID</th>
-                        <th class='px-4 py-2'>First Name</th>
-                        <th class='px-4 py-2'>Last Name</th>
+                        <th class='px-4 py-2'>Resident Name</th> <!-- New column for userId -->
                         <th class='px-4 py-2'>Status</th>
-                        <th class='px-4 py-2'>View</th>
+                        <th class='px-4 py-2'>Verification</th>
                         <th class='px-4 py-2'>Actions</th>
                     </tr>
                 </thead>
@@ -36,6 +35,7 @@ $updateProfileContent = "
                     <!-- Data will be inserted here dynamically -->
                 </tbody>
             </table>
+
 
             <!-- Status Update Modal -->
             <div id='statusUpdateModal' class='fixed inset-0 items-center justify-center z-50 hidden'>
@@ -96,7 +96,10 @@ const fetchBirthRegistrations = () => {
     const status = document.getElementById('statusFilter').value;
     const employeeId = localStorage.getItem('userId'); // Replace with the logged-in employee's ID
 
-    fetch(`http://localhost/civil-registrar/api/birth.php?employee_id=${employeeId}&search=${search}&status=${status}`)
+    // Make sure to encode the search parameter for safe URL usage
+    const encodedSearch = encodeURIComponent(search);
+
+    fetch(`http://localhost/civil-registrar/api/birth.php?employee_id=${employeeId}&search=${encodedSearch}&status=${status}`)
         .then(response => response.json())
         .then(data => {
             if (Array.isArray(data)) {
@@ -107,8 +110,7 @@ const fetchBirthRegistrations = () => {
                     const row = `
                         <tr>
                             <td class='px-4 py-2'>${birth.id}</td>
-                            <td class='px-4 py-2'>${birth.child_first_name}</td>
-                            <td class='px-4 py-2'>${birth.child_last_name}</td>
+                            <td class='px-4 py-2'>${birth.user_name}</td> <!-- Display user name here -->
                             <td class='px-4 py-2 text-center'>
                                 <span class='${birth.status === "verified" ? "bg-green-200" : "bg-yellow-200"} text-green-800 text-xs font-medium px-2.5 py-0.5 rounded'>
                                     ${birth.status}
@@ -135,6 +137,8 @@ const fetchBirthRegistrations = () => {
         })
         .catch(error => console.error('Error:', error));
 };
+
+
 
 // Call the function when the page loads or filters are changed
 document.getElementById('searchInput').addEventListener('input', fetchBirthRegistrations);
