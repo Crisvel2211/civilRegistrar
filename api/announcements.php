@@ -1,103 +1,110 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-include 'db.php'; // Include your database connection
-
 header('Content-Type: application/json');
+include 'db.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    createAnnouncement();
-} else {
-    echo json_encode(['message' => 'Method not allowed']);
-    http_response_code(405);
+$method = $_SERVER['REQUEST_METHOD'];
+
+// Define the base URL for the uploaded images
+$base_url = 'http://localhost/civil-registrar/api/uploads/';
+
+// Check the request method
+if ($method == 'GET') {
+    // Retrieve user role and user ID from the query parameters
+    $role = $_GET['role'] ?? null;
+    $userId = $_GET['userId'] ?? null;
+
+    if ($role && $userId) {
+        // Define the query based on the user's role
+        if ($role === 'employee') {
+            $sql = "SELECT * FROM announcements WHERE announcement_type = 'employee' OR announcement_type = 'all' ORDER BY created_at DESC";
+        } elseif ($role === 'resident') {
+            $sql = "SELECT * FROM announcements WHERE announcement_type = 'resident' OR announcement_type = 'all' ORDER BY created_at DESC";
+        } else {
+            echo json_encode(["error" => "Invalid role"]);
+            exit;
+        }
+
+        // Execute the query
+        $result = $conn->query($sql);
+
+        if ($result) {
+            $announcements = [];
+            while ($row = $result->fetch_assoc()) {
+                $announcements[] = $row;
+            }
+            echo json_encode($announcements);
+        } else {
+            echo json_encode(["error" => $conn->error]);
+        }
+    } else {
+        echo json_encode(["error" => "Role or UserId is missing"]);
+    }
 }
 
-function createAnnouncement() {
-    global $conn;
+if ($method == 'POST') {
+    // Check if POST data is set
+    $userId = $_POST['userId'] ?? null;
+    $title = $_POST['title'] ?? null;
+    $description = $_POST['description'] ?? null;
+    $announcement_type = $_POST['announcement_type'] ?? null;
 
-    // Check if POST fields are set
-    if (isset($_POST['title'], $_POST['description'], $_POST['posted_by'])) {
-        $title = trim($_POST['title']);
-        $description = trim($_POST['description']);
-        $postedBy = trim($_POST['posted_by']);
+    // Handle file uploads
+    $image = $_FILES['image'] ?? null;
+    $upload_dir = 'uploads/'; // Directory where files will be uploaded
+    $file_path = '';
 
-        // Check if fields are empty
-        if (empty($title) || empty($description) || empty($postedBy)) {
-            echo json_encode(['message' => 'All fields are required.']);
-            http_response_code(400);
-            return;
+    // Check and create upload directory if it doesn't exist
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0755, true);
+    }
+
+    // Check for file upload errors
+    if ($image) {
+        if ($image['error'] !== UPLOAD_ERR_OK) {
+            echo json_encode(["error" => "Error uploading file. Error Code: " . $image['error']]);
+            exit;
         }
 
-        // Initialize image path
-        $imagePath = null;
+        $file_name = basename($image['name']);
+        $target_file = $upload_dir . uniqid() . '_' . $file_name;
 
-        // Handle image upload
-        if (isset($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
-            $imagePath = uploadImage($_FILES['image']);
-            if (is_string($imagePath)) {
-                echo json_encode(['message' => $imagePath]); // Return the error message
-                http_response_code(400);
-                return;
-            }
+        // Validate file extension
+        $imageFileType = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'webp', 'svg', 'pdf']; // Added pdf
+
+        if (!in_array($imageFileType, $allowed_extensions)) {
+            echo json_encode(["error" => "Invalid file type. Only image and PDF files are allowed."]);
+            exit;
         }
 
-        // Prepare SQL statement
-        $stmt = $conn->prepare("INSERT INTO announcements (title, description, posted_by, image_path) VALUES (?, ?, ?, ?)");
-        if (!$stmt) {
-            echo json_encode(['message' => 'Database statement preparation failed: ' . $conn->error]);
-            http_response_code(500);
-            return;
-        }
-
-        $stmt->bind_param("ssss", $title, $description, $postedBy, $imagePath);
-
-        // Execute and check for errors
-        if ($stmt->execute()) {
-            echo json_encode(['message' => 'Announcement created successfully']);
-            http_response_code(201);
+        if (move_uploaded_file($image['tmp_name'], $target_file)) {
+            $file_path = $target_file; // Store the file path
         } else {
-            echo json_encode(['message' => 'Failed to create announcement: ' . $stmt->error]);
-            http_response_code(500);
+            echo json_encode(["error" => "Failed to upload file: $file_name"]);
+            exit;
         }
+    } else {
+        echo json_encode(["error" => "No file uploaded."]);
+        exit;
+    }
+
+    // Prepare and execute the SQL statement
+    $sql = "INSERT INTO announcements (userId, title, description, announcement_type, created_at, image) VALUES (?, ?, ?, ?, NOW(), ?)";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("issss", $userId, $title, $description, $announcement_type, $file_path);
+
+        if ($stmt->execute()) {
+            echo json_encode(["message" => "Announcement document created successfully."]);
+        } else {
+            echo json_encode(["error" => $stmt->error]);
+        }
+
         $stmt->close();
     } else {
-        echo json_encode(['message' => 'Invalid input. Make sure all fields are filled.']);
-        http_response_code(400);
+        echo json_encode(["error" => $conn->error]);
     }
 }
 
-function uploadImage($file) {
-    $targetDir = "uploads/";
-    $targetFile = $targetDir . basename($file["name"]);
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
-    // Validate if the uploaded file is an image
-    $check = getimagesize($file["tmp_name"]);
-    if ($check === false) {
-        return "File is not an image.";
-    }
-
-    // Allow specific file formats
-    $allowedFormats = ['jpg', 'jpeg', 'png', 'gif'];
-    if (!in_array($imageFileType, $allowedFormats)) {
-        return "Invalid file format. Allowed formats are: " . implode(", ", $allowedFormats);
-    }
-
-    // Check for upload errors
-    if ($file['error'] !== UPLOAD_ERR_OK) {
-        return "Error uploading file: " . $file['error'];
-    }
-
-    // Move uploaded file to target directory
-    if (!file_exists($targetDir)) {
-        mkdir($targetDir, 0777, true); // Create the directory if it doesn't exist
-    }
-
-    if (move_uploaded_file($file["tmp_name"], $targetFile)) {
-        return $targetFile; // Return the path to the uploaded image
-    } else {
-        return "Failed to move uploaded file.";
-    }
-}
 ?>

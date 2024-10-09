@@ -4,67 +4,46 @@ include '../../layout/employee/employeeLayout.php';
 
 // Define the content for the home page
 $homeContent = "
- <div class='container mx-auto w-full mt-20 md:mt-1 px-[8px] mb-10'>
+<div class='bg-gray-300 w-full h-[88vh] overflow-y-scroll'>
+ <div class='container mx-auto w-full md:mt-1 px-[8px] mb-10'>
+
     <div class='flex justify-start items-center gap-[10px] w-full h-auto mt-2 '>
         <i class='fas fa-tasks text-[#93A3BC] text-[25px]'></i>
-        <h1 class='font-bold text-gray-700 text-[21px]'>Employee Dashboard</h1>
-    </div>
-   
-
-    <!-- Table with Filtering -->
-   <div class='mt-10'>
-    <div class='mb-4 flex justify-between items-center w-full gap-4'>
-        <div class='flex items-center gap-3'>
-            <i class='fas fa-tasks text-[#93A3BC] text-2xl'></i>
-            <h1 class='font-bold text-gray-800 text-xl'>Recent Task</h1>
-        </div>
-        <div class='flex items-center'>
-            <label for='filter' class='block text-gray-700 mr-2'>Filter by Status:</label>
-            <select id='filter' class='w-2/4 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500'>
-                <option value='All'>All</option>
-                <option value='Pending'>Pending</option>
-                <option value='Approved'>Approved</option>
-                <option value='Issued'>Issued</option>
-            </select>
-        </div>
+        <h1 class='font-bold text-gray-700 text-[21px]'>Overview</h1>
     </div>
 
-    <div class='overflow-x-auto'>
-        <table class='min-w-full divide-y divide-gray-200 bg-white border border-gray-200 rounded-lg shadow-md'>
-            <thead>
-                <tr>
-                    <th class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50'>ID</th>
-                    <th class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50'>Name</th>
-                    <th class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50'>Status</th>
-                    <th class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50'>Category</th>
-                </tr>
-            </thead>
-            <tbody id='taskTableBody' class='bg-white divide-y divide-gray-200'>
-                <!-- Sample Data Rows -->
-                <tr data-status='Pending'>
-                    <td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>1</td>
-                    <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>Task A</td>
-                    <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>Pending</td>
-                    <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>Category 1</td>
-                </tr>
-                <tr data-status='Approved'>
-                    <td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>2</td>
-                    <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>Task B</td>
-                    <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>Approved</td>
-                    <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>Category 2</td>
-                </tr>
-                <tr data-status='Issued'>
-                    <td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>3</td>
-                    <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>Task C</td>
-                    <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>Issued</td>
-                    <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>Category 3</td>
-                </tr>
-                <!-- More rows can be added here -->
-            </tbody>
-        </table>
+    <div class='grid grid-cols-1 md:grid-cols-4 gap-6 mt-5'>
+      <div class='flex flex-col justify-center items-center bg-gray-100 p-4 rounded-lg shadow'>
+         <i class='fas fa-baby text-blue-500 text-[30px] mb-2'></i>
+        <h2 class='font-semibold text-gray-700'>Birth Total <span id='birth-count' class='font-bold'>0</span></h2>
+      </div>
+      
+      <div class='flex flex-col justify-center items-center bg-gray-100 p-4 rounded-lg shadow'>
+         <i class='fas fa-cross text-red-500 text-[30px] mb-2'></i>
+         <h2 class='font-semibold text-gray-700'>Death Total <span id='death-count' class='font-bold'>0</span></h2>
+      </div>
+      
+      <div class='flex flex-col justify-center items-center bg-gray-100 p-4 rounded-lg shadow'>
+         <i class='fas fa-ring text-green-500 text-[30px] mb-2'></i>
+        <h2 class='font-semibold text-gray-700'>Marriage Total <span id='marriage-count' class='font-bold'>0</span></h2>
+      </div>
+      
+      <div class='flex flex-col justify-center items-center bg-gray-100 p-4 rounded-lg shadow'>
+         <i class='fas fa-calendar-check text-yellow-500 text-[30px] mb-2'></i>
+         <h2 class='font-semibold text-gray-700'>Appointment Total</h2>
+      </div>
     </div>
-</div>
 
+    <div class='flex justify-start items-center gap-[10px] w-full h-auto mt-8'>
+        <i class='fas fa-bullhorn text-[#93A3BC] text-[25px]'></i>
+        <h1 class='font-bold text-gray-700 text-[21px]'>Announcements</h1>
+    </div>
+
+    <!-- Announcements List -->
+    <div id='announcements-container' class='mt-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
+        <!-- Announcements will be populated here -->
+    </div>
+ </div>
 </div>
 ";
 
@@ -72,23 +51,141 @@ $homeContent = "
 employeeLayout($homeContent);
 ?>
 
-<!-- Include Chart.js library -->
-<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
 
-    // Filter Table Functionality
-    document.getElementById('filter').addEventListener('change', (e) => {
-        const filterValue = e.target.value;
-        const rows = document.querySelectorAll('#taskTableBody tr');
-        rows.forEach(row => {
-            if (filterValue === 'All' || row.getAttribute('data-status') === filterValue) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
+        const employeeId = localStorage.getItem('userId');
+const role = localStorage.getItem('role'); // Assume the role is stored in localStorage
+
+const fetchAnnouncements = async () => {
+    try {
+        const response = await fetch(`http://localhost/civil-registrar/api/announcements.php?role=${role}&userId=${employeeId}`);
+        
+        // Check if response is OK
+        if (!response.ok) {
+            throw new Error('Failed to fetch announcements.');
+        }
+
+        const announcements = await response.json();
+        const announcementsContainer = document.getElementById('announcements-container');
+        
+        announcementsContainer.innerHTML = ''; // Clear existing announcements
+
+        // Check if announcements are available
+        if (announcements.length > 0) {
+            announcements.forEach(announcement => {
+                 // Format the created_at date
+                 const createdAt = new Date(announcement.created_at).toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true, // For AM/PM format
+                    timeZone: 'Asia/Manila' // Philippines Time Zone
+                });
+
+                // Create an announcement card for each item
+                const announcementCard = `
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h2 class="text-xl font-semibold text-gray-700">${announcement.title}</h2>
+                        <p class="text-gray-600 mt-2">${announcement.description}</p>
+                        ${announcement.image ? `<img src="http://localhost/civil-registrar/api/${announcement.image}" class="mt-4 w-full" alt="Announcement Image">` : ''}
+                          <p class="text-gray-500 text-sm mt-4">Posted on: ${createdAt}</p>
+                    </div>
+                `;
+                // Append the card to the container
+                announcementsContainer.innerHTML += announcementCard;
+            });
+        } else {
+            // If no announcements, display a message
+            announcementsContainer.innerHTML = '<p class="text-gray-600">No announcements available.</p>';
+        }
+    } catch (error) {
+        console.error('Error fetching announcements:', error);
+    }
+};
+
+
+        // Function to fetch death count
+        const fetchDeathCount = async () => {
+            const employeeId = localStorage.getItem('userId');
+            try {
+                const response = await fetch(`http://localhost/civil-registrar/api/death.php?get_employee_counts=true&employee_id=${employeeId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+
+                // Check if data is an object and contains total_certificates
+                if (data && typeof data === 'object' && 'total_certificates' in data) {
+                    // Update the death count in the HTML
+                    document.getElementById('death-count').innerText = data.total_certificates || 0;
+                } else {
+                    throw new Error('Invalid response format');
+                }
+            } catch (error) {
+                console.error('Error fetching death count:', error);
+                document.getElementById('death-count').innerText = 'Error';
             }
-        });
+        };
+
+        //birthCount
+
+        const fetchBirthCount = async () => {
+            const employeeId = localStorage.getItem('userId');
+            try {
+                const response = await fetch(`http://localhost/civil-registrar/api/birth.php?get_employee_counts=true&employee_id=${employeeId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+
+                // Check if data is an object and contains total_certificates
+                if (data && typeof data === 'object' && 'total_certificates' in data) {
+                    // Update the death count in the HTML
+                    document.getElementById('birth-count').innerText = data.total_certificates || 0;
+                } else {
+                    throw new Error('Invalid response format');
+                }
+            } catch (error) {
+                console.error('Error fetching birth count:', error);
+                document.getElementById('birth-count').innerText = 'Error';
+            }
+        };
+
+
+        //birthCount
+
+        const fetchMarriageCount = async () => {
+            const employeeId = localStorage.getItem('userId');
+            try {
+                const response = await fetch(`http://localhost/civil-registrar/api/marriage.php?get_employee_counts=true&employee_id=${employeeId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+
+                // Check if data is an object and contains total_certificates
+                if (data && typeof data === 'object' && 'total_certificates' in data) {
+                    // Update the death count in the HTML
+                    document.getElementById('marriage-count').innerText = data.total_certificates || 0;
+                } else {
+                    throw new Error('Invalid response format');
+                }
+            } catch (error) {
+                console.error('Error fetching birth count:', error);
+                document.getElementById('marriage-count').innerText = 'Error';
+            }
+        };
+
+        
+        // Call the function to fetch death count
+        fetchBirthCount();
+        fetchDeathCount();
+        fetchMarriageCount();
+        fetchAnnouncements();
     });
-});
 </script>
+

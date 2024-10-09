@@ -8,10 +8,26 @@ function employeeLayout($children) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://cdn.tailwindcss.com"></script>
         <title>employee Dashboard</title>
+         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/toastify-js/toastify.min.css'>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.css" rel="stylesheet">
+        <style>
+        .active {
+            display: flex;                       
+            justify-content: flex-start;        
+            align-items: center;              
+            margin-top: 0.125rem;               
+            gap: 1rem;                          
+            padding: 0.5rem;                   
+            border-radius: 0.375rem;            
+            background-color: rgba(229, 231, 235, 0.12); 
+            padding-left: 1.25rem;              
+            padding-right: 1.25rem;             
+            color: #ffffff;                     
+        }
+
+      </style>
     </head>
     <body>
     <div class="w-full gap-[4px] flex h-screen flex-col md:flex md:flex-row">
@@ -29,8 +45,8 @@ function employeeLayout($children) {
                 <!--menu-->
                 <div class='border-t-[.01px] border-[#6b7280] w-full '>
 
-<div class='flex flex-col w-[93%] mx-2 mt-6 mb-8'>
-    <a href="/civil-registrar/pages/employee/employeeDashboard.php" class="flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+<div class='flex flex-col w-[93%] mx-2 mt-6 mb-8'id="sidebar-link">
+    <a href="/civil-registrar/pages/employee/employeeDashboard.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
@@ -59,38 +75,53 @@ function employeeLayout($children) {
     </a>
 
     <div id="certificate-submenu" class="hidden mt-2  flex-col gap-1 w-[90%] pl-10">
-        <a href='/civil-registrar/pages/employee/birthRegistration.php' class="flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/civil-registrar/pages/employee/birthRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Birth Certificate</h1>
         </a>
-        <a href='/civil-registrar/pages/resident/marriageRegistration.php' class="flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/civil-registrar/pages/employee/marriageRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Marriage Certificate</h1>
         </a>
-        <a href='/civil-registrar/pages/resident/deathRegistration.php' class="flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/civil-registrar/pages/employee/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Death Certificate</h1>
         </a>
     </div>
 
-    <a href='/civil-registrar/pages/employee/appointment.php' class="flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href='/civil-registrar/pages/employee/verifyDocuments.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
             </svg>
         </div>
         <div>
-            <h1 class='font-[500]'>Appointment Schedule</h1>
+            <h1 class='font-[500]'>Verification</h1>
         </div>
     </a>
+
+    <a href='/civil-registrar/pages/employee/appointment.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+            </svg>
+        </div>
+        <div>
+            <h1 class='font-[500]'>Appointment</h1>
+        </div>
+    </a>
+
 </div>
 </div>
             </div>
         </div>
 
-        <div class="bg-gray-200 md:w-[78%] w-full transform translate-x-0 transition-transform duration-300 ease-in-out mx-[1px] p-1 overflow-hidden overflow-y-scroll" id="contentpanel">
-            <div class='hidden lg:block bg-blue-600 box-shadow border-b-[1px] border-[#e1e0e4] dark:border-darkHeader border-solid rounded-[5px]' id='header'>
+        <div class="bg-gray-200 md:w-[78%] w-full transform translate-x-0 transition-transform duration-300 ease-in-out mx-[1px] p-1 overflow-hidden overflow-y-scroll relative" id="contentpanel">
+            <div class='bg-blue-600 box-shadow border-b-[1px] border-[#e1e0e4] dark:border-darkHeader border-solid rounded-[5px]' id='header'>
                 <div class='flex p-3 justify-between items-center'>
                     <!-- Menu Icon -->
                     <div class='flex justify-start items-center'>
-                        <button id='menuButton' class='text-[#6B737E] cursor-pointer hover:bg-slate-200 h-[35px] w-[35px] p-[5px] rounded-[50%]'>
+                        <button id='menuButton' class='hidden md:block  text-[#6B737E] cursor-pointer hover:bg-slate-200 h-[35px] w-[35px] p-[5px] rounded-[50%]'>
+                            <i class="fas fa-bars text-[24px]"></i>
+                        </button>
+                        <button class='block md:hidden text-[#6B737E] cursor-pointer hover:bg-slate-200 h-[35px] w-[35px] p-[5px] rounded-[50%]' id='mobilemenuButton'>
                             <i class="fas fa-bars text-[24px]"></i>
                         </button>
                     </div>
@@ -148,13 +179,93 @@ function employeeLayout($children) {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <?php echo $children; ?>
+            </div>
+            <div>
+                <?php echo $children; ?>
+            </div>
+   
+            </div>
+          <!--mobilesidebar-->
+            <div class="absolute top-16 left-0 right-0 bg-blue-900 md:w-[22%] transform translate-x-0 transition-transform duration-300 ease-in mx-1 rounded-b-md hidden" id='mobilesidebarpanel'>
+            <div class="flex flex-col gap-1 w-full ">
+                <div class='flex relative justify-evenly items-center w-full mt-6 px-4 mb-5'>
+                    <div>
+                        <img src="../../images/qclogo.svg" alt='logo' class='cursor-pointer w-[50px] h-[50px]'/>
+                    </div>
+                    <div>
+                        <h1 class='text-[#e3e4e9] text-[25px] text-center font-bold'>Civil Registrar</h1>
+                    </div>
                 </div>
 
-                
+                <!--menu-->
+                <div class='border-t-[.01px] border-[#6b7280] w-full '>
+
+                <div class='flex flex-col w-[93%] mx-2 mt-6 mb-8' id="sidebar-link">
+                        <a href="/civil-registrar/pages/employee/employeeDashboard.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h1 class='font-[500]'>Dashboard</h1>
+                            </div>
+                        </a>
+
+                        <a href="#" class="flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]" onclick="mobiletoggleCertificates(event)">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                                </svg>
+                            </div>
+                            <div class='flex justify-between items-center w-full'>
+                                <h1 class='font-[500] '>Certificates</h1>
+                                <span id="certificate-toggle-icon" class="text-[20px]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[20px] h-[20px]">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </a>
+
+                        <div id="mobilecertificate-submenu" class="hidden mt-2  flex-col gap-1 w-[90%] pl-10">
+                            <a href='/civil-registrar/pages/employee/birthRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                                <h1 class='text-[13px] font-[600] pl-[2rem]'>Birth Certificate</h1>
+                            </a>
+                            <a href='/civil-registrar/pages/employee/marriageRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                                <h1 class='text-[13px] font-[600] pl-[2rem]'>Marriage Certificate</h1>
+                            </a>
+                            <a href='/civil-registrar/pages/employee/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                                <h1 class='text-[13px] font-[600] pl-[2rem]'>Death Certificate</h1>
+                            </a>
+                        </div>
+                        
+                        <a href='/civil-registrar/pages/employee/verifyDocuments.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h1 class='font-[500]'>Verification</h1>
+                            </div>
+                        </a>
+
+                        <a href='/civil-registrar/pages/employee/appointment.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h1 class='font-[500]'>Appointment Schedule</h1>
+                            </div>
+                        </a>
+                </div>
+</div>
             </div>
+           </div>
                
         </div>
     </div>
@@ -172,7 +283,7 @@ function employeeLayout($children) {
                 duration: 3000
             }).showToast();
         }
-
+          
         function toggleCertificates(event) {
             event.preventDefault();
             const submenu = document.getElementById('certificate-submenu');
@@ -189,6 +300,42 @@ function employeeLayout($children) {
             }
         }
 
+        function mobiletoggleCertificates(event) {
+            event.preventDefault();
+            const submenu = document.getElementById('mobilecertificate-submenu');
+            const toggleIcon = document.getElementById('certificate-toggle-icon');
+
+            // Toggle submenu visibility
+            submenu.classList.toggle('hidden');
+            
+            // Update toggle icon
+            if (submenu.classList.contains('hidden')) {
+                toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[20px] h-[20px]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>';
+            } else {
+                toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[20px] h-[20px]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 15l-7-7-7 7"/></svg>';
+            }
+        }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            const sidebarLinks = document.querySelectorAll(".sidebar-link");
+            const currentPath = window.location.pathname;
+
+            sidebarLinks.forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add("active");
+                }
+            });
+        });
+        const modal = document.getElementById("mobilesidebarpanel");
+    const openModalButton = document.getElementById("mobilemenuButton");
+
+    // Function to toggle modal visibility
+    const toggleModal = () => {
+      modal.classList.toggle("hidden");
+    };
+
+    // Open/Close modal on button click
+    openModalButton.addEventListener("click", toggleModal);
         document.addEventListener('DOMContentLoaded', () => {
             const notificationButton = document.getElementById('notificationButton');
             const profileButton = document.getElementById('profileButton');
@@ -236,9 +383,13 @@ function employeeLayout($children) {
                 }
                 if (!event.target.closest('#profileButton') && !event.target.closest('#profilePanel')) {
                     profilePanel.classList.add('hidden');
+                } if (!event.target.closest('#mobilemenuButton') && !event.target.closest('#mobilesidebarpanel')) {
+                    mobilesidebarpanel.classList.add('hidden');
                 }
             });
         });
+
+    
 
 
         function logout() {

@@ -11,11 +11,11 @@
                         
                 </form>
 
-                <div class=' justify-center items-center gap-4 hidden md:flex'>
-                    <a href="/aboutUs" class="font-[500]">Services</a>
-                    <a href="/aboutUs" class="font-[500]">About</a>
-                    <a href="/contactUs" class="font-[500]">Contact us</a>
-                    <a href="/pages/login.php" class="font-[500] border px-2 py-1 rounded-md">Sign In</a>
+                <div class=' justify-center items-center gap-4 md:flex'>
+                    <a href="/aboutUs" class="font-[500] hidden md:flex">Services</a>
+                    <a href="/aboutUs" class="font-[500] hidden md:flex">About</a>
+                    <a href="/contactUs" class="font-[500] hidden md:flex">Contact us</a>
+                    <a href="/civil-registrar/pages/login.php" class="font-[500] border px-2 py-1 rounded-md">Sign In</a>
                     
             
                 </div>

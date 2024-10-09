@@ -4,7 +4,7 @@ include '../../layout/admin/adminLayout.php';
 
 // Define the content for the home page
 $homeContent = "
-<div class='flex flex-col'>
+<div class='flex flex-col container mx-auto w-full h-[88vh] overflow-y-scroll'>
     <!-- Main Container -->
     <div class='container mx-auto my-10'>
         <div class='bg-white p-6 rounded-lg shadow-lg'>
@@ -21,7 +21,8 @@ $homeContent = "
 
             <!-- Users Table -->
             <h2 class='text-2xl mb-4'>Users</h2>
-            <table class='min-w-full table-auto mb-6' id='usersTable'>
+            <div class='w-full overflow-x-auto md:overflow-none'>
+             <table class='w-full table-auto mb-6' id='usersTable'>
                 <thead class='bg-gray-200'>
                     <tr>
                         <th class='px-4 py-2'>ID</th>
@@ -33,6 +34,9 @@ $homeContent = "
                 </thead>
                 <tbody class='bg-white divide-y divide-gray-200'></tbody>
             </table>
+            
+            </div>
+           
 
             <!-- Add/Update User Form -->
             <h2 id='formTitle' class='text-2xl mb-4'>Add User</h2>

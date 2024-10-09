@@ -46,7 +46,7 @@ $cardArray = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Civil-Registrar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -92,7 +92,7 @@ $cardArray = [
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 -mt-6 md:-mt-0">
                 <?php foreach ($cardArray as $card): ?>
-                    <div class="cursor-pointer">
+                    <div class="cursor-pointer bg-gray-300 p-2 rounded-sm">
                         <img src="<?php echo htmlspecialchars($card['image']); ?>" alt="image" class="rounded-sm"/>
                         <h2 class="font-[600]"><?php echo htmlspecialchars($card['title']); ?></h2>
                         <p class="text-[13px]"><?php echo htmlspecialchars($card['description']); ?></p>

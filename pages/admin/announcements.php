@@ -1,68 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Announcement</title>
-</head>
-<body>
-    <h1>Create Announcement</h1>
-    <form id="announcementForm" enctype="multipart/form-data">
-        <div>
-            <input type="text" name="title" placeholder="Title" required>
-        </div>
-        <div>
-            <textarea name="description" placeholder="Description" required></textarea>
-        </div>
-        <div>
-            <input type="text" name="posted_by" placeholder="Posted By" required>
-        </div>
-        <div>
-            <input type="file" name="image" accept="image/*" required>
-        </div>
-        <div>
-            <input type="submit" value="Submit Announcement">
-        </div>
-    </form>
+<?php
+// Include the layout file
+include '../../layout/admin/adminLayout.php';
 
-    <script>
-    document.getElementById('announcementForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent the default form submission
-        const formData = new FormData(this); // Create FormData object from the form
+// Define the content for the create announcement page
+$announcementContent = "
+<div class='flex flex-col'>
+    <div class='container mx-auto my-10'>
+        <h1 class='text-2xl font-bold mb-5'>Create Announcement</h1>
+        <form id='announcementForm' enctype='multipart/form-data' class='bg-white p-5 rounded shadow-md grid grid-cols-1 md:grid-cols-2 gap-4'>
+           <input type='hidden' id='userId' name='userId'> <!-- Hidden User ID -->
+            <div class='mb-4'>
+                <label for='title' class='block text-sm font-medium text-gray-700'>Title</label>
+                <input type='text' name='title' id='title' placeholder='Title' required class='mt-1 block w-full border border-gray-300 rounded-md p-2'>
+            </div>
 
-        // Log the form data for debugging
-        for (let [key, value] of formData.entries()) {
-            console.log(key, value);
-        }
+             <div class='mb-4'>
+                <label for='announcement_type' class='block text-sm font-medium text-gray-700'>Announcement Type</label>
+                <select name='announcement_type' id='announcement_type' required class='mt-1 block w-full border border-gray-300 rounded-md p-2'>
+                    <option value='' disabled selected>Select Option</option>
+                    <option value='employee'>Employee Announcement</option>
+                    <option value='resident'>Resident Announcement</option>
+                </select>
+            </div>
 
-        // Check if all required fields are filled
-        if (!formData.get('title') || !formData.get('description') || !formData.get('posted_by') || !formData.get('image')) {
-            alert('Please fill all required fields.');
-            return;
-        }
+            <div class='mb-4'>
+                <label for='description' class='block text-sm font-medium text-gray-700'>Description</label>
+                <textarea name='description' id='description' placeholder='Description' required class='mt-1 block w-full border border-gray-300 rounded-md p-2'></textarea>
+            </div>
 
-        fetch('http://localhost/civil-registrar/api/announcements.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => { throw new Error(err.message); });
+            <div class='mb-4'>
+                <label for='image' class='block text-sm font-medium text-gray-700'>Image</label>
+                <input type='file' name='image' id='image' accept='image/*' required class='mt-1 block w-full border border-gray-300 rounded-md p-2'>
+            </div>
+
+            <div class='col-span-1 md:col-span-2'>
+                <input type='submit' value='Submit Announcement' class='bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 w-full'>
+            </div>
+        </form>
+    </div>
+</div>
+";
+
+// Call the layout function with the announcement creation page content
+adminLayout($announcementContent);
+?>
+<script src='https://cdn.jsdelivr.net/npm/toastify-js'></script>
+
+<script>
+    // Set userId from localStorage
+    document.getElementById('userId').value = localStorage.getItem('userId') || '';
+
+    document.getElementById('announcementForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        
+      
+
+
+        try {
+            const response = await fetch('http://localhost/civil-registrar/api/announcements.php', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                showToast(result.message, 'success');
+                this.reset(); // Reset the form fields
+            } else {
+                showToast(result.error || 'Error occurred', 'error');
             }
-            return response.json(); // Parse the JSON response
-        })
-        .then(data => {
-            alert(data.message); // Display success or error message
-            if (data.message === 'Announcement created successfully') {
-                this.reset(); // Clear the form on success
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error creating announcement: ' + error.message);
-        });
+        } catch (error) {
+            showToast('Network error: ' + error.message, 'error');
+        }
     });
-</script>
 
-</body>
-</html>
+    function showToast(message, type) {
+        Toastify({
+            text: message,
+            style: {
+                background: type === 'success' ? 'linear-gradient(to right, #00b09b, #96c93d)' : 'linear-gradient(to right, #ff5f6d, #ffc371)',
+            },
+            duration: 3000,
+        }).showToast();
+    }
+</script>

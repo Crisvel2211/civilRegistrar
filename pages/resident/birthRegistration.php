@@ -156,6 +156,10 @@ $homeContent = "
                     </select>
                 </div>
 
+                <div class='col-span-3 mb-3'>
+                    <h1 class='font-bold'>Empolyee Information</h1>
+                </div>
+
                 <div class='flex flex-col'>
                     <label for='employee' class='text-[12.5px]'>Select Employee</label>
                     <select name='employee_id' id='employee' class='outline-none border border-gray-700 p-1 rounded-md'>
@@ -164,10 +168,11 @@ $homeContent = "
                     </select>
                 </div>
 
+               
 
-
-                <div class='col-span-3 flex justify-center mt-4'>
-                    <button type='submit' class='bg-blue-500 text-white py-2 px-4 rounded-md'>Register</button>
+                <!-- Submit Button -->
+                <div class='col-span-3 flex justify-center mt-5'>
+                    <button type='submit' class='bg-blue-500 text-white py-2 px-4 rounded-md'>Submit Registration</button>
                 </div>
             </form>
         </div>

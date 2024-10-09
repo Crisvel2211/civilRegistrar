@@ -3,8 +3,8 @@
 include '../../layout/employee/employeeLayout.php';
 
 $updateProfileContent = "   
-    <div class='min-h-screen flex items-center justify-center mt-2'>
-        <div class='bg-white p-8 rounded-lg shadow-lg w-full max-w-md'>
+    <div class='container mx-auto w-full h-[88vh] overflow-y-scroll'>
+        <div class='bg-white p-8 rounded-lg shadow-lg w-full'>
             <h2 class='text-2xl font-bold text-center mb-6 text-gray-800'>Book an Appointment</h2>
             
             <form id='appointmentform' enctype='multipart/form-data'>

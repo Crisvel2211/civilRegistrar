@@ -9,7 +9,14 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-        <h2 class="text-2xl font-bold text-center mb-4">Register</h2>
+                <div class='flex relative justify-evenly items-center w-full mt-4 px-4 mb-5'>
+                    <div>
+                        <img src="../images/qclogo.svg" alt='logo' class='cursor-pointer w-[100px] h-[100px]'/>
+                    </div>
+                    <div>
+                        <h1 class='text-[25px] text-center font-bold'>Civil Registrar</h1>
+                    </div>
+                </div>
         <div id="register-form">
             <div class="mb-4">
                 <label for="register-name" class="block text-sm font-medium text-gray-700">Name</label>
