@@ -155,21 +155,18 @@ function residentLayout($children) {
                         </div>
                         <!-- Profile -->
                         <div class='relative w-[35px] h-[35px] text-[#93A3BC] font-semibold cursor-pointer hover:bg-slate-300 rounded-[50%] hover:bg-opacity-[.03] p-[7px]' >
+
+                         <!-- Dynamic Profile Image or Sign In Button -->
+                         <div id="authDisplay"></div>
                             
-                            <img src='../../images/content2.jpg' alt='profile-icon' class='w-[21px] h-[21px] font-semibold cursor-pointer rounded-[100%]' id='profileButton'/>
                             
 
                             <div id='profilePanel' class='absolute bg-[#ffffff] right-[.5rem] w-[10rem] h-[10rem] mt-[12px] rounded-[5px] shadow-lg z-[1000] hidden'>
-                                <div class='border-b-[.01px] border-[#e5e8eb]'>
+                                <div class='border-b-[.01px] border-[#e5e8eb] text-center'>
                                     <div class='p-2 my-[4px] w-full relative'>
                                         <p class='text-[14px] font-[400] text-[#324153]'>Signed in as</p>
-                                        <p class='text-[12px] font-[400] text-[#324153]'>capstone@gmail.com</p>
+                                        <p class='text-[12px] font-[400] text-[#324153]' id="email-display"></p>
 
-                                        <div class="flex justify-center items-center absolute top-0 right-0 cursor-pointer">
-                                        <button id="themeToggle" class="px-4 py-2 rounded">
-                                            <i id="themeIcon" class="fas fa-sun"></i> 
-                                        </button>
-                                        </div>
 
                                     </div>
                                 </div>
@@ -304,6 +301,17 @@ function residentLayout($children) {
     const modal = document.getElementById("mobilesidebarpanel");
     const openModalButton = document.getElementById("mobilemenuButton");
 
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const authDisplay = document.getElementById('authDisplay');
+        const profileImage = localStorage.getItem('profileImage'); // Base64 image stored, or null
+
+        if (profileImage) {
+            // User is authenticated, show profile image from localStorage
+            authDisplay.innerHTML = `<img src="${profileImage}" alt="Profile" class='w-[21px] h-[21px] font-semibold cursor-pointer rounded-[100%]' id='profileButton'/>`;
+        }
+    });
+
     // Function to toggle modal visibility
     const toggleModal = () => {
       modal.classList.toggle("hidden");
@@ -411,6 +419,18 @@ function residentLayout($children) {
             });
         });
 
+        // Get the email from localStorage
+        const email = localStorage.getItem('email');
+
+        // If email exists, display it, otherwise do nothing
+        if (email) {
+            document.getElementById('email-display').textContent = email;
+        }
+
+        // To store email in localStorage (example)
+        localStorage.setItem('userEmail', 'capstone@gmail.com');
+
+
 
         function logout() {
           // Clear user data from local storage
@@ -419,6 +439,7 @@ function residentLayout($children) {
         localStorage.removeItem('email');
         localStorage.removeItem('password');
         localStorage.removeItem('role');
+        localStorage.removeItem('profileImage');
 
         // Show a toast message for logout confirmation
         showToast('You have successfully logged out.', 'success');

@@ -68,20 +68,19 @@ if ($method === 'POST' && isset($_GET['action']) && $_GET['action'] === 'login')
                     'name' => $user['name'],
                     'email' => $user['email'],
                     'role' => $user['role'],
-                    'password' => $user['password'],
                     'exp' => time() + (60 * 60)  // Token valid for 1 hour
                 ];
 
                 $token = JWT::encode($payload);
 
-                // Return both the token and the user's role
+                // Return both the token and the user's details including profile image
                 $response = [
                     'token' => $token,
                     'name' => $user['name'],
                     'role' => $user['role'],
                     'userId' => $user['id'], // Return userId
-                    'email' => $user['email'], // Return userId
-                    'password' => $user['password']
+                    'email' => $user['email'],
+                    'userProfile' => $user['userProfile'] // Include the profile image URL
                 ];
             } else {
                 $response = ['error' => 'Invalid password'];
@@ -95,6 +94,7 @@ if ($method === 'POST' && isset($_GET['action']) && $_GET['action'] === 'login')
     echo json_encode($response);
     exit();
 }
+
 
 // JWT validation endpoint
 if ($method === 'GET' && isset($_GET['action']) && $_GET['action'] === 'validate') {

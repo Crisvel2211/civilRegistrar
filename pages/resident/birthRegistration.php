@@ -10,163 +10,235 @@ $homeContent = "
             <h1 class='text-center font-bold text-[23px]'>BIRTH CERTIFICATE REGISTRATION FORM</h1>
         </div>
         <div class='m-4 bg-white p-4 rounded-[8px]'>
-            <form class='grid grid-cols-3 gap-2' id='birthCertificateForm'>
+            <form class='grid grid-cols-1 md:grid-cols-3 gap-2 w-full' id='birthCertificateForm'>
               <input type='hidden' name='user_id' id='user_id' />
                 <!-- Child's Information -->
                 <div class='col-span-3 mb-3'>
                     <h1 class='font-bold'>Child’s Information</h1>
                 </div>
+
+                <div class='col-span-3 md:col-span-1 '>
+                  <label class='text-[12.5px]'>Firstname</label>
+                   <div class='col-span-3 md:col-span-1'>
+                    <input type='text' name='child_first_name' class='outline-none border border-gray-700 p-1 rounded-md w-full'  />
+                  </div>
+                </div>
+                 
+    
+               <div class='col-span-3 md:col-span-1'>
+                 <label class='text-[12.5px]'>Lastname</label>
+                 <div class='col-span-3 md:col-span-1'>
+                    <input type='text' name='child_last_name' class='outline-none border border-gray-700 p-1 rounded-md w-full'  />
+                </div>
+               </div>
                 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Firstname</label>
-                    <input type='text' name='child_first_name' class='outline-none border border-gray-700 p-1 rounded-md'  />
+               <div class='col-span-3 md:col-span-1 w-full'>
+                 <label class='text-[12.5px]'>Middlename</label>
+                 <div class='col-span-3 md:col-span-1'>
+                
+                    <input type='text' name='child_middle_name' class='outline-none border border-gray-700 p-1 rounded-md w-full' />
                 </div>
-
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Lastname</label>
-                    <input type='text' name='child_last_name' class='outline-none border border-gray-700 p-1 rounded-md'  />
-                </div>
-
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Middlename</label>
-                    <input type='text' name='child_middle_name' class='outline-none border border-gray-700 p-1 rounded-md' />
-                </div>
-
-                <div class='flex flex-col'>
-                    <label for='sex' class='text-[12.5px]'>Sex</label>
-                    <select name='child_sex' id='sex' class='outline-none border border-gray-700 p-1 rounded-md' >
+               </div>
+    
+                <div class='col-span-3 md:col-span-1 w-full>
+                  <label for='sex' class='text-[12.5px]'>Sex</label>
+                  <div class='col-span-3 md:col-span-1'>
+                    
+                    <select name='child_sex' id='sex' class='outline-none border border-gray-700 p-1 rounded-md w-full' >
                         <option value='male'>Male</option>
                         <option value='female'>Female</option>
                     </select>
+                  </div>
                 </div>
-
-                <div class='flex flex-col'>
-                    <label for='dob' class='text-[12.5px]'>Date of Birth</label>
-                    <input type='date' name='child_date_of_birth' id='dob' class='outline-none border border-gray-700 p-1 rounded-md'  />
+                
+                
+              <div class='col-span-3 md:col-span-1 w-full'>
+                <label for='dob' class='text-[12.5px]'>Date of Birth</label>
+                 <div class='col-span-3 md:col-span-1'>
+                    
+                    <input type='date' name='child_date_of_birth' id='dob' class='outline-none border border-gray-700 p-1 rounded-md w-full' />
                 </div>
-
-                <div class='flex flex-col'>
-                    <label for='time_of_birth' class='text-[12.5px]'>Time of Birth</label>
-                    <input type='time' name='child_time_of_birth' id='time_of_birth' class='outline-none border border-gray-700 p-1 rounded-md'  />
+              </div>
+            
+               <div class='col-span-3 md:col-span-1 w-full>
+                <label for='time_of_birth' class='text-[12.5px]'>Time of Birth</label>
+                <div class='col-span-3 md:col-span-1'>
+                   
+                    <input type='time' name='child_time_of_birth' id='time_of_birth' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
                 </div>
+               
+               </div>
 
-                <div class='flex flex-col'>
-                    <label for='place_of_birth' class='text-[12.5px]'>Place of Birth</label>
-                    <input type='text' name='child_place_of_birth' class='outline-none border border-gray-700 p-1 rounded-md'  />
-                </div>
+               <div class='col-span-3 md:col-span-1 w-full>
+                 <label for='place_of_birth' class='text-[12.5px]'>Place of Birth</label>
+                 <div class='col-span-3 md:col-span-1'>
+                    <input type='text' name='child_place_of_birth' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
+                 </div>
+               </div>
 
-                <div class='flex flex-col'>
+
+                <div class='col-span-3 md:col-span-1 w-full'>
                     <label for='birth_type' class='text-[12.5px]'>Birth Type</label>
-                    <select name='child_birth_type' id='birth_type' class='outline-none border border-gray-700 p-1 rounded-md' >
-                        <option value='single'>Single</option>
-                        <option value='twin'>Twin</option>
-                        <option value='triplet'>Triplet</option>
-                        <option value='other'>Other</option>
-                    </select>
+                    <div class='col-span-3 md:col-span-1'>
+                        <select name='child_birth_type' id='birth_type' class='outline-none border border-gray-700 p-1 rounded-md w-full' >
+                            <option value='single'>Single</option>
+                            <option value='twin'>Twin</option>
+                            <option value='triplet'>Triplet</option>
+                            <option value='other'>Other</option>
+                        </select>
+                    </div>
+                    
+                </div>
+        
+
+                <div class='col-span-3 md:col-span-1 w-full'>
+                  <label for='birth_order' class='text-[12.5px]'>Birth Order</label>
+                  <div class='col-span-3 md:col-span-1'>
+                    <input type='number' name='child_birth_order' class='outline-none border border-gray-700 p-1 rounded-md w-full' min='1'/>
+                  </div>
                 </div>
 
-                <div class='flex flex-col'>
-                    <label for='birth_order' class='text-[12.5px]'>Birth Order</label>
-                    <input type='number' name='child_birth_order' class='outline-none border border-gray-700 p-1 rounded-md' min='1'  />
-                </div>
+                
 
-                <div class='col-span-3 mb-3'>
+                <div class='col-span-3 mb-2 mt-4'>
                     <h1 class='font-bold'>Father’s Information</h1>
                 </div>
 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Firstname</label>
-                    <input type='text' name='father_first_name' class='outline-none border border-gray-700 p-1 rounded-md'  />
+                <div class='col-span-3 md:col-span-1 w-full'>
+                  <label class='text-[12.5px]'>Firstname</label>
+                  <div class='col-span-3 md:col-span-1'>
+                    <input type='text' name='father_first_name' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
+                  </div>
                 </div>
 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Lastname</label>
-                    <input type='text' name='father_last_name' class='outline-none border border-gray-700 p-1 rounded-md'  />
+                <div class='col-span-3 md:col-span-1 w-full'>
+                 <label class='text-[12.5px]'>Lastname</label>
+                 <div class='col-span-3 md:col-span-1'>
+                   <input type='text' name='father_last_name' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
+                 </div>
+                </div>
+            
+                <div class='col-span-3 md:col-span-1 w-full'>
+                  <label class='text-[12.5px]'>Middlename</label>
+                  <div class='col-span-3 md:col-span-1'>
+                    <input type='text' name='father_middle_name' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
+                  </div>
                 </div>
 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Middlename</label>
-                    <input type='text' name='father_middle_name' class='outline-none border border-gray-700 p-1 rounded-md' />
+                <div class='col-span-3 md:col-span-1 w-full'>
+                 <label class='text-[12.5px]'>Suffix</label>
+                 <div class='col-span-3 md:col-span-1'>
+                    <input type='text' name='father_suffix' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
+                 </div>
                 </div>
 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Suffix</label>
-                    <input type='text' name='father_suffix' class='outline-none border border-gray-700 p-1 rounded-md' />
+                <div class='col-span-3 md:col-span-1 w-full'>
+                  <label class='text-[12.5px]'>Nationality</label>
+                   <div class='col-span-3 md:col-span-1'>
+                    <input type='text' name='father_nationality' class='outline-none border border-gray-700 p-1 rounded-md w-full'  />
+                   </div>              
                 </div>
 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Nationality</label>
-                    <input type='text' name='father_nationality' class='outline-none border border-gray-700 p-1 rounded-md'  />
+                <div class='col-span-3 md:col-span-1 w-full'>
+                  <label class='text-[12.5px]'>Date of Birth</label>
+                   <div class='col-span-1 md:col-span-1'>
+                    <input type='date' name='father_date_of_birth' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
+                  </div>
                 </div>
 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Date of Birth</label>
-                    <input type='date' name='father_date_of_birth' class='outline-none border border-gray-700 p-1 rounded-md'  />
+                <div class='col-span-3 md:col-span-1 w-full'>
+                  <label class='text-[12.5px]'>Place of Birth</label>
+                  <div class='col-span-3 md:col-span-1'>
+                    <input type='text' name='father_place_of_birth' class='outline-none border border-gray-700 p-1 rounded-md w-full'  />
+                  </div>               
                 </div>
+ 
 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Place of Birth</label>
-                    <input type='text' name='father_place_of_birth' class='outline-none border border-gray-700 p-1 rounded-md'  />
-                </div>
-
-                <div class='col-span-3 mb-3'>
+                <div class='col-span-3 mb-2 mt-4'>
                     <h1 class='font-bold'>Mother’s Information</h1>
                 </div>
 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Firstname</label>
-                    <input type='text' name='mother_first_name' class='outline-none border border-gray-700 p-1 rounded-md'  />
+                <div class='col-span-3 md:col-span-1 w-full'>
+                 <label class='text-[12.5px]'>Firstname</label>
+                  <div class='col-span-3 md:col-span-1'>
+                    <input type='text' name='mother_first_name' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
+                  </div>
+                
                 </div>
 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Lastname</label>
-                    <input type='text' name='mother_last_name' class='outline-none border border-gray-700 p-1 rounded-md'  />
+                <div class='col-span-3 md:col-span-1 w-full'>
+                 <label class='text-[12.5px]'>Lastname</label>
+                 <div class='col-span-3 md:col-span-1'> 
+                    <input type='text' name='mother_last_name' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
+                 </div>
                 </div>
 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Middlename</label>
-                    <input type='text' name='mother_middle_name' class='outline-none border border-gray-700 p-1 rounded-md' />
-                </div>
 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Maiden Name</label>
-                    <input type='text' name='mother_maiden_name' class='outline-none border border-gray-700 p-1 rounded-md' />
-                </div>
 
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Nationality</label>
-                    <input type='text' name='mother_nationality' class='outline-none border border-gray-700 p-1 rounded-md'  />
+                <div class='col-span-3 md:col-span-1 w-full'>
+                 <label class='text-[12.5px]'>Middlename</label>
+                 <div class='col-span-3 md:col-span-1'>
+                
+                    <input type='text' name='mother_middle_name' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
+                 </div>
                 </div>
-
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Date of Birth</label>
-                    <input type='date' name='mother_date_of_birth' class='outline-none border border-gray-700 p-1 rounded-md'  />
+                
+                <div class='col-span-3 md:col-span-1 w-full'>
+                  <label class='text-[12.5px]'>Maiden Name</label>
+                   <div class='col-span-3 md:col-span-1'> 
+                    <input type='text' name='mother_maiden_name' class='outline-none border border-gray-700 p-1 rounded-md w-full' />
+                   </div>
                 </div>
-
-                <div class='flex flex-col'>
-                    <label class='text-[12.5px]'>Place of Birth</label>
-                    <input type='text' name='mother_place_of_birth' class='outline-none border border-gray-700 p-1 rounded-md'  />
+                
+                <div class='col-span-3 md:col-span-1 w-full'>
+                  <label class='text-[12.5px]'>Nationality</label>
+                 <div class='col-span-3 md:col-span-1'>
+                    <input type='text' name='mother_nationality' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
+                 </div>
                 </div>
-
-                <div class='flex flex-col'>
-                    <label for='parents_married_at_birth' class='text-[12.5px]'>Were Parents Married at Birth?</label>
-                    <select name='parents_married_at_birth' id='parents_married_at_birth' class='outline-none border border-gray-700 p-1 rounded-md' >
+                
+                <div class='col-span-3 md:col-span-1 w-full'>
+                 <label class='text-[12.5px]'>Date of Birth</label>
+                 <div class='col-span-3 md:col-span-1'>                  
+                    <input type='date' name='mother_date_of_birth' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
+                 </div>
+                </div>
+                
+                <div class='col-span-3 md:col-span-1 w-full'>
+                 <label class='text-[12.5px]'>Place of Birth</label>
+                  <div class='col-span-3 md:col-span-1'>
+                    <input type='text' name='mother_place_of_birth' class='outline-none border border-gray-700 p-1 rounded-md w-full'/>
+                  </div>
+                </div>
+               
+                <div class='col-span-3 md:col-span-1 w-full'>
+                 <label for='parents_married_at_birth' class='text-[12.5px]'>Were Parents Married at Birth?</label>
+                  <div class='col-span-3 md:col-span-1'>
+                   
+                    <select name='parents_married_at_birth' id='parents_married_at_birth' class='outline-none border border-gray-700 p-1 rounded-md w-full' >
                         <option value='yes'>Yes</option>
                         <option value='no'>No</option>
                     </select>
+                  </div>
                 </div>
+               
 
-                <div class='col-span-3 mb-3'>
+                <div class='col-span-3 mt-4'>
                     <h1 class='font-bold'>Empolyee Information</h1>
                 </div>
 
-                <div class='flex flex-col'>
+                <div class='col-span-3 md:col-span-1 w-full'>
                     <label for='employee' class='text-[12.5px]'>Select Employee</label>
-                    <select name='employee_id' id='employee' class='outline-none border border-gray-700 p-1 rounded-md'>
-                        <option value=''>Select an Employee</option>
-                        <!-- Dynamic employee options will be inserted here -->
-                    </select>
+                    <div class='col-span-3 md:col-span-1'>
+                        <select name='employee_id' id='employee' class='outline-none border border-gray-700 p-1 rounded-md w-full'>
+                            <option value=''>Select an Employee</option>
+                            <!-- Dynamic employee options will be inserted here -->
+                        </select>
+                    </div>
                 </div>
+                 
+                
+                
 
                
 

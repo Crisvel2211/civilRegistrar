@@ -9,7 +9,7 @@ $marriageContent = "
             <h1 class='text-center font-bold text-[23px]'>MARRIAGE REGISTRATION FORM</h1>
         </div>
         <div class='m-4 bg-white p-4 rounded-[8px]'>
-            <form id='marriageCertificateForm' class='grid grid-cols-3 gap-2'>
+            <form id='marriageCertificateForm' class='grid grid-cols-1 md:grid-cols-3 gap-2 w-full'>
                 
                 <!-- Hidden Input for userId -->
                 <input type='hidden' name='user_id' id='user_id' />
@@ -19,181 +19,257 @@ $marriageContent = "
                     <h1 class='font-bold'>Personal Information of the Couple</h1>
                 </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Groom's First Name</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='groom_first_name'  />
+                 
+
+                <div class='col-span-3 md:col-span-1 w-full'>
+                  <label class='text-[12.5px]'>Groom's First Name</label>
+                  <div class='col-span-3 md:col-span-1'>
+                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_first_name'  />
+                  </div>
                 </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Groom's Middle Name</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='groom_middle_name' />
+              <div class='col-span-3 md:col-span-1 w-full'>
+                <label class='text-[12.5px]'>Groom's Middle Name</label>
+                <div class='col-span-3 md:col-span-1'>  
+                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_middle_name'/>
+                </div>
+              
+              </div>
+
+              <div class='col-span-3 md:col-span-1 w-full'>
+                <label class='text-[12.5px]'>Groom's Last Name</label>
+                <div class='col-span-3 md:col-span-1'>
+                 <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_last_name' />
+                </div>
+              
+              </div>
+
+              
+
+               <div class='col-span-3 md:col-span-1 w-full'>
+                 <label class='text-[12.5px]'>Groom's Suffix (if applicable)</label>
+                  <div class='col-span-3 md:col-span-1'>
+                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_suffix' />
+                  </div>
+               
+               </div>
+
+               <div class='col-span-3 md:col-span-1 w-full'>
+                 <label class='text-[12.5px]'>Bride's First Name</label>
+                 <div class='col-span-3 md:col-span-1'>
+                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_first_name' />
+                 </div>
+
+               </div>
+
+               <div class='col-span-3 md:col-span-1 w-full'>
+                 <label class='text-[12.5px]'>Bride's Middle Name</label>
+                 <div class='col-span-3 md:col-span-1'>
+                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_middle_name' />
+                </div>
+               </div>
+    
+
+             <div class='col-span-3 md:col-span-1 w-full'>
+               <label class='text-[12.5px]'>Bride's Last Name</label>
+               <div class='col-span-3 md:col-span-1'>
+                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_last_name' />
                 </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Groom's Last Name</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='groom_last_name' />
-                </div>
+             </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Groom's Suffix (if applicable)</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='groom_suffix' />
+             <div class='col-span-3 md:col-span-1 w-full'>
+               <label class='text-[12.5px]'>Bride's Maiden Name (if applicable)</label>
+               <div class='col-span-3 md:col-span-1'>
+                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_maiden_name' />
                 </div>
+             
+             </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Bride's First Name</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='bride_first_name' />
+
+            <div class='col-span-3 md:col-span-1 w-full'>
+              <label class='text-[12.5px]'>Bride's Suffix (if applicable)</label>
+              <div class='col-span-3 md:col-span-1'>
+                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_suffix' />
+              </div>
+            </div>
+            
+            <!-- Birth Details -->
+            <div class='col-span-3 mb-2 mt-4'>
+                <h1 class='font-bold'>Birth Details</h1>
+            </div>
+
+            <div class='col-span-3 md:col-span-1 w-full'>
+                <label class='text-[12.5px]'>Date of Birth of Groom:</label>
+                <div class='col-span-3 md:col-span-1'>
+                    <input type='date' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_dob' />
                 </div>
+            </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Bride's Middle Name</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='bride_middle_name' />
+            <div class='col-span-3 md:col-span-1 w-full'>
+             <label class='text-[12.5px]'>Date of Birth of Bride:</label>
+              <div class='col-span-3 md:col-span-1'>
+                    <input type='date' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_dob' />
                 </div>
+            </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Bride's Last Name</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='bride_last_name' />
+            <div class='col-span-3 md:col-span-1 w-full'>
+             <label class='text-[12.5px]'>Place of Birth of Groom:</label>
+               <div class='col-span-3 md:col-span-1'>
+                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_birth_place' />
                 </div>
+            </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Bride's Maiden Name (if applicable)</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='bride_maiden_name' />
+
+            <div class='col-span-3 md:col-span-1 w-full'>
+             <label class='text-[12.5px]'>Place of Birth of Bride:</label>
+             <div class='col-span-3 md:col-span-1'>
+                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_birth_place' />
                 </div>
+            </div>
+                       
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Bride's Suffix (if applicable)</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='bride_suffix' />
-                </div>
+            <!-- Birth Details -->
+            <div class='col-span-3 mb-2 mt-4'>
+                <h1 class='font-bold'>Place of Marriage & Date</h1>
+            </div>
 
-                <!-- Birth Details -->
-                <div class='col-span-3 mb-3 mt-5'>
-                    <h1 class='font-bold'>Birth Details</h1>
-                </div>
+            <div class='col-span-3 md:col-span-1 w-full'>
+             <label class='text-[12.5px]'>Marriage Date</label>
+             <div class='col-span-3 md:col-span-1'>             
+                <input type='date' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='marriage_date' />
+             </div>
+            </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Date of Birth of Groom:</label>
-                    <input type='date' class='outline-none border border-gray-700 p-1 rounded-md' name='groom_dob' />
-                </div>
+            <div class='col-span-3 md:col-span-1 w-full'>
+              <label class='text-[12.5px]'>Marriage place</label>
+              <div class='col-span-3 md:col-span-1'>
+                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='marriage_place' />
+            </div>
+            </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Date of Birth of Bride:</label>
-                    <input type='date' class='outline-none border border-gray-700 p-1 rounded-md' name='bride_dob' />
-                </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Place of Birth of Groom:</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='groom_birth_place' />
-                </div>
+            <!-- Civil Status Before Marriage -->
+            <div class='col-span-3 mb-2 mt-4'>
+              <h1 class='font-bold'>Civil Status Before Marriage</h1>
+            </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Place of Birth of Bride:</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='bride_birth_place' />
-                </div>
-
-                 <!-- Birth Details -->
-                <div class='col-span-3 mb-3 mt-5'>
-                    <h1 class='font-bold'>Place of Marriage & Date</h1>
-                </div>
-
-                 <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Marriage Date</label>
-                    <input type='date' class='outline-none border border-gray-700 p-1 rounded-md' name='marriage_date' />
-                </div>
-
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Marriage place</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='marriage_place' />
-                </div>
-
-                <!-- Civil Status Before Marriage -->
-                <div class='col-span-3 mb-3 mt-5'>
-                    <h1 class='font-bold'>Civil Status Before Marriage</h1>
-                </div>
-
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Groom’s Civil Status:</label>
-                    <select name='groom_civil_status' class='outline-none border border-gray-700 p-1 rounded-md'>
+            <div class='col-span-3 md:col-span-1 w-full'>
+              <label class='text-[12.5px]'>Groom’s Civil Status:</label>
+               <div class='col-span-3 md:col-span-1'>
+                    <select name='groom_civil_status' class='outline-none border border-gray-700 p-1 rounded-md w-full'>
                         <option value='Single'>Single</option>
                         <option value='Widowed'>Widowed</option>
                         <option value='Divorced'>Divorced</option>
                         <option value='Annulled'>Annulled</option>
                     </select>
                 </div>
+            
+            </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Bride’s Civil Status:</label>
-                    <select name='bride_civil_status' class='outline-none border border-gray-700 p-1 rounded-md'>
+            <div class='col-span-3 md:col-span-1 w-full'>
+               <label class='text-[12.5px]'>Bride’s Civil Status:</label>
+               <div class='col-span-3 md:col-span-1'>
+                    <select name='bride_civil_status' class='outline-none border border-gray-700 p-1 rounded-md w-full'>
                         <option value='Single'>Single</option>
                         <option value='Widowed'>Widowed</option>
                         <option value='Divorced'>Divorced</option>
                         <option value='Annulled'>Annulled</option>
                     </select>
                 </div>
+            </div>
 
 
-                <!-- Nationality -->
-                <div class='col-span-3 mb-3 mt-5'>
-                    <h1 class='font-bold'>Nationality</h1>
+            <!-- Nationality -->
+            <div class='col-span-3 mb-2 mt-4'>
+                <h1 class='font-bold'>Nationality</h1>
+            </div>
+
+            <div class='col-span-3 md:col-span-1 w-full'>
+              <label class='text-[12.5px]'>Nationality of Groom</label>
+                <div class='col-span-3 md:col-span-1'>
+                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_nationality' />
+                </div>
+            </div>
+
+            <div class='col-span-3 md:col-span-1 w-full'>
+              <label class='text-[12.5px]'>Nationality of Bride</label>
+               <div class='col-span-3 md:col-span-1'>
+                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_nationality' />
+                </div>
+            </div>
+            
+            <!-- Parents' Information -->
+            <div class='col-span-3 mb-2 mt-4'>
+                <h1 class='font-bold'>Parents' Information</h1>
+            </div>
+
+            <div class='col-span-3 md:col-span-1 w-full'>
+              <label class='text-[12.5px]'>Full Name of Groom's Father:</label>
+              <div class='col-span-3 md:col-span-1'>
+                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_father_name' />
+                </div>
+            
+            </div>
+
+            <div class='col-span-3 md:col-span-1 w-full'>
+             <label class='text-[12.5px]'>Full Name of Groom's Mother:</label>
+              <div class='col-span-3 md:col-span-1'>
+                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_mother_name' />
+              </div>
+            </div>
+
+            <div class='col-span-3 md:col-span-1 w-full'>
+               <label class='text-[12.5px]'>Full Name of Bride's Father:</label>
+                <div class='col-span-3 md:col-span-1'>
+                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_father_name' />
+                </div>
+            
+            </div>
+
+            <div class='col-span-3 md:col-span-1 w-full>
+              <label class='text-[12.5px]'>Full Name of Bride's Mother:</label>
+              <div class='col-span-3 md:col-span-1'>
+                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_mother_name' />
                 </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Nationality of Groom</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='groom_nationality' />
-                </div>
+            </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Nationality of Bride</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='bride_nationality' />
-                </div>
+            <div class='col-span-3 md:col-span-1 w-full'>
+              <label class='text-[12.5px]'>Groom Witness</label>
+              <div class='col-span-3 md:col-span-1'>
+                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_witness' />
+              </div>
+            
+            </div>
 
+            <div class='col-span-3 md:col-span-1 w-full'>
+              <label class='text-[12.5px]'>Bride Witness</label>
+              <div class='col-span-3 md:col-span-1'>
+                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_witness' />
+              </div>
+            </div>
 
-                <!-- Parents' Information -->
-                <div class='col-span-3 mb-3 mt-5'>
-                    <h1 class='font-bold'>Parents' Information</h1>
-                </div>
+              
+        
+            <!-- Employee Information -->
+            <div class='col-span-3 mt-5'>
+                <h1 class='font-bold'>Employee Information</h1>
+            </div>
 
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Full Name of Groom's Father:</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='groom_father_name' />
-                </div>
-
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Full Name of Groom's Mother:</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='groom_mother_name' />
-                </div>
-
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Full Name of Bride's Father:</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='bride_father_name' />
-                </div>
-                 <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Full Name of Bride's Mother:</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='bride_mother_name' />
-                </div>
-
-                
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Groom Witness</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='groom_witness' />
-                </div>
-                <div class='col-span-1 flex flex-col'>
-                    <label class='text-[12.5px]'>Bride Witness</label>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md' name='bride_witness' />
-                </div>
-                
-                <!-- Employee Information -->
-                <div class='col-span-3 mb-3'>
-                    <h1 class='font-bold'>Employee Information</h1>
-                </div>
-                 <div class='flex flex-col'>
-                    <label for='employee' class='text-[12.5px]'>Select Employee</label>
-                    <select name='employee_id' id='employee' class='outline-none border border-gray-700 p-1 rounded-md'>
+            <div class='col-span-3 md:col-span-1 w-full'>
+              <label for='employee' class='text-[12.5px]'>Select Employee</label>
+              <div class='col-span-3 md:col-span-1'> 
+                    <select name='employee_id' id='employee' class='outline-none border border-gray-700 p-1 rounded-md w-full'>
                         <option value=''>Select an Employee</option>
                         <!-- Dynamic employee options will be inserted here -->
                     </select>
                 </div>
+            
+            </div>
 
                  <!-- Submit Button -->
-                <div class='col-span-3 flex justify-center mt-5'>
+                <div class='col-span-3 flex justify-center mt-2'>
                     <button type='submit' class='bg-blue-500 text-white py-2 px-4 rounded-md'>Submit Registration</button>
                 </div>
 

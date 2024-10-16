@@ -108,6 +108,17 @@ function employeeLayout($children) {
         </div>
     </a>
 
+    <a href='/civil-registrar/pages/employee/IssuedCertificates.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h1 class='font-[500]'>Issued Certificates</h1>
+                            </div>
+    </a>
+
 </div>
 </div>
             </div>
@@ -153,14 +164,15 @@ function employeeLayout($children) {
                         <!-- Profile -->
                         <div class='relative w-[35px] h-[35px] text-[#93A3BC] font-semibold cursor-pointer hover:bg-slate-300 rounded-[50%] hover:bg-opacity-[.03] p-[7px]' >
                             
-                            <img src='../../images/content2.jpg' alt='profile-icon' class='w-[21px] h-[21px] font-semibold cursor-pointer rounded-[100%]' id='profileButton'/>
+                            <!-- Dynamic Profile Image or Sign In Button -->
+                         <div id="authDisplay"></div>
                             
 
                             <div id='profilePanel' class='absolute bg-[#ffffff] right-[.5rem] w-[10rem] h-[10rem] mt-[12px] rounded-[5px] shadow-lg z-[1000] hidden'>
                                 <div class='border-b-[.01px] border-[#e5e8eb]'>
                                     <div class='hover:bg-gray-900 hover:bg-opacity-[.12] cursor-pointer p-2 my-[4px] w-full'>
                                         <p class='text-[14px] font-[400] text-[#324153]'>Signed in as</p>
-                                        <p class='text-[12px] font-[400] text-[#324153]'>capstone@gmail.com</p>
+                                        <p class='text-[12px] font-[400] text-[#324153]' id="email-display"></p>
                                     </div>
                                 </div>
                                   <div class='border-b-[.01px] border-[#e5e8eb]'>
@@ -262,6 +274,18 @@ function employeeLayout($children) {
                                 <h1 class='font-[500]'>Appointment Schedule</h1>
                             </div>
                         </a>
+
+                        <a href='/civil-registrar/pages/employee/IssuedCertificates.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h1 class='font-[500]'>Issued Certificates</h1>
+                            </div>
+                        </a>
+
                 </div>
 </div>
             </div>
@@ -334,6 +358,17 @@ function employeeLayout($children) {
       modal.classList.toggle("hidden");
     };
 
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const authDisplay = document.getElementById('authDisplay');
+        const profileImage = localStorage.getItem('profileImage'); // Base64 image stored, or null
+
+        if (profileImage) {
+            // User is authenticated, show profile image from localStorage
+            authDisplay.innerHTML = `<img src="${profileImage}" alt="Profile" class='w-[21px] h-[21px] font-semibold cursor-pointer rounded-[100%]' id='profileButton'/>`;
+        }
+    });
+
     // Open/Close modal on button click
     openModalButton.addEventListener("click", toggleModal);
         document.addEventListener('DOMContentLoaded', () => {
@@ -388,6 +423,17 @@ function employeeLayout($children) {
                 }
             });
         });
+        // Get the email from localStorage
+            const email = localStorage.getItem('email');
+
+            // If email exists, display it, otherwise do nothing
+            if (email) {
+                document.getElementById('email-display').textContent = email;
+            }
+
+            // To store email in localStorage (example)
+            localStorage.setItem('userEmail', 'capstone@gmail.com');
+
 
     
 

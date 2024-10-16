@@ -165,14 +165,15 @@ function adminLayout($children) {
                         <!-- Profile -->
                         <div class='relative w-[35px] h-[35px] text-[#93A3BC] font-semibold cursor-pointer hover:bg-slate-300 rounded-[50%] hover:bg-opacity-[.03] p-[7px]' >
                             
-                            <img src='../../images/content2.jpg' alt='profile-icon' class='w-[21px] h-[21px] font-semibold cursor-pointer rounded-[100%]' id='profileButton'/>
+                             <!-- Dynamic Profile Image or Sign In Button -->
+                         <div id="authDisplay"></div>
                             
 
                             <div id='profilePanel' class='absolute bg-[#ffffff] right-[.5rem] w-[10rem] h-[10rem] mt-[12px] rounded-[5px] shadow-lg z-[1000] hidden'>
                                 <div class='border-b-[.01px] border-[#e5e8eb]'>
                                     <div class='hover:bg-gray-900 hover:bg-opacity-[.12] cursor-pointer p-2 my-[4px] w-full'>
                                         <p class='text-[14px] font-[400] text-[#324153]'>Signed in as</p>
-                                        <p class='text-[12px] font-[400] text-[#324153]'>capstone@gmail.com</p>
+                                        <p class='text-[12px] font-[400] text-[#324153]' id="email-display"></p>
                                     </div>
                                 </div>
                                   <div class='border-b-[.01px] border-[#e5e8eb]'>
@@ -361,6 +362,16 @@ function adminLayout($children) {
             }
         }
 
+        document.addEventListener("DOMContentLoaded", function () {
+        const authDisplay = document.getElementById('authDisplay');
+        const profileImage = localStorage.getItem('profileImage'); // Base64 image stored, or null
+
+        if (profileImage) {
+            // User is authenticated, show profile image from localStorage
+            authDisplay.innerHTML = `<img src="${profileImage}" alt="Profile" class='w-[21px] h-[21px] font-semibold cursor-pointer rounded-[100%]' id='profileButton'/>`;
+        }
+    });
+
         document.addEventListener('DOMContentLoaded', () => {
             const notificationButton = document.getElementById('notificationButton');
             const profileButton = document.getElementById('profileButton');
@@ -394,6 +405,18 @@ function adminLayout($children) {
                 profilePanel.classList.toggle('hidden');
                 notificationPanel.classList.add('hidden'); // Hide notification panel if open
             });
+
+            // Get the email from localStorage
+        const email = localStorage.getItem('email');
+
+        // If email exists, display it, otherwise do nothing
+        if (email) {
+            document.getElementById('email-display').textContent = email;
+        }
+
+        // To store email in localStorage (example)
+        localStorage.setItem('userEmail', 'capstone@gmail.com');
+
 
             // Optionally, add event listener to handle logout
             logoutButton.addEventListener('click', () => {

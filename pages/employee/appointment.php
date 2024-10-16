@@ -79,8 +79,18 @@ $updateProfileContent = "
 
 employeeLayout($updateProfileContent);
 ?>
-
+<script src='https://cdn.jsdelivr.net/npm/toastify-js'></script>
 <script>
+
+    function showToast(message, type) {
+        Toastify({
+            text: message,
+            style: {
+                background: type === 'success' ? 'linear-gradient(to right, #00b09b, #96c93d)' : 'linear-gradient(to right, #ff5f6d, #ffc371)'
+            },
+            duration: 3000
+        }).showToast();
+    }
     // Fetch residents data and populate the resident dropdown
     let residents = []; // Store the residents globally
 
@@ -158,15 +168,15 @@ employeeLayout($updateProfileContent);
         .then(response => response.json())
         .then(data => {
             if (data.error) {
-                alert(`Error: ${data.error}`);
+                showToast(data.error, 'error');
             } else {
-                alert(data.message);
+                showToast(data.message, 'success');
                 form.reset(); // Clear the form after successful submission
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('An error occurred while booking the appointment.');
+            showToast('An error occurred while booking the appointment.', 'error');
         });
     });
 </script>

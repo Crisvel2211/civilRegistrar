@@ -5,7 +5,7 @@ include '../../layout/employee/employeeLayout.php';
 $updateProfileContent = "
     <div class='bg-gray-300 w-full h-[88vh] overflow-y-scroll'>
         <!-- Main Container -->
-        <div class='container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg'>
+        <div class='container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg relative'>
         
             <!-- Search and Filter Section -->
             <div class='flex items-center justify-between mb-6'>
@@ -41,9 +41,9 @@ $updateProfileContent = "
 
 
             <!-- Status Update Modal -->
-            <div id='statusUpdateModal' class='fixed inset-0 items-center justify-center z-50 hidden'>
-                <div class='bg-white p-5 rounded shadow-lg w-1/3'>
-                    <h2 class='text-lg font-semibold mb-4'>Update Status</h2>
+            <div id='statusUpdateModal' class='items-center justify-center h-auto z-50 hidden absolute md:top-[8rem] md:left-[20rem] md:w-[68%] top-[15rem] left-[1rem] w-full'>
+              <div class='bg-white p-5 rounded shadow-lg md:w-[40%] w-[90%]'>
+                  <h2 class='text-lg font-semibold mb-4'>Update Status</h2>
                     <select id='newStatusInput' class='w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4'>
                         <option value=''>Select Status</option>
                         <option value='pending'>Pending</option>
@@ -51,19 +51,22 @@ $updateProfileContent = "
                         <option value='verified'>Verified</option>
                         <option value='completed'>Completed</option>
                     </select>
-                    <div class='flex justify-end'>
+                    <div class='flex justify-between'>
                         <button id='modalCancelButton' class='bg-gray-300 text-gray-800 px-4 py-1 rounded hover:bg-gray-200'>Cancel</button>
                         <button id='modalConfirmButton' class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 ml-2'>Confirm</button>
                     </div>
+              
                 </div>
+                    
+                
             </div>
 
             <!-- Delete Confirmation Modal -->
-            <div id='deleteConfirmationModal' class='fixed inset-0 items-center justify-center z-50 hidden'>
-                <div class='bg-white p-5 rounded shadow-lg w-1/3'>
+            <div id='deleteConfirmationModal' class='items-center justify-center h-auto z-50 hidden absolute md:top-[8rem] md:left-[20rem] md:w-[68%] top-[15rem] left-[1rem] w-full'>
+                <div class='bg-white p-5 rounded shadow-lg md:w-[40%] w-[90%]'>
                     <h2 class='text-lg font-semibold mb-4'>Delete Confirmation</h2>
                     <p>Are you sure you want to delete this birth registration?</p>
-                    <div class='flex justify-end'>
+                    <div class='flex justify-between mt-2'>
                         <button id='deleteModalCancelButton' class='bg-gray-300 text-gray-800 px-4 py-1 rounded hover:bg-gray-200'>Cancel</button>
                         <button id='deleteModalConfirmButton' class='bg-red-500 text-white px-4 py-1 rounded hover:bg-red-400 ml-2'>Delete</button>
                     </div>
@@ -71,8 +74,8 @@ $updateProfileContent = "
             </div>
 
             <!-- View Birth Registration Modal -->
-            <div id='viewBirthModal' class='fixed inset-0 items-center justify-center z-50 hidden'>
-                <div class='bg-white p-5 rounded shadow-lg w-1/3'>
+            <div id='viewBirthModal' class='items-center justify-center h-auto z-50 hidden absolute md:-top-9 md:left-[15rem] top-[15rem] left-[1rem] md:w-[76%] w-full'>
+                <div class='bg-white p-5 rounded shadow-lg md:w-[60%] w-[90%]'>
                     <h2 class='text-lg font-semibold mb-4'>Birth Registration Details</h2>
                     <div id='birthDetailsContent' class='mb-4'>
                         <!-- Details will be populated here -->
@@ -111,19 +114,19 @@ const fetchBirthRegistrations = () => {
 
                 data.forEach(birth => {
                     const row = `
-                        <tr>
-                            <td class='px-4 py-2'>${birth.id}</td>
-                            <td class='px-4 py-2'>${birth.user_name}</td> <!-- Display user name here -->
-                            <td class='px-4 py-2 text-center'>
+                        <tr class='border-b border-x border-gray-300'>
+                            <td class='px-4 py-2 border-r border-gray-300'>${birth.id}</td>
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>${birth.user_name}</td> <!-- Display user name here -->
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>
                                 <span class='${(birth.status === "verified" || birth.status === "completed") ? "bg-green-300 text-green-800" : "bg-yellow-300 text-yellow-800"} text-xs font-medium px-2.5 py-0.5 rounded'>
                                     ${birth.status}
                                 </span>
                             </td>
 
-                            <td class='px-4 py-2'>
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>
                                 <button class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 transition duration-300' onclick='viewBirth(${birth.id})'>View</button>
                             </td>
-                            <td class='px-4 py-2 flex space-x-4'>
+                            <td class='px-4 py-2 flex justify-around'>
                                 <button class='text-blue-500 hover:text-blue-400' onclick='updateStatus(${birth.id})'>
                                     <i class='fas fa-sync-alt'></i> 
                                 </button>
@@ -198,6 +201,44 @@ document.getElementById('modalConfirmButton').addEventListener('click', () => {
 document.getElementById('modalCancelButton').addEventListener('click', () => {
     document.getElementById('statusUpdateModal').classList.add('hidden'); // Hide the modal
     document.getElementById('newStatusInput').value = ''; // Reset the select input
+});
+
+
+const statusModal =  document.getElementById('statusUpdateModal')
+
+function closeUpdatebutton(){
+    statusModal.classList.toggle('hidden');
+}
+// Close modal when clicking outside the modal panel
+window.addEventListener('click', (e) => {
+      if (e.target === statusModal) {
+        closeUpdatebutton();
+      }
+});
+
+
+const deleteModal =  document.getElementById('deleteConfirmationModal')
+
+function closedeletebutton(){
+    deleteModal.classList.toggle('hidden');
+}
+// Close modal when clicking outside the modal panel
+window.addEventListener('click', (e) => {
+      if (e.target === deleteModal) {
+        closedeletebutton();
+      }
+});
+
+const viewModal =  document.getElementById('viewBirthModal')
+
+function closeViewbutton(){
+    viewModal.classList.add('hidden');
+}
+// Close modal when clicking outside the modal panel
+window.addEventListener('click', (e) => {
+      if (e.target === viewModal) {
+        closeViewbutton();
+      }
 });
 
 // Confirm deletion of a birth registration

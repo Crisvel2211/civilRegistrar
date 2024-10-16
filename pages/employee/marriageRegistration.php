@@ -21,7 +21,7 @@ $updateProfileContent = "
             </div>
 
             <!-- Marriage Registration Table -->
-           <div class='w-full overflow-x-auto md:overflow-none'>
+           <div class='w-full overflow-x-auto'>
                 <table class='w-full table-auto bg-white'>
                     <thead class='bg-gray-200'>
                         <tr>
@@ -40,8 +40,8 @@ $updateProfileContent = "
 
 
             <!-- Status Update Modal -->
-            <div id='statusUpdateModal' class='items-center justify-center z-50 hidden absolute top-[8rem] left-[18rem] w-full'>
-                <div class='bg-white p-5 rounded shadow-lg w-1/3'>
+            <div id='statusUpdateModal' class='items-center justify-center h-auto z-50 hidden absolute md:top-[8rem] md:left-[20rem] md:w-[68%] top-[18rem] left-[1rem] w-full'>
+                <div class='bg-white p-5 rounded shadow-lg md:w-[40%] w-[90%]'>
                     <h2 class='text-lg font-semibold mb-4'>Update Status</h2>
                     <select id='newStatusInput' class='w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4'>
                         <option value=''>Select Status</option>
@@ -58,11 +58,11 @@ $updateProfileContent = "
             </div>
 
             <!-- Delete Confirmation Modal -->
-            <div id='deleteConfirmationModal' class='items-center justify-center z-50 hidden'>
-                <div class='bg-white p-5 rounded shadow-lg w-1/3'>
+            <div id='deleteConfirmationModal' class='items-center justify-center h-auto z-50 hidden absolute md:top-[8rem] md:left-[20rem] md:w-[68%] top-[18rem] left-[1rem] w-full'>
+                <div class='bg-white p-5 rounded shadow-lg md:w-[40%] w-[90%]'>
                     <h2 class='text-lg font-semibold mb-4'>Delete Confirmation</h2>
                     <p>Are you sure you want to delete this marriage registration?</p>
-                    <div class='flex justify-end'>
+                    <div class='flex justify-between mt-2'>
                         <button id='deleteModalCancelButton' class='bg-gray-300 text-gray-800 px-4 py-1 rounded hover:bg-gray-200'>Cancel</button>
                         <button id='deleteModalConfirmButton' class='bg-red-500 text-white px-4 py-1 rounded hover:bg-red-400 ml-2'>Delete</button>
                     </div>
@@ -70,8 +70,8 @@ $updateProfileContent = "
             </div>
 
             <!-- View marriage Registration Modal -->
-            <div id='viewmarriageModal' class='items-center justify-center z-50 hidden'>
-                <div class='bg-white p-5 rounded shadow-lg w-1/3'>
+            <div id='viewmarriageModal' class='items-center justify-center h-auto z-50 hidden absolute md:-top-9 md:left-[15rem] top-[18rem] left-[1rem] md:w-[76%] w-full'>
+                <div class='bg-white p-5 rounded shadow-lg md:w-[60%] w-[90%]'>
                     <h2 class='text-lg font-semibold mb-4'>Marriage Registration Details</h2>
                     <div id='marriageDetailsContent' class='mb-4'>
                         <!-- Details will be populated here -->
@@ -110,18 +110,18 @@ const fetchmarriageRegistrations = () => {
 
                 data.forEach(marriage => {
                     const row = `
-                        <tr>
-                            <td class='px-4 py-2'>${marriage.id}</td>
-                            <td class='px-4 py-2'>${marriage.user_name}</td> <!-- Display user name here -->
-                             <td class='px-4 py-2 text-center'>
+                        <tr class='border-b border-x border-gray-300'> 
+                            <td class='px-4 py-2 border-r border-gray-300'>${marriage.id}</td>
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>${marriage.user_name}</td> <!-- Display user name here -->
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>
                                 <span class='${(marriage.status === "verified" || marriage.status === "completed") ? "bg-green-300 text-green-800" : "bg-yellow-300 text-yellow-800"} text-xs font-medium px-2.5 py-0.5 rounded'>
                                     ${marriage.status}
                                 </span>
                             </td>
-                            <td class='px-4 py-2'>
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>
                                 <button class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 transition duration-300 cursor-pointer' onclick='viewmarriage(${marriage.id})'>View</button>
                             </td>
-                            <td class='px-4 py-2 flex space-x-4'>
+                            <td class='px-4 py-2 flex justify-around'>
                                 <button class='text-blue-500 hover:text-blue-400 cursor-pointer' onclick='updateStatus(${marriage.id})'>
                                     <i class='fas fa-sync-alt'></i> 
                                 </button>
@@ -130,6 +130,7 @@ const fetchmarriageRegistrations = () => {
                                 </button>
                             </td>
                         </tr>
+
                     `;
                     tableBody.innerHTML += row;
                 });
@@ -207,6 +208,31 @@ function closeUpdatebutton(){
 window.addEventListener('click', (e) => {
       if (e.target === statusModal) {
         closeUpdatebutton();
+      }
+});
+
+
+const deleteModal =  document.getElementById('deleteConfirmationModal')
+
+function closedeletebutton(){
+    deleteModal.classList.toggle('hidden');
+}
+// Close modal when clicking outside the modal panel
+window.addEventListener('click', (e) => {
+      if (e.target === deleteModal) {
+        closedeletebutton();
+      }
+});
+
+const viewModal =  document.getElementById('viewmarriageModal')
+
+function closeViewbutton(){
+    viewModal.classList.add('hidden');
+}
+// Close modal when clicking outside the modal panel
+window.addEventListener('click', (e) => {
+      if (e.target === viewModal) {
+        closeViewbutton();
       }
 });
 // Confirm deletion of a marriage registration

@@ -84,6 +84,7 @@
                 localStorage.setItem('email', result.email);
                 localStorage.setItem('password', result.password);
                 localStorage.setItem('role', result.role); // Store the user ID
+                localStorage.setItem('profileImage', result.userProfile);
                 
 
                 setTimeout(() => {

@@ -5,7 +5,7 @@ include '../../layout/employee/employeeLayout.php';
 $updateProfileContent = "
     <div class='bg-gray-300 w-full h-[88vh] overflow-y-scroll'>
         <!-- Main Container -->
-        <div class='container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg'>
+        <div class='container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg relative'>
         
             <!-- Search and Filter Section -->
             <div class='flex items-center justify-between mb-6'>
@@ -41,8 +41,8 @@ $updateProfileContent = "
 
 
             <!-- Status Update Modal -->
-            <div id='statusUpdateModal' class='fixed inset-0 items-center justify-center z-50 hidden'>
-                <div class='bg-white p-5 rounded shadow-lg w-1/3'>
+            <div id='statusUpdateModal' class='items-center justify-center h-auto z-50 hidden absolute md:top-[8rem] md:left-[20rem] md:w-[68%] top-[15rem] left-[1rem] w-full'>
+                <div class='bg-white p-5 rounded shadow-lg md:w-[40%] w-[90%]'>
                     <h2 class='text-lg font-semibold mb-4'>Update Status</h2>
                     <select id='newStatusInput' class='w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4'>
                         <option value=''>Select Status</option>
@@ -51,7 +51,7 @@ $updateProfileContent = "
                         <option value='verified'>Verified</option>
                         <option value='completed'>Completed</option>
                     </select>
-                    <div class='flex justify-end'>
+                    <div class='flex justify-between'>
                         <button id='modalCancelButton' class='bg-gray-300 text-gray-800 px-4 py-1 rounded hover:bg-gray-200'>Cancel</button>
                         <button id='modalConfirmButton' class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 ml-2'>Confirm</button>
                     </div>
@@ -59,11 +59,11 @@ $updateProfileContent = "
             </div>
 
             <!-- Delete Confirmation Modal -->
-            <div id='deleteConfirmationModal' class='fixed inset-0 items-center justify-center z-50 hidden'>
-                <div class='bg-white p-5 rounded shadow-lg w-1/3'>
+            <div id='deleteConfirmationModal' class='items-center justify-center h-auto z-50 hidden absolute md:top-[8rem] md:left-[20rem] md:w-[68%] top-[15rem] left-[1rem] w-full'>
+                <div class='bg-white p-5 rounded shadow-lg md:w-[40%] w-[90%]'>
                     <h2 class='text-lg font-semibold mb-4'>Delete Confirmation</h2>
                     <p>Are you sure you want to delete this death registration?</p>
-                    <div class='flex justify-end'>
+                    <div class='flex justify-between mt-2'>
                         <button id='deleteModalCancelButton' class='bg-gray-300 text-gray-800 px-4 py-1 rounded hover:bg-gray-200'>Cancel</button>
                         <button id='deleteModalConfirmButton' class='bg-red-500 text-white px-4 py-1 rounded hover:bg-red-400 ml-2'>Delete</button>
                     </div>
@@ -71,8 +71,8 @@ $updateProfileContent = "
             </div>
 
             <!-- View death Registration Modal -->
-            <div id='viewdeathModal' class='fixed inset-0 items-center justify-center z-50 hidden'>
-                <div class='bg-white p-5 rounded shadow-lg w-1/3'>
+            <div id='viewdeathModal' class='items-center justify-center h-auto z-50 hidden absolute md:-top-9 md:left-[15rem] top-[15rem] left-[1rem] md:w-[76%] w-full'>
+                <div class='bg-white p-5 rounded shadow-lg md:w-[60%] w-[90%]'>
                     <h2 class='text-lg font-semibold mb-4'>death Registration Details</h2>
                     <div id='deathDetailsContent' class='mb-4'>
                         <!-- Details will be populated here -->
@@ -111,26 +111,27 @@ const fetchdeathRegistrations = () => {
 
                 data.forEach(death => {
                     const row = `
-                        <tr>
-                            <td class='px-4 py-2'>${death.id}</td>
-                            <td class='px-4 py-2'>${death.user_name}</td> <!-- Display user name here -->
-                            <td class='px-4 py-2 text-center'>
+                         <tr class='border-b border-x border-gray-300'> 
+                            <td class='px-4 py-2 border-r border-gray-300'>${death.id}</td>
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>${death.user_name}</td> <!-- Display user name here -->
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>
                                 <span class='${(death.status === "verified" || death.status === "completed") ? "bg-green-300 text-green-800" : "bg-yellow-300 text-yellow-800"} text-xs font-medium px-2.5 py-0.5 rounded'>
                                     ${death.status}
                                 </span>
                             </td>
-                            <td class='px-4 py-2'>
-                                <button class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 transition duration-300' onclick='viewdeath(${death.id})'>View</button>
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>
+                                <button class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 transition duration-300 cursor-pointer' onclick='viewdeath(${death.id})'>View</button>
                             </td>
-                            <td class='px-4 py-2 flex space-x-4'>
-                                <button class='text-blue-500 hover:text-blue-400' onclick='updateStatus(${death.id})'>
+                            <td class='px-4 py-2 flex justify-around'>
+                                <button class='text-blue-500 hover:text-blue-400 cursor-pointer' onclick='updateStatus(${death.id})'>
                                     <i class='fas fa-sync-alt'></i> 
                                 </button>
-                                <button class='text-red-500 hover:text-red-400' onclick='confirmDelete(${death.id})'>
+                                <button class='text-red-500 hover:text-red-400 cursor-pointer' onclick='confirmDelete(${death.id})'>
                                     <i class='fas fa-trash'></i>
                                 </button>
                             </td>
                         </tr>
+
                     `;
                     tableBody.innerHTML += row;
                 });

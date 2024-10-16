@@ -6,7 +6,7 @@ $updateProfileContent = "
     <div class='container mx-auto w-full md:mt-1 px-[8px] h-[88vh] overflow-y-scroll'>
         <div class='container mx-auto p-6'>
             <div class='mb-8'>
-                <h1 class='text-3xl font-bold text-center'>Civil Registrar Appointment Schedule</h1>
+                <h1 class='text-3xl font-bold text-center text-gray-500'>Appointment Schedule</h1>
             </div>
             
             <!-- Appointments Grid -->
