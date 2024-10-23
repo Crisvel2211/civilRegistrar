@@ -7,6 +7,40 @@ $method = $_SERVER['REQUEST_METHOD'];
 $base_url = 'http://localhost/civil-registrar/api/uploads/';
 
 if ($method === 'GET') {
+    // Check for count parameter
+    if (isset($_GET['count']) && $_GET['count'] === 'true') {
+        // Count total users
+        $count_sql = "SELECT COUNT(*) AS total_users FROM users";
+        $count_result = $conn->query($count_sql);
+        $total_count = $count_result ? $count_result->fetch_assoc()['total_users'] : 0;
+
+        echo json_encode(['total' => $total_count]);
+        exit;
+    }
+    // Add check for roleCounts parameter
+    if (isset($_GET['roleCounts']) && $_GET['roleCounts'] === 'true') {
+        // Query to get count of users by role (Admin, Employee, Resident)
+        $role_sql = "
+            SELECT 
+                SUM(CASE WHEN role = 'Admin' THEN 1 ELSE 0 END) AS admin_count,
+                SUM(CASE WHEN role = 'Employee' THEN 1 ELSE 0 END) AS employee_count,
+                SUM(CASE WHEN role = 'Resident' THEN 1 ELSE 0 END) AS resident_count
+            FROM users";
+        
+        $role_result = $conn->query($role_sql);
+
+        if ($role_result) {
+            $counts = $role_result->fetch_assoc();
+            echo json_encode([
+                'admin' => $counts['admin_count'],
+                'employee' => $counts['employee_count'],
+                'resident' => $counts['resident_count']
+            ]);
+        } else {
+            echo json_encode(['error' => $conn->error]);
+        }
+        exit;
+    }
     // Check if the request includes an ID for a specific user
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']);

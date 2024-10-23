@@ -20,9 +20,15 @@ $homeContent = "
             </div>
 
             <!-- Users Table -->
-            <h2 class='text-2xl mb-4'>Users</h2>
-            <div class='w-full overflow-x-auto md:overflow-none'>
-             <table class='w-full table-auto mb-6' id='usersTable'>
+            <div class='flex justify-between item-center mb-4'>
+             <h2 class='text-2xl '>Lists Of User</h2>
+             <button class='bg-green-400  rounded-[5px] p-2 text-[12px] hover:bg-green-700 '>
+             <i class='fa-solid fa-plus'> Add User</i>
+             </button>
+            </div>
+           
+            <div class='w-full overflow-x-auto md:overflow-none mt-2'>
+             <table class='w-full table-auto mb-6'>
                 <thead class='bg-gray-200'>
                     <tr>
                         <th class='px-4 py-2'>ID</th>
@@ -32,7 +38,9 @@ $homeContent = "
                         <th class='px-4 py-2'>Actions</th>
                     </tr>
                 </thead>
-                <tbody class='bg-white divide-y divide-gray-200'></tbody>
+                <tbody id='usersTable' class='divide-y divide-gray-300'>
+                        <!-- Data will be inserted here dynamically -->
+                </tbody>    
             </table>
             
             </div>
@@ -106,20 +114,35 @@ adminLayout($homeContent);
             return response.json();
         })
         .then(users => {
-            const usersTable = document.getElementById('usersTable').getElementsByTagName('tbody')[0];
-            usersTable.innerHTML = '';
-            users.forEach(user => {
-                const row = usersTable.insertRow();
-                row.insertCell(0).textContent = user.id;
-                row.insertCell(1).textContent = user.name;
-                row.insertCell(2).textContent = user.email;
-                row.insertCell(3).textContent = user.role;
-                const actionsCell = row.insertCell(4);
-                actionsCell.innerHTML = `
-                    <button class='bg-blue-500 text-white px-2 py-1 rounded cursor-pointer hover:bg-blue-400' onclick='editUser(${user.id}, "${user.name}", "${user.email}", "${user.role}")'>Edit</button>
-                    <button class='bg-red-500 text-white px-2 py-1 rounded cursor-pointer hover:bg-red-400 ml-2' onclick='deleteUser(${user.id})'>Delete</button>
-                `;
-            });
+            if(Array.isArray(users)){
+                const usersTable = document.querySelector('#usersTable');
+                usersTable.innerHTML='';
+                 
+                users.forEach(user => {
+                    const row = `
+                     <tr class='border-b border-x border-gray-300'>
+                            <td class='px-4 py-2 border-r border-gray-300'>${user.id}</td>
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>${user.name}</td>
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>${user.email}</td>
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>${user.role}</td> 
+                           
+                            <td class='px-4 py-2 flex justify-around'>
+                                <button class='text-blue-500 hover:text-blue-400'  onclick='editUser(${user.id}, "${user.name}", "${user.email}", "${user.role}")'>
+                                    <i class='fas fa-sync-alt'></i> 
+                                </button>
+                                <button class='text-red-500 hover:text-red-400' onclick='deleteUser(${user.id})'>
+                                    <i class='fas fa-trash'></i>
+                                </button>
+                            </td>
+                        </tr>
+                    
+                    `;
+
+                    usersTable.innerHTML += row;
+                });
+            }else {
+                console.error('Error fetching data:', users);
+            }
         })
         .catch(error => {
             console.error('Error:', error);

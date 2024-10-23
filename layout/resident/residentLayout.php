@@ -427,8 +427,6 @@ function residentLayout($children) {
             document.getElementById('email-display').textContent = email;
         }
 
-        // To store email in localStorage (example)
-        localStorage.setItem('userEmail', 'capstone@gmail.com');
 
 
 
@@ -445,7 +443,7 @@ function residentLayout($children) {
         showToast('You have successfully logged out.', 'success');
 
         // Redirect the user to the login page
-        window.location.href = 'http://localhost/civil-registrar/pages/login.php'; // Adjust the URL as necessary
+        window.location.href = 'http://localhost/civil-registrar/index.php'; // Adjust the URL as necessary
     }
 
     // Attach the logout function to a button click event

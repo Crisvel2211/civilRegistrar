@@ -86,13 +86,13 @@ function adminLayout($children) {
     </a>
 
     <div id="certificate-submenu" class="hidden mt-2  flex-col gap-1 w-[90%] pl-10">
-        <a href='/AdminDashboards/birthCertificate' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/civil-registrar/pages/admin/birthRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Birth Certificate</h1>
         </a>
-        <a href='/AdminDashboards/marriageCertificate' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/civil-registrar/pages/admin/marriageRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Marriage Certificate</h1>
         </a>
-        <a href='/AdminDashboards/deathCertificate' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/civil-registrar/pages/admin/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Death Certificate</h1>
         </a>
     </div>
@@ -256,13 +256,13 @@ function adminLayout($children) {
     </a>
 
     <div id="mobilecertificate-submenu" class="hidden mt-2  flex-col gap-1 w-[90%] pl-10">
-        <a href='/AdminDashboards/birthCertificate' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/civil-registrar/pages/admin/birthRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Birth Certificate</h1>
         </a>
-        <a href='/AdminDashboards/marriageCertificate' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/civil-registrar/pages/admin/marriageRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Marriage Certificate</h1>
         </a>
-        <a href='/AdminDashboards/deathCertificate' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/civil-registrar/pages/admin/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Death Certificate</h1>
         </a>
     </div>
@@ -414,9 +414,7 @@ function adminLayout($children) {
             document.getElementById('email-display').textContent = email;
         }
 
-        // To store email in localStorage (example)
-        localStorage.setItem('userEmail', 'capstone@gmail.com');
-
+        
 
             // Optionally, add event listener to handle logout
             logoutButton.addEventListener('click', () => {
@@ -444,12 +442,13 @@ function adminLayout($children) {
         localStorage.removeItem('email');
         localStorage.removeItem('password');
         localStorage.removeItem('role');
+        localStorage.removeItem('profileImage');
 
         // Show a toast message for logout confirmation
         showToast('You have successfully logged out.', 'success');
 
         // Redirect the user to the login page
-        window.location.href = 'http://localhost/civil-registrar/pages/login.php'; // Adjust the URL as necessary
+        window.location.href = 'http://localhost/civil-registrar/index.php'; // Adjust the URL as necessary
     }
 
     // Attach the logout function to a button click event

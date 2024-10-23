@@ -5,6 +5,16 @@ include 'db.php'; // Include your database connection file
 $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method === 'GET') {
+     // Check for count parameter
+     if (isset($_GET['count']) && $_GET['count'] === 'true') {
+        // Count total users
+        $count_sql = "SELECT COUNT(*) AS total_death FROM death_registration";
+        $count_result = $conn->query($count_sql);
+        $total_count = $count_result ? $count_result->fetch_assoc()['total_death'] : 0;
+
+        echo json_encode(['total' => $total_count]);
+        exit;
+    }
     // Check if an ID parameter is provided for a single death registration view
     if (isset($_GET['id'])) {
         // Retrieve a single death registration by ID
