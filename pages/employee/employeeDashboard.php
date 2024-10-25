@@ -180,7 +180,16 @@ const fetchAnnouncements = async () => {
             }
         };
 
-        
+        function checkAuthentication() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '../login.php';
+        }
+    }
+
+    // Call the checkAuthentication function when the page loads
+    checkAuthentication();
+
         // Call the function to fetch death count
         fetchBirthCount();
         fetchDeathCount();

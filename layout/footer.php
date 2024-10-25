@@ -1,5 +1,5 @@
-<div class='bg-cyan-300'>
-    <div class='container mx-auto h-auto mt-20 pb-10 bg-cyan-300 pt-10'>
+<div class='bg-blue-600'>
+    <div class='container mx-auto h-auto mt-20 pb-10 pt-10'>
         <div class="grid grid-cols-3 md:grid-cols-5 px-2 md:px-0">
             <div class="md:col-span-2 col-span-3 mb-6 md:mb-0">
                 <div class='mb-5'>

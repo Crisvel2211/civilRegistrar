@@ -9,7 +9,8 @@ function adminLayout($children) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.tailwindcss.com"></script>
-        <title>Admin Dashboard</title>
+        <title>CivilRegistrar</title>
+        <link rel="icon" href="../../images/qcfavicon.svg" type="image/x-icon">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.css" rel="stylesheet">
         <style>
@@ -35,11 +36,9 @@ function adminLayout($children) {
             <div class="flex flex-col gap-1 w-full ">
                 <div class='flex relative justify-evenly items-center w-full mt-6 px-4 mb-5'>
                     <div>
-                        <img src="../../images/qclogo.svg" alt='logo' class='cursor-pointer w-[50px] h-[50px]'/>
+                        <img src="../../images/qclogo.png" alt='logo' class='cursor-pointer w-full h-[50px]'/>
                     </div>
-                    <div>
-                        <h1 class='text-[#e3e4e9] text-[25px] text-center font-bold'>Civil Registrar</h1>
-                    </div>
+                   
                 </div>
 
                 <!--menu-->
@@ -205,11 +204,9 @@ function adminLayout($children) {
             <div class="flex flex-col gap-1 w-full ">
                 <div class='flex relative justify-evenly items-center w-full mt-6 px-4 mb-5'>
                     <div>
-                        <img src="../../images/qclogo.svg" alt='logo' class='cursor-pointer w-[50px] h-[50px]'/>
+                        <img src="../../images/qclogo.png" alt='logo' class='cursor-pointer w-full h-[50px]'/>
                     </div>
-                    <div>
-                        <h1 class='text-[#e3e4e9] text-[25px] text-center font-bold'>Civil Registrar</h1>
-                    </div>
+                   
                 </div>
 
                 <!--menu-->

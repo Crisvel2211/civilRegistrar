@@ -28,8 +28,8 @@ $updateProfileContent = "
                             <th class='px-4 py-2'>ID</th>
                             <th class='px-4 py-2'>Resident Name</th> 
                             <th class='px-4 py-2'>Status</th>
-                            <th class='px-4 py-2'>Verification</th>
-                            <th class='px-4 py-2'>Actions</th>
+                            <th class='px-4 py-2'>Employee Assigned</th>
+                            
                         </tr>
                     </thead>
                     <tbody id='usersTable' class='divide-y divide-gray-300'>
@@ -96,12 +96,11 @@ adminLayout($updateProfileContent);
 const fetchmarriageRegistrations = () => {
     const search = document.getElementById('searchInput').value;
     const status = document.getElementById('statusFilter').value;
-    const employeeId = localStorage.getItem('userId'); // Replace with the logged-in employee's ID
-
+    
     // Make sure to encode the search parameter for safe URL usage
     const encodedSearch = encodeURIComponent(search);
 
-    fetch(`http://localhost/civil-registrar/api/marriage.php?employee_id=${employeeId}&search=${encodedSearch}&status=${status}`)
+    fetch(`http://localhost/civil-registrar/api/marriage.php?search=${encodedSearch}&status=${status}`)
         .then(response => response.json())
         .then(data => {
             if (Array.isArray(data)) {
@@ -118,17 +117,8 @@ const fetchmarriageRegistrations = () => {
                                     ${marriage.status}
                                 </span>
                             </td>
-                            <td class='px-4 py-2 text-center border-r border-gray-300'>
-                                <button class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 transition duration-300 cursor-pointer' onclick='viewmarriage(${marriage.id})'>View</button>
-                            </td>
-                            <td class='px-4 py-2 flex justify-around'>
-                                <button class='text-blue-500 hover:text-blue-400 cursor-pointer' onclick='updateStatus(${marriage.id})'>
-                                    <i class='fas fa-sync-alt'></i> 
-                                </button>
-                                <button class='text-red-500 hover:text-red-400 cursor-pointer' onclick='confirmDelete(${marriage.id})'>
-                                    <i class='fas fa-trash'></i>
-                                </button>
-                            </td>
+                             <td class='px-4 py-2 text-center border-r border-gray-300'>${marriage.employee_id}</td>
+                           
                         </tr>
 
                     `;

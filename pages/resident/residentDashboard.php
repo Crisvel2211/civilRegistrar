@@ -7,32 +7,6 @@ $homeContent = "
 <div class='bg-gray-300 w-full h-[88vh] overflow-y-scroll'>
  <div class='container mx-auto w-full md:mt-1 px-[8px] mb-10'>
 
-    <div class='flex justify-start items-center gap-[10px] w-full h-auto mt-2 '>
-        <i class='fas fa-tasks text-[#93A3BC] text-[25px]'></i>
-        <h1 class='font-bold text-gray-700 text-[21px]'>Overview</h1>
-    </div>
-
-    <div class='grid grid-cols-1 md:grid-cols-4 gap-6 mt-5'>
-      <div class='flex flex-col justify-center items-center bg-gray-100 p-4 rounded-lg shadow'>
-         <i class='fas fa-baby text-blue-500 text-[30px] mb-2'></i>
-        <h2 class='font-semibold text-gray-700'>Birth Total <span id='birth-count' class='font-bold'>0</span></h2>
-      </div>
-      
-      <div class='flex flex-col justify-center items-center bg-gray-100 p-4 rounded-lg shadow'>
-         <i class='fas fa-cross text-red-500 text-[30px] mb-2'></i>
-         <h2 class='font-semibold text-gray-700'>Death Total <span id='death-count' class='font-bold'>0</span></h2>
-      </div>
-      
-      <div class='flex flex-col justify-center items-center bg-gray-100 p-4 rounded-lg shadow'>
-         <i class='fas fa-ring text-green-500 text-[30px] mb-2'></i>
-        <h2 class='font-semibold text-gray-700'>Marriage Total <span id='marriage-count' class='font-bold'>0</span></h2>
-      </div>
-      
-      <div class='flex flex-col justify-center items-center bg-gray-100 p-4 rounded-lg shadow'>
-         <i class='fas fa-calendar-check text-yellow-500 text-[30px] mb-2'></i>
-         <h2 class='font-semibold text-gray-700'>Appointment Total</h2>
-      </div>
-    </div>
 
     <div class='flex justify-start items-center gap-[10px] w-full h-auto mt-8'>
         <i class='fas fa-bullhorn text-[#93A3BC] text-[25px]'></i>
@@ -56,7 +30,7 @@ residentLayout($homeContent);
     document.addEventListener('DOMContentLoaded', () => {
 
         const residentId = localStorage.getItem('userId');
-const role = localStorage.getItem('role'); // Assume the role is stored in localStorage
+         const role = localStorage.getItem('role'); // Assume the role is stored in localStorage
 
 const fetchAnnouncements = async () => {
     try {
@@ -108,83 +82,16 @@ const fetchAnnouncements = async () => {
 };
 
 
-        // Function to fetch death count
-        const fetchDeathCount = async () => {
-            const residentId = localStorage.getItem('userId');
-            try {
-                const response = await fetch(`http://localhost/civil-registrar/api/death.php?get_resident_counts=true&resident_id=${residentId}`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
+        function checkAuthentication() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '../login.php';
+        }
+    }
 
-                // Check if data is an object and contains total_certificates
-                if (data && typeof data === 'object' && 'total_certificates' in data) {
-                    // Update the death count in the HTML
-                    document.getElementById('death-count').innerText = data.total_certificates || 0;
-                } else {
-                    throw new Error('Invalid response format');
-                }
-            } catch (error) {
-                console.error('Error fetching death count:', error);
-                document.getElementById('death-count').innerText = 'Error';
-            }
-        };
+    // Call the checkAuthentication function when the page loads
+    checkAuthentication();
 
-        //birthCount
-
-        const fetchBirthCount = async () => {
-            const residentId = localStorage.getItem('userId');
-            try {
-                const response = await fetch(`http://localhost/civil-registrar/api/birth.php?get_resident_counts=true&resident_id=${residentId}`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-
-                // Check if data is an object and contains total_certificates
-                if (data && typeof data === 'object' && 'total_certificates' in data) {
-                    // Update the death count in the HTML
-                    document.getElementById('birth-count').innerText = data.total_certificates || 0;
-                } else {
-                    throw new Error('Invalid response format');
-                }
-            } catch (error) {
-                console.error('Error fetching birth count:', error);
-                document.getElementById('birth-count').innerText = 'Error';
-            }
-        };
-
-
-        //birthCount
-
-        const fetchMarriageCount = async () => {
-            const residentId = localStorage.getItem('userId');
-            try {
-                const response = await fetch(`http://localhost/civil-registrar/api/marriage.php?get_resident_counts=true&resident_id=${residentId}`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-
-                // Check if data is an object and contains total_certificates
-                if (data && typeof data === 'object' && 'total_certificates' in data) {
-                    // Update the death count in the HTML
-                    document.getElementById('marriage-count').innerText = data.total_certificates || 0;
-                } else {
-                    throw new Error('Invalid response format');
-                }
-            } catch (error) {
-                console.error('Error fetching birth count:', error);
-                document.getElementById('marriage-count').innerText = 'Error';
-            }
-        };
-
-        
-        // Call the function to fetch death count
-        fetchBirthCount();
-        fetchDeathCount();
-        fetchMarriageCount();
         fetchAnnouncements();
     });
 </script>

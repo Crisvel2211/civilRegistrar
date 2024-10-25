@@ -3,16 +3,20 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, PUT, DELETE");
+header("Access-Control-Allow-Methods: POST, GET");
 header("Access-Control-Allow-Headers: Content-Type");
 
 include 'db.php'; // Include your database connection file
-include 'jwt.php';   // JWT helper
+include 'jwt.php';   // Include your JWT helper file
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 $response = []; // Initialize an array to collect responses
 
-// Registration endpoint
+// User Registration
 if ($method === 'POST' && isset($_GET['action']) && $_GET['action'] === 'register') {
     $data = json_decode(file_get_contents('php://input'), true);
 
@@ -23,6 +27,7 @@ if ($method === 'POST' && isset($_GET['action']) && $_GET['action'] === 'registe
         $email = trim($conn->real_escape_string($data['email']));
         $password = password_hash($data['password'], PASSWORD_BCRYPT);
         $role = trim($conn->real_escape_string($data['role']));
+        $verification_token = bin2hex(random_bytes(16)); // Generate a unique token
 
         $sql_check = "SELECT id FROM users WHERE email = '$email'";
         $result_check = $conn->query($sql_check);
@@ -32,9 +37,32 @@ if ($method === 'POST' && isset($_GET['action']) && $_GET['action'] === 'registe
         } elseif ($result_check->num_rows > 0) {
             $response = ['error' => 'Email already exists'];
         } else {
-            $sql = "INSERT INTO users (name, email, password, role) VALUES ('$name', '$email', '$password', '$role')";
+            // Insert the user into the database with the verification token
+            $sql = "INSERT INTO users (name, email, password, role, verification_token, is_verified) VALUES ('$name', '$email', '$password', '$role', '$verification_token', 0)";
             if ($conn->query($sql) === TRUE) {
-                $response = ['message' => 'User registered successfully'];
+                // Send verification email
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com';
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'sanchezlando333@gmail.com'; // Your email
+                    $mail->Password   = 'ifkkfcdkadzhcggh'; // Your email password
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port       = 587;
+
+                    $mail->setFrom('sanchezlando333@gmail.com', 'CivilRegistrar');
+                    $mail->addAddress($email, $name);
+
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Email Verification';
+                    $mail->Body    = "Hi $name,<br><br>Thank you for registering! Please verify your email by clicking on the link below:<br><a href='http://localhost/civil-registrar/api/verifyTokenEmail.php?token=$verification_token'>Verify Email</a><br><br>Thank you!";
+                    $mail->send();
+
+                    $response = ['message' => 'User registered successfully. Please check your email for verification.'];
+                } catch (Exception $e) {
+                    $response = ['error' => "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"];
+                }
             } else {
                 $response = ['error' => 'Database error: ' . $conn->error];
             }
@@ -42,45 +70,38 @@ if ($method === 'POST' && isset($_GET['action']) && $_GET['action'] === 'registe
     }
 }
 
-// Login endpoint
+// User Login
 if ($method === 'POST' && isset($_GET['action']) && $_GET['action'] === 'login') {
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // Ensure email and password are present in the request
     if (!isset($data['email'], $data['password'])) {
         $response = ['error' => 'Invalid input'];
     } else {
         $email = $conn->real_escape_string($data['email']);
         $password = $data['password'];
 
-        // Check if user exists
         $sql = "SELECT * FROM users WHERE email = '$email'";
         $result = $conn->query($sql);
 
         if ($result && $result->num_rows > 0) {
             $user = $result->fetch_assoc();
 
-            // Verify password
             if (password_verify($password, $user['password'])) {
-                // Create JWT token
                 $payload = [
                     'id' => $user['id'],
                     'name' => $user['name'],
                     'email' => $user['email'],
                     'role' => $user['role'],
-                    'exp' => time() + (60 * 60)  // Token valid for 1 hour
+                    'exp' => time() + (60 * 60) // Token valid for 1 hour
                 ];
 
                 $token = JWT::encode($payload);
-
-                // Return both the token and the user's details including profile image
                 $response = [
                     'token' => $token,
                     'name' => $user['name'],
                     'role' => $user['role'],
-                    'userId' => $user['id'], // Return userId
-                    'email' => $user['email'],
-                    'userProfile' => $user['userProfile'] // Include the profile image URL
+                    'userId' => $user['id'],
+                    'email' => $user['email']
                 ];
             } else {
                 $response = ['error' => 'Invalid password'];
@@ -89,16 +110,10 @@ if ($method === 'POST' && isset($_GET['action']) && $_GET['action'] === 'login')
             $response = ['error' => 'User not found'];
         }
     }
-
-    // Send the response as JSON
-    echo json_encode($response);
-    exit();
 }
-
 
 // JWT validation endpoint
 if ($method === 'GET' && isset($_GET['action']) && $_GET['action'] === 'validate') {
-    // Validate JWT token
     $headers = getallheaders();
     $authHeader = isset($headers['Authorization']) ? $headers['Authorization'] : '';
     $token = str_replace('Bearer ', '', $authHeader);

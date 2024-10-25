@@ -22,9 +22,7 @@ $homeContent = "
             <!-- Users Table -->
             <div class='flex justify-between item-center mb-4'>
              <h2 class='text-2xl '>Lists Of User</h2>
-             <button class='bg-green-400  rounded-[5px] p-2 text-[12px] hover:bg-green-700 '>
-             <i class='fa-solid fa-plus'> Add User</i>
-             </button>
+             
             </div>
            
             <div class='w-full overflow-x-auto md:overflow-none mt-2'>

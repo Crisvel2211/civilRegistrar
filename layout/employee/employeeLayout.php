@@ -8,7 +8,8 @@ function employeeLayout($children) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>employee Dashboard</title>
+        <title>CivilRegistrar</title>
+        <link rel="icon" href="../../images/qcfavicon.svg" type="image/x-icon">
          <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.css" rel="stylesheet">
@@ -35,11 +36,9 @@ function employeeLayout($children) {
             <div class="flex flex-col gap-1 w-full ">
                 <div class='flex relative justify-evenly items-center w-full mt-6 px-4 mb-5'>
                     <div>
-                        <img src="../../images/qclogo.svg" alt='logo' class='cursor-pointer w-[50px] h-[50px]'/>
+                        <img src="../../images/qclogo.png" alt='logo' class='cursor-pointer w-full h-[50px]'/>
                     </div>
-                    <div>
-                        <h1 class='text-[#e3e4e9] text-[25px] text-center font-bold'>Civil Registrar</h1>
-                    </div>
+                   
                 </div>
 
                 <!--menu-->
@@ -202,7 +201,7 @@ function employeeLayout($children) {
             <div class="flex flex-col gap-1 w-full ">
                 <div class='flex relative justify-evenly items-center w-full mt-6 px-4 mb-5'>
                     <div>
-                        <img src="../../images/qclogo.svg" alt='logo' class='cursor-pointer w-[50px] h-[50px]'/>
+                        <img src="../../images/qclogo.png" alt='logo' class='cursor-pointer w-full h-[50px]'/>
                     </div>
                     <div>
                         <h1 class='text-[#e3e4e9] text-[25px] text-center font-bold'>Civil Registrar</h1>

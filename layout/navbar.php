@@ -2,7 +2,7 @@
     <div class="container mx-auto">
         <nav class="flex justify-between items-center p-2 relative">
             <div>
-                <img src="images/logo.png" alt="logo" />
+                <img src="images/qclogo.png" alt='logo' class='cursor-pointer w-full h-[49px]' />
             </div>
 
             <form class="hidden md:flex border justify-between items-center rounded-sm p-[2px] px-2 bg-white w-[30%]">

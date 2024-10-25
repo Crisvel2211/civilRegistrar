@@ -27,9 +27,8 @@ $updateProfileContent = "
                         <tr>
                             <th class='px-4 py-2'>ID</th>
                             <th class='px-4 py-2'>Resident Name</th> <!-- New column for userId -->
-                            <th class='px-4 py-2'>Status</th>
-                            <th class='px-4 py-2'>Verification</th>
-                            <th class='px-4 py-2'>Actions</th>
+                            <th class='px-4 py-2'>Status</th>                            
+                            <th class='px-4 py-2'>Employee Assigned</th>
                         </tr>
                     </thead>
                     <tbody id='usersTable' class='divide-y divide-gray-300'>
@@ -40,49 +39,7 @@ $updateProfileContent = "
 
 
 
-            <!-- Status Update Modal -->
-            <div id='statusUpdateModal' class='items-center justify-center h-auto z-50 hidden absolute md:top-[8rem] md:left-[20rem] md:w-[68%] top-[15rem] left-[1rem] w-full'>
-                <div class='bg-white p-5 rounded shadow-lg md:w-[40%] w-[90%]'>
-                    <h2 class='text-lg font-semibold mb-4'>Update Status</h2>
-                    <select id='newStatusInput' class='w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4'>
-                        <option value=''>Select Status</option>
-                        <option value='pending'>Pending</option>
-                        <option value='processing'>Processing</option>
-                        <option value='verified'>Verified</option>
-                        <option value='completed'>Completed</option>
-                    </select>
-                    <div class='flex justify-between'>
-                        <button id='modalCancelButton' class='bg-gray-300 text-gray-800 px-4 py-1 rounded hover:bg-gray-200'>Cancel</button>
-                        <button id='modalConfirmButton' class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 ml-2'>Confirm</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Delete Confirmation Modal -->
-            <div id='deleteConfirmationModal' class='items-center justify-center h-auto z-50 hidden absolute md:top-[8rem] md:left-[20rem] md:w-[68%] top-[15rem] left-[1rem] w-full'>
-                <div class='bg-white p-5 rounded shadow-lg md:w-[40%] w-[90%]'>
-                    <h2 class='text-lg font-semibold mb-4'>Delete Confirmation</h2>
-                    <p>Are you sure you want to delete this death registration?</p>
-                    <div class='flex justify-between mt-2'>
-                        <button id='deleteModalCancelButton' class='bg-gray-300 text-gray-800 px-4 py-1 rounded hover:bg-gray-200'>Cancel</button>
-                        <button id='deleteModalConfirmButton' class='bg-red-500 text-white px-4 py-1 rounded hover:bg-red-400 ml-2'>Delete</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- View death Registration Modal -->
-            <div id='viewdeathModal' class='items-center justify-center h-auto z-50 hidden absolute md:-top-9 md:left-[15rem] top-[15rem] left-[1rem] md:w-[76%] w-full'>
-                <div class='bg-white p-5 rounded shadow-lg md:w-[60%] w-[90%]'>
-                    <h2 class='text-lg font-semibold mb-4'>death Registration Details</h2>
-                    <div id='deathDetailsContent' class='mb-4'>
-                        <!-- Details will be populated here -->
-                    </div>
-                    <div class='flex justify-end'>
-                        <button id='viewModalCloseButton' class='bg-gray-300 text-gray-800 px-4 py-1 rounded hover:bg-gray-200'>Close</button>
-                    </div>
-                </div>
-            </div>
-
+           
 
         </div>
     </div>
@@ -97,12 +54,12 @@ adminLayout($updateProfileContent);
 const fetchdeathRegistrations = () => {
     const search = document.getElementById('searchInput').value;
     const status = document.getElementById('statusFilter').value;
-    const employeeId = localStorage.getItem('userId'); // Replace with the logged-in employee's ID
+    
 
     // Make sure to encode the search parameter for safe URL usage
     const encodedSearch = encodeURIComponent(search);
 
-    fetch(`http://localhost/civil-registrar/api/death.php?employee_id=${employeeId}&search=${encodedSearch}&status=${status}`)
+    fetch(`http://localhost/civil-registrar/api/death.php?search=${encodedSearch}&status=${status}`)
         .then(response => response.json())
         .then(data => {
             if (Array.isArray(data)) {
@@ -119,17 +76,7 @@ const fetchdeathRegistrations = () => {
                                     ${death.status}
                                 </span>
                             </td>
-                            <td class='px-4 py-2 text-center border-r border-gray-300'>
-                                <button class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 transition duration-300 cursor-pointer' onclick='viewdeath(${death.id})'>View</button>
-                            </td>
-                            <td class='px-4 py-2 flex justify-around'>
-                                <button class='text-blue-500 hover:text-blue-400 cursor-pointer' onclick='updateStatus(${death.id})'>
-                                    <i class='fas fa-sync-alt'></i> 
-                                </button>
-                                <button class='text-red-500 hover:text-red-400 cursor-pointer' onclick='confirmDelete(${death.id})'>
-                                    <i class='fas fa-trash'></i>
-                                </button>
-                            </td>
+                            <td class='px-4 py-2 text-center border-r border-gray-300'>${death.employee_id}</td>
                         </tr>
 
                     `;

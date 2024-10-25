@@ -7,7 +7,7 @@ $homeContent = "
  <div class='container mx-auto'>
     <div class='flex justify-start items-center gap-[10px] w-full h-auto mt-2 '>
         <i class='fas fa-tasks text-[#93A3BC] text-[25px]'></i>
-        <h1 class='font-bold text-gray-700 text-[21px]'>Total Applications</h1>
+        <h1 class='font-bold text-gray-700 text-[21px]'>Overview</h1>
     </div>
 
     <div class='grid md:grid-cols-4 grid-cols-1 place-items-center px-2 gap-4 mt-[30px] '>
@@ -207,5 +207,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    
+    function checkAuthentication() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '../login.php';
+        }
+    }
+
+    // Call the checkAuthentication function when the page loads
+    checkAuthentication();
+
 });
 </script>
