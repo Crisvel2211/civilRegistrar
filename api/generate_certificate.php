@@ -35,24 +35,73 @@ if ($issuedType === 'birth') {
 
     $birthRecord = $result->fetch_assoc();
     $certificateContent = "
-         <h1>Birth Certificate</h1>
-        <p><strong>Child's Full Name:</strong> {$birthRecord['child_first_name']} {$birthRecord['child_middle_name']} {$birthRecord['child_last_name']}</p>
-        <p><strong>Sex:</strong> {$birthRecord['child_sex']}</p>
-        <p><strong>Date of Birth:</strong> {$birthRecord['child_date_of_birth']}</p>
-        <p><strong>Time of Birth:</strong> {$birthRecord['child_time_of_birth']}</p>
-        <p><strong>Place of Birth:</strong> {$birthRecord['child_place_of_birth']}</p>
-        <p><strong>Birth Type:</strong> {$birthRecord['child_birth_type']}</p>
-        <p><strong>Birth Order:</strong> {$birthRecord['child_birth_order']}</p>
-        <p><strong>Father's Name:</strong> {$birthRecord['father_first_name']} {$birthRecord['father_middle_name']} {$birthRecord['father_last_name']} {$birthRecord['father_suffix']}</p>
-        <p><strong>Father's Nationality:</strong> {$birthRecord['father_nationality']}</p>
-        <p><strong>Father's Date of Birth:</strong> {$birthRecord['father_date_of_birth']}</p>
-        <p><strong>Father's Place of Birth:</strong> {$birthRecord['father_place_of_birth']}</p>
-        <p><strong>Mother's Name:</strong> {$birthRecord['mother_first_name']} {$birthRecord['mother_middle_name']} {$birthRecord['mother_last_name']} (nee {$birthRecord['mother_maiden_name']})</p>
-        <p><strong>Mother's Nationality:</strong> {$birthRecord['mother_nationality']}</p>
-        <p><strong>Mother's Date of Birth:</strong> {$birthRecord['mother_date_of_birth']}</p>
-        <p><strong>Mother's Place of Birth:</strong> {$birthRecord['mother_place_of_birth']}</p>
-        <p><strong>Parents Married at Birth:</strong> {$birthRecord['parents_married_at_birth']}</p>
-    ";
+    <html>
+    <head>
+        <script src='https://cdn.tailwindcss.com'></script>
+    </head>
+    <body class='bg-gray-100'>
+        <div class='w-full max-w-4xl mx-auto p-8 bg-gradient-to-b from-[#e8f7d6] to-[#fff7d6] border-2 border-gray-300 shadow-lg'>
+            <div class='relative mb-8'>
+                <div class='absolute top-0 left-0 w-24 h-24 rounded-full border-2 border-blue-500 flex items-center justify-center'>
+                    <div class='w-20 h-20 rounded-full border-2 border-blue-400 flex items-center justify-center'>
+                        <div class='text-xs text-center text-blue-600'>REPUBLIC SEAL</div>
+                    </div>
+                </div>
+                <h1 class='text-center text-3xl font-bold pt-6'>BIRTH CERTIFICATE</h1>
+            </div>
+
+            <div class='space-y-4'>
+                <div>
+                    <h2 class='text-xl font-semibold border-b border-gray-300 pb-1 mb-2'>Child's Information</h2>
+                    <p><strong class='font-medium'>Full Name:</strong> {$birthRecord['child_first_name']} {$birthRecord['child_middle_name']} {$birthRecord['child_last_name']}</p>
+                    <p><strong class='font-medium'>Sex:</strong> {$birthRecord['child_sex']}</p>
+                    <p><strong class='font-medium'>Date of Birth:</strong> {$birthRecord['child_date_of_birth']}</p>
+                    <p><strong class='font-medium'>Time of Birth:</strong> {$birthRecord['child_time_of_birth']}</p>
+                    <p><strong class='font-medium'>Place of Birth:</strong> {$birthRecord['child_place_of_birth']}</p>
+                    <p><strong class='font-medium'>Birth Type:</strong> {$birthRecord['child_birth_type']}</p>
+                    <p><strong class='font-medium'>Birth Order:</strong> {$birthRecord['child_birth_order']}</p>
+                </div>
+
+                <div>
+                    <h2 class='text-xl font-semibold border-b border-gray-300 pb-1 mb-2'>Father's Information</h2>
+                    <p><strong class='font-medium'>Name:</strong> {$birthRecord['father_first_name']} {$birthRecord['father_middle_name']} {$birthRecord['father_last_name']} {$birthRecord['father_suffix']}</p>
+                    <p><strong class='font-medium'>Nationality:</strong> {$birthRecord['father_nationality']}</p>
+                    <p><strong class='font-medium'>Date of Birth:</strong> {$birthRecord['father_date_of_birth']}</p>
+                    <p><strong class='font-medium'>Place of Birth:</strong> {$birthRecord['father_place_of_birth']}</p>
+                </div>
+
+                <div>
+                    <h2 class='text-xl font-semibold border-b border-gray-300 pb-1 mb-2'>Mother's Information</h2>
+                    <p><strong class='font-medium'>Name:</strong> {$birthRecord['mother_first_name']} {$birthRecord['mother_middle_name']} {$birthRecord['mother_last_name']} (nee {$birthRecord['mother_maiden_name']})</p>
+                    <p><strong class='font-medium'>Nationality:</strong> {$birthRecord['mother_nationality']}</p>
+                    <p><strong class='font-medium'>Date of Birth:</strong> {$birthRecord['mother_date_of_birth']}</p>
+                    <p><strong class='font-medium'>Place of Birth:</strong> {$birthRecord['mother_place_of_birth']}</p>
+                </div>
+
+                <div>
+                    <p><strong class='font-medium'>Parents Married at Birth:</strong> {$birthRecord['parents_married_at_birth']}</p>
+                </div>
+
+                <div class='mt-8 pt-4 border-t border-gray-300'>
+                    <div class='grid grid-cols-2 gap-8'>
+                        <div class='text-center mt-6'>
+                            <img src='https://fontmeme.com/permalink/241113/3689af6f9cc47262970a90e1de5e1497.png' alt='Civil Registrar Signature' class='h-10 pl-14' />
+                            <div class='border-b border-black mx-8'></div>
+                            <p class='text-sm mt-1'>Civil Registrar</p>
+                        </div>
+                        <div class='text-center mt-10'>
+                            <p>" . date("M j, Y", strtotime($birthRecord['created_at'])) . "</p>
+                            <div class='border-b border-black mx-8'></div>
+                            <p class='text-sm mt-1'>Date Registered</p>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </body>
+    </html>
+";
+
 
 } elseif ($issuedType === 'death') {
     // Fetch the death registration details for the resident
@@ -67,15 +116,66 @@ if ($issuedType === 'birth') {
         exit;
     }
 
-    $record = $result->fetch_assoc();
+    $deathRecord = $result->fetch_assoc();
     $certificateContent = "
-        <h1>Death Certificate</h1>
-        <p><strong>Deceased's Full Name:</strong> {$record['deceased_first_name']} {$record['deceased_middle_name']} {$record['deceased_last_name']}</p>
-        <p><strong>Date of Death:</strong> {$record['date_of_death']}</p>
-        <p><strong>Cause of Death:</strong> {$record['cause_of_death']}</p>
-        <!-- Add other details here -->
-    ";
+        <html>
+        <head>
+            <script src='https://cdn.tailwindcss.com'></script>
+        </head>
+        <body class='bg-gray-100 '>
+            <div class='w-full max-w-4xl mx-auto p-8 bg-gradient-to-b from-[#e8f7d6] to-[#fff7d6] border-2 border-gray-300 shadow-lg'>
+                <div class='relative mb-8'>
+                    <div class='absolute top-0 left-0 w-24 h-24 rounded-full border-2 border-blue-500 flex items-center justify-center'>
+                        <div class='w-20 h-20 rounded-full border-2 border-blue-400 flex items-center justify-center'>
+                            <div class='text-xs text-center text-blue-600'>REPUBLIC SEAL</div>
+                        </div>
+                    </div>
+                    <h1 class='text-center text-3xl font-bold pt-6'>DEATH CERTIFICATE</h1>
+                </div>
 
+                <div class='space-y-4'>
+                    <div>
+                        <h2 class='text-xl font-semibold border-b border-gray-300 pb-1 mb-2'>Deceased Information</h2>
+                        <p><strong class='font-medium'>Deceased Full Name:</strong> {$deathRecord['deceased_first_name']} {$deathRecord['deceased_middle_name']} {$deathRecord['deceased_last_name']}</p>
+                        <p><strong class='font-medium'>Date of Birth:</strong> {$deathRecord['deceased_dob']}</p>
+                        <p><strong class='font-medium'>Date of Death:</strong> {$deathRecord['date_of_death']}</p>
+                        <p><strong class='font-medium'>Place of Death:</strong> {$deathRecord['place_of_death']}</p>
+                        <p><strong class='font-medium'>Cause of Death:</strong> {$deathRecord['cause_of_death']}</p>
+                    </div>
+
+                    <div>
+                        <h2 class='text-xl font-semibold border-b border-gray-300 pb-1 mb-2'>Informant Information</h2>
+                        <p><strong class='font-medium'>Informant's Name:</strong> {$deathRecord['informant_name']}</p>
+                        <p><strong class='font-medium'>Relationship to Deceased:</strong> {$deathRecord['relationship_to_deceased']}</p>
+                        <p><strong class='font-medium'>Informant's Contact Number:</strong> {$deathRecord['informant_contact']}</p>
+                    </div>
+
+                    <div>
+                        <h2 class='text-xl font-semibold border-b border-gray-300 pb-1 mb-2'>Disposition Details</h2>
+                        <p><strong class='font-medium'>Method of Disposition:</strong> {$deathRecord['disposition_method']}</p>
+                        <p><strong class='font-medium'>Date of Disposition:</strong> {$deathRecord['disposition_date']}</p>
+                        <p><strong class='font-medium'>Location of Disposition:</strong> {$deathRecord['disposition_location']}</p>
+                    </div>
+
+                    <div class='mt-8 pt-4 border-t border-gray-300'>
+                        <div class='grid grid-cols-2 gap-8'>
+                            <div class='text-center mt-6'>
+                                <img src='https://fontmeme.com/permalink/241113/3689af6f9cc47262970a90e1de5e1497.png' alt='Civil Registrar Signature' class='h-10 pl-14' />
+                                <div class='border-b border-black mx-8'></div>
+                                <p class='text-sm mt-1'>Civil Registrar</p>
+                            </div>
+                            <div class='text-center mt-10'>
+                                <p>" . date("M j, Y", strtotime($deathRecord['created_at'])) . "</p>
+                                <div class='border-b border-black mx-8'></div>
+                                <p class='text-sm mt-1'>Date Registered</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>
+    ";
 } elseif ($issuedType === 'marriage') {
     // Fetch the marriage registration details for the resident
     $query = "SELECT * FROM marriage_registration WHERE userId = ?";
@@ -89,12 +189,50 @@ if ($issuedType === 'birth') {
         exit;
     }
 
-    $record = $result->fetch_assoc();
+    $marriageRecord = $result->fetch_assoc();
     $certificateContent = "
-        <h1>Marriage Certificate</h1>
-        <p><strong>Groom's Full Name:</strong> {$record['groom_first_name']} {$record['groom_middle_name']} {$record['groom_last_name']}</p>
-        <p><strong>Bride's Full Name:</strong> {$record['bride_first_name']} {$record['bride_middle_name']} {$record['bride_last_name']}</p>
-        <!-- Add other details here -->
+    <html>
+    <head>
+        <script src='https://cdn.tailwindcss.com'></script>
+    </head>
+    <body class='bg-gray-100'>
+        <div class='w-full max-w-4xl mx-auto p-8 bg-gradient-to-b from-[#e8f7d6] to-[#fff7d6] border-2 border-gray-300 shadow-lg'>
+            <div class='relative mb-8'>
+                <div class='absolute top-0 left-0 w-24 h-24 rounded-full border-2 border-blue-500 flex items-center justify-center'>
+                    <div class='w-20 h-20 rounded-full border-2 border-blue-400 flex items-center justify-center'>
+                        <div class='text-xs text-center text-blue-600'>REPUBLIC SEAL</div>
+                    </div>
+                </div>
+                <h1 class='text-center text-3xl font-bold pt-6'>MARRIAGE CERTIFICATE</h1>
+            </div>
+
+            <div class='space-y-4'>
+                <div>
+                    <h2 class='text-xl font-semibold border-b border-gray-300 pb-1 mb-2'>Personal Information of the Couple</h2>
+                    <p><strong class='font-medium'>Groom's Full Name:</strong> {$marriageRecord['groom_first_name']} {$marriageRecord['groom_middle_name']} {$marriageRecord['groom_last_name']}</p>
+                    <p><strong class='font-medium'>Bride's Full Name:</strong> {$marriageRecord['bride_first_name']} {$marriageRecord['bride_middle_name']} {$marriageRecord['bride_last_name']}</p>
+                    <p><strong class='font-medium'>Marriage Date:</strong> {$marriageRecord['marriage_date']}</p>
+                    <p><strong class='font-medium'>Marriage Place:</strong> {$marriageRecord['marriage_place']}</p>
+                </div>
+
+                <div class='mt-8 pt-4 border-t border-gray-300'>
+                    <div class='grid grid-cols-2 gap-8'>
+                        <div class='text-center mt-6'>
+                            <img src='https://fontmeme.com/permalink/241113/3689af6f9cc47262970a90e1de5e1497.png' alt='Civil Registrar Signature' class='h-10 pl-14' />
+                            <div class='border-b border-black mx-8'></div>
+                            <p class='text-sm mt-1'>Civil Registrar</p>
+                        </div>
+                        <div class='text-center mt-10'>
+                            <p>" . date("M j, Y", strtotime($marriageRecord['created_at'])) . "</p>
+                            <div class='border-b border-black mx-8'></div>
+                            <p class='text-sm mt-1'>Date Registered</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
     ";
 }
 

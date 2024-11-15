@@ -40,14 +40,44 @@ $updateProfileContent = "
                     </button>
                 </div>
             </form>
+
+            <!-- Certificate Display Section -->
+            <div id='certificate-display' class='mt-8 hidden'>
+                <div class='bg-white p-6 rounded-lg shadow-lg'>
+                 
+                    <div id='certificate-content' class='mb-6'></div>
+
+                    <!-- Buttons for Download and Print -->
+                    <div class='flex justify-center'>
+                        <button id='download-btn' class='bg-green-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300 mr-4'>
+                            Download
+                        </button>
+                        <button id='print-btn' class='bg-blue-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300'>
+                            Print
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 ";
 
 employeeLayout($updateProfileContent);
 ?>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.js"></script>
 
 <script>
+
+     function showToast(message, type) {
+        Toastify({
+            text: message,
+            style: {
+                background: type === 'success' ? "linear-gradient(to right, #00b09b, #96c93d)" : "linear-gradient(to right, #ff5f6d, #ffc371)"
+            },
+            duration: 3000,
+            close: true
+        }).showToast();
+    }
     let residents = []; // Store residents globally
 
     window.onload = function() {
@@ -58,11 +88,11 @@ employeeLayout($updateProfileContent);
                 if (Array.isArray(data)) {
                     residents = data;
                 } else {
-                    console.error('Failed to load resident data:', data);
+                    showToast('Failed to load resident data:', 'error');
                 }
             })
             .catch(error => {
-                console.error('Error fetching residents:', error);
+                showToast('Error fetching residents:', 'error');
             });
     };
 
@@ -116,7 +146,7 @@ employeeLayout($updateProfileContent);
         const issuedType = document.getElementById('issued-type').value;
 
         if (!residentId || !issuedType) {
-            alert('Please select a resident and the type of certificate.');
+            showToast('Please select a resident and the type of certificate.', ' error');
             return;
         }
 
@@ -131,24 +161,44 @@ employeeLayout($updateProfileContent);
         .then(response => response.json())
         .then(data => {
             if (data.error) {
-                alert(`Error: ${data.error}`);
+                showToast(`Error: ${data.error}`,'error');
             } else {
-                displayAndPrintCertificate(data.certificateContent);
+                displayCertificate(data.certificateContent);
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('An error occurred while generating the certificate.');
+            showToast('An error occurred while generating the certificate.','error');
         });
     });
 
-    // Function to display and print the certificate
-    function displayAndPrintCertificate(certificateContent) {
+    // Function to display the certificate and show the buttons
+    function displayCertificate(certificateContent) {
+        const certificateDisplay = document.getElementById('certificate-display');
+        const certificateContentDiv = document.getElementById('certificate-content');
+
+        certificateContentDiv.innerHTML = certificateContent;
+        certificateDisplay.classList.remove('hidden');
+    }
+
+    // Handle certificate download
+    document.getElementById('download-btn').addEventListener('click', function() {
+        const certificateContent = document.getElementById('certificate-content').innerHTML;
+        const blob = new Blob([certificateContent], { type: 'text/html' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'certificate.html';
+        link.click();
+    });
+
+    // Handle certificate print
+    document.getElementById('print-btn').addEventListener('click', function() {
+        const certificateContent = document.getElementById('certificate-content').innerHTML;
         const printWindow = window.open('', '', 'width=800,height=600');
         printWindow.document.write(`
             <html>
             <head>
-                <title>Print Certificate</title>
+                <link href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css' rel='stylesheet'>
                 <style>
                     body {
                         font-family: Arial, sans-serif;
@@ -159,6 +209,7 @@ employeeLayout($updateProfileContent);
                         border: 1px solid #000;
                         padding: 20px;
                         text-align: center;
+                        margin: auto;
                     }
                 </style>
             </head>
@@ -171,5 +222,5 @@ employeeLayout($updateProfileContent);
         `);
         printWindow.document.close();
         printWindow.print();
-    }
+    });
 </script>

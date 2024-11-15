@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CivilRegistrar</title>
-    <link rel="icon" href="../images/qcfavicon.svg" type="image/x-icon">
+    <link rel="icon" href="../images/qcfavicon.png" type="image/x-icon">
     <!-- TailwindCSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome CDN (Updated version for solid icons) -->
@@ -35,16 +35,30 @@
            
         </div>
         <div id="login-form">
-            <div class="mb-4">
+        <div class="mb-4 relative">
                 <label for="login-email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" id="login-email" placeholder="Enter your email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                <div class="flex items-center border border-gray-300 rounded-md">
+                    <span class="flex items-center pl-3">
+                        <i class="fas fa-envelope text-gray-400"></i>
+                    </span>
+                    <input type="email" id="login-email" placeholder="Enter your email"
+                        class="mt-1 block w-full px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
             </div>
             <div class="mb-4 relative">
                 <label for="login-password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" id="login-password" placeholder="Enter your password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                <button type="button" onclick="togglePassword()" class="absolute inset-y-6 right-0 px-4 py-2 text-sm text-gray-600 hover:text-gray-900 focus:outline-none">
-                    <i id="toggle-password-icon" class="fa-solid fa-eye-slash"></i>
-                </button>
+                <div class="flex items-center border border-gray-300 rounded-md">
+                    <span class="flex items-center pl-3">
+                        <i class="fas fa-lock text-gray-400"></i>
+                    </span>
+                    <input type="password" id="login-password" placeholder="Enter your password"
+                        oninput="checkPasswordStrength()"
+                        class="mt-1 block w-full px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    <button type="button" onclick="togglePassword()"
+                        class="absolute inset-y-7 md:inset-y-6 right-0 px-4 py-2 text-sm text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <i id="toggle-password-icon" class="fa-solid fa-eye-slash"></i>
+                    </button>
+                </div>
             </div>
             <div class="mb-4">
                 <button id="login-btn" onclick="login()" class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex justify-center items-center">
@@ -140,6 +154,7 @@
                 showToast('Login successful!', 'success');
                 localStorage.setItem('token', result.token); // Store the JWT token
                 localStorage.setItem('userId', result.userId);
+                localStorage.setItem('name', result.name);
                 localStorage.setItem('email', result.email);
                 localStorage.setItem('password', result.password);
                 localStorage.setItem('role', result.role); // Store the user ID

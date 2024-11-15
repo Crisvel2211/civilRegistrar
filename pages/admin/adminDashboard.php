@@ -59,7 +59,7 @@ $homeContent = "
             <h2 class='font-bold text-gray-700 text-[18px] mb-4'>Certificates</h2>
             <canvas id='doughnutChart'></canvas>
         </div>
-        <div class='bg-white p-4 rounded-md shadow-md  h-[96%]  '>
+        <div class='bg-white p-4 rounded-md shadow-md h-[96%]  '>
             <h2 class='font-bold text-gray-700 text-[18px] mb-4'>Users</h2>
             <canvas id='barChart'></canvas>
         </div>

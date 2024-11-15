@@ -182,7 +182,7 @@ function adminLayout($children) {
                                     </a>
                                   </div>
                                    <div class=''>
-                                    <div class='hover:bg-gray-900 hover:bg-opacity-[.12] cursor-pointer p-2 my-[4px] w-full flex justify-start items-center gap-4' id='logoutButton'>
+                                    <div class='hover:bg-gray-900 hover:bg-opacity-[.12] cursor-pointer p-2 my-[4px] w-full flex justify-start items-center gap-4' onclick="showLogoutModal()">
                                         <img src='../../images/logout.svg' alt='profile-icon' class='w-[21px] h-[21px] font-semibold cursor-pointer'/>
                                         <p class='text-[14px] font-[400] text-[#324153]'>Sign out</p>
                                     </div>
@@ -295,8 +295,40 @@ function adminLayout($children) {
                
         </div>
     </div>
+
+
+    <!-- Logout Modal -->
+    <div id="logoutModal" class="fixed inset-0 flex items-center justify-center z-50 hidden bg-gray-800 bg-opacity-50">
+        <div class="bg-white rounded-lg shadow-lg w-[65%] md:w-[25%]  p-6">
+            <h2 class="text-xl font-semibold mb-4">Confirm Logout</h2>
+            <p class="text-gray-600 mb-6">Are you sure you want to log out?</p>
+            <div class="flex justify-between gap-4">
+                <button onclick="closeLogoutModal()" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400">Cancel</button>
+                <p class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 cursor-pointer" onclick="logout()">Sign out</p>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
+
+        // Function to display the logout modal
+        function showLogoutModal() {
+            document.getElementById("logoutModal").classList.remove("hidden");
+        }
+
+        // Function to hide the logout modal
+        function closeLogoutModal() {
+            document.getElementById("logoutModal").classList.add("hidden");
+        }
+
+        // Logout Function with Modal
+    function logout() {
+        localStorage.clear();
+        showToast('You have successfully logged out.', 'success');
+        window.location.href = 'http://localhost/civil-registrar/index.php';
+    }
+
          function showToast(message, type) {
             Toastify({
                 text: message,
@@ -374,7 +406,6 @@ function adminLayout($children) {
             const profileButton = document.getElementById('profileButton');
             const notificationPanel = document.getElementById('notificationPanel');
             const profilePanel = document.getElementById('profilePanel');
-            const logoutButton = document.getElementById('logoutButton');
             const sidebarPanel = document.getElementById('sidebarpanel');
             const menuButton = document.getElementById('menuButton');
             const contentPanel = document.getElementById('contentpanel');
@@ -413,12 +444,7 @@ function adminLayout($children) {
 
         
 
-            // Optionally, add event listener to handle logout
-            logoutButton.addEventListener('click', () => {
-                // Implement logout functionality, e.g., redirect or AJAX request
-                alert('Logged out');
-            });
-
+           
             // Hide panels if clicking outside
             document.addEventListener('click', (event) => {
                 if (!event.target.closest('#notificationButton') && !event.target.closest('#notificationPanel')) {
@@ -432,24 +458,7 @@ function adminLayout($children) {
             });
         });
 
-        function logout() {
-        // Clear user data from local storage
-        localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('email');
-        localStorage.removeItem('password');
-        localStorage.removeItem('role');
-        localStorage.removeItem('profileImage');
-
-        // Show a toast message for logout confirmation
-        showToast('You have successfully logged out.', 'success');
-
-        // Redirect the user to the login page
-        window.location.href = 'http://localhost/civil-registrar/index.php'; // Adjust the URL as necessary
-    }
-
-    // Attach the logout function to a button click event
-    document.getElementById('logoutButton').addEventListener('click', logout);
+      
     </script>
     </body>
     </html>

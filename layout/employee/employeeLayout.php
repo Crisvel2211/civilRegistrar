@@ -9,7 +9,7 @@ function employeeLayout($children) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CivilRegistrar</title>
-        <link rel="icon" href="../../images/qcfavicon.svg" type="image/x-icon">
+         <link rel="icon" href="https://res.cloudinary.com/dn60f1sgi/image/upload/v1729892573/qcfavicon_pbm25c.png" type="image/x-icon">
          <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@ function employeeLayout($children) {
                 <div class='border-t-[.01px] border-[#6b7280] w-full '>
 
 <div class='flex flex-col w-[93%] mx-2 mt-6 mb-8'id="sidebar-link">
-    <a href="/civil-registrar/pages/employee/employeeDashboard.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href="http://localhost/civil-registrar/pages/employee/employeeDashboard.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
@@ -74,18 +74,18 @@ function employeeLayout($children) {
     </a>
 
     <div id="certificate-submenu" class="hidden mt-2  flex-col gap-1 w-[90%] pl-10">
-        <a href='/civil-registrar/pages/employee/birthRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='http://localhost/civil-registrar/pages/employee/birthRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Birth Certificate</h1>
         </a>
-        <a href='/civil-registrar/pages/employee/marriageRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='http://localhost/civil-registrar/pages/employee/marriageRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Marriage Certificate</h1>
         </a>
-        <a href='/civil-registrar/pages/employee/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='http://localhost/civil-registrar/pages/employee/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Death Certificate</h1>
         </a>
     </div>
 
-    <a href='/civil-registrar/pages/employee/verifyDocuments.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href='http://localhost/civil-registrar/pages/employee/verifyDocuments.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
@@ -96,7 +96,7 @@ function employeeLayout($children) {
         </div>
     </a>
 
-    <a href='/civil-registrar/pages/employee/appointment.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href='http://localhost/civil-registrar/pages/employee/appointment.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
@@ -107,7 +107,7 @@ function employeeLayout($children) {
         </div>
     </a>
 
-    <a href='/civil-registrar/pages/employee/IssuedCertificates.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href='http://localhost/civil-registrar/pages/employee/IssuedCertificates.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
@@ -175,15 +175,15 @@ function employeeLayout($children) {
                                     </div>
                                 </div>
                                   <div class='border-b-[.01px] border-[#e5e8eb]'>
-                                    <a href='/civil-registrar/pages/employee/employeeProfile.php' class='hover:bg-gray-900 hover:bg-opacity-[.12] cursor-pointer p-2 my-[4px] w-full flex justify-start items-center gap-4'>
+                                    <a href='http://localhost/civil-registrar/pages/employee/employeeProfile.php' class='hover:bg-gray-900 hover:bg-opacity-[.12] cursor-pointer p-2 my-[4px] w-full flex justify-start items-center gap-4'>
                                         <img src='../../images/profile-icon.svg' alt='profile-icon' class='w-[21px] h-[21px] font-semibold cursor-pointer'/>
                                         <p class='text-[14px] font-[400] text-[#324153]'>Profile</p>
                                     </a>
                                   </div>
                                    <div class=''>
-                                    <div class='hover:bg-gray-900 hover:bg-opacity-[.12] cursor-pointer p-2 my-[4px] w-full flex justify-start items-center gap-4' id='logoutButton'>
+                                    <div class='hover:bg-gray-900 hover:bg-opacity-[.12] cursor-pointer p-2 my-[4px] w-full flex justify-start items-center gap-4' onclick="showLogoutModal()">
                                         <img src='../../images/logout.svg' alt='profile-icon' class='w-[21px] h-[21px] font-semibold cursor-pointer'/>
-                                        <p class='text-[14px] font-[400] text-[#324153]' id="logoutButton">Sign out</p>
+                                        <p class='text-[14px] font-[400] text-[#324153]'>Sign out</p>
                                     </div>
                                    </div>
                               </div>
@@ -212,7 +212,7 @@ function employeeLayout($children) {
                 <div class='border-t-[.01px] border-[#6b7280] w-full '>
 
                 <div class='flex flex-col w-[93%] mx-2 mt-6 mb-8' id="sidebar-link">
-                        <a href="/civil-registrar/pages/employee/employeeDashboard.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                        <a href="http://localhost/civil-registrar/pages/employee/employeeDashboard.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
@@ -241,18 +241,18 @@ function employeeLayout($children) {
                         </a>
 
                         <div id="mobilecertificate-submenu" class="hidden mt-2  flex-col gap-1 w-[90%] pl-10">
-                            <a href='/civil-registrar/pages/employee/birthRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                            <a href='http://localhost/civil-registrar/pages/employee/birthRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
                                 <h1 class='text-[13px] font-[600] pl-[2rem]'>Birth Certificate</h1>
                             </a>
-                            <a href='/civil-registrar/pages/employee/marriageRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                            <a href='http://localhost/civil-registrar/pages/employee/marriageRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
                                 <h1 class='text-[13px] font-[600] pl-[2rem]'>Marriage Certificate</h1>
                             </a>
-                            <a href='/civil-registrar/pages/employee/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                            <a href='http://localhost/civil-registrar/pages/employee/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
                                 <h1 class='text-[13px] font-[600] pl-[2rem]'>Death Certificate</h1>
                             </a>
                         </div>
                         
-                        <a href='/civil-registrar/pages/employee/verifyDocuments.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                        <a href='http://localhost/civil-registrar/pages/employee/verifyDocuments.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
@@ -263,7 +263,7 @@ function employeeLayout($children) {
                             </div>
                         </a>
 
-                        <a href='/civil-registrar/pages/employee/appointment.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                        <a href='http://localhost/civil-registrar/pages/employee/appointment.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
@@ -274,7 +274,7 @@ function employeeLayout($children) {
                             </div>
                         </a>
 
-                        <a href='/civil-registrar/pages/employee/IssuedCertificates.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+                        <a href='http://localhost/civil-registrar/pages/employee/IssuedCertificates.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
@@ -293,9 +293,38 @@ function employeeLayout($children) {
         </div>
     </div>
 
+    <!-- Logout Modal -->
+    <div id="logoutModal" class="fixed inset-0 flex items-center justify-center z-50 hidden bg-gray-800 bg-opacity-50">
+        <div class="bg-white rounded-lg shadow-lg w-[65%] md:w-[25%]  p-6">
+            <h2 class="text-xl font-semibold mb-4">Confirm Logout</h2>
+            <p class="text-gray-600 mb-6">Are you sure you want to log out?</p>
+            <div class="flex justify-between gap-4">
+                <button onclick="closeLogoutModal()" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400">Cancel</button>
+                <p class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 cursor-pointer" onclick="logout()">Sign out</p>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <script>
+
+        // Function to display the logout modal
+        function showLogoutModal() {
+            document.getElementById("logoutModal").classList.remove("hidden");
+        }
+
+        // Function to hide the logout modal
+        function closeLogoutModal() {
+            document.getElementById("logoutModal").classList.add("hidden");
+        }
+
+        // Logout Function with Modal
+    function logout() {
+        localStorage.clear();
+        showToast('You have successfully logged out.', 'success');
+        window.location.href = 'http://localhost/civil-registrar/index.php';
+    }
 
          function showToast(message, type) {
             Toastify({
@@ -375,7 +404,7 @@ function employeeLayout($children) {
             const profileButton = document.getElementById('profileButton');
             const notificationPanel = document.getElementById('notificationPanel');
             const profilePanel = document.getElementById('profilePanel');
-            const logoutButton = document.getElementById('logoutButton');
+           
             const sidebarPanel = document.getElementById('sidebarpanel');
             const menuButton = document.getElementById('menuButton');
             const contentPanel = document.getElementById('contentpanel');
@@ -404,11 +433,7 @@ function employeeLayout($children) {
                 notificationPanel.classList.add('hidden'); // Hide notification panel if open
             });
 
-            // Optionally, add event listener to handle logout
-            logoutButton.addEventListener('click', () => {
-                // Implement logout functionality, e.g., redirect or AJAX request
-                alert('Logged out');
-            });
+        
 
             // Hide panels if clicking outside
             document.addEventListener('click', (event) => {
@@ -436,24 +461,8 @@ function employeeLayout($children) {
     
 
 
-        function logout() {
-          // Clear user data from local storage
-        localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('email');
-        localStorage.removeItem('password');
-        localStorage.removeItem('role');
-        localStorage.removeItem('profileImage');
-
-        // Show a toast message for logout confirmation
-        showToast('You have successfully logged out.', 'success');
-
-        // Redirect the user to the login page
-        window.location.href = 'http://localhost/civil-registrar/index.php'; // Adjust the URL as necessary
-    }
-
-    // Attach the logout function to a button click event
-    document.getElementById('logoutButton').addEventListener('click', logout);
+    
+       
 
     // Function to load notifications
 

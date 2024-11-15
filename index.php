@@ -1,4 +1,25 @@
 <?php
+// Example data for the slides
+$slides = [
+    [
+        'heading' => 'Streamlining Civil Registration for a Better Future',
+        'text' => 'Welcome to the Local Civil Registrar System, where we simplify the process of registration, verification, and issuance of certificates. Our user-friendly platform ensures a hassle-free experience for all.',
+        'image' => 'images/content2.jpg',
+    ],
+    [
+        'heading' => 'Simplified and Hassle-free Process',
+        'text' => 'Our platform makes it easier than ever to manage civil registration tasks. Whether you are registering for a birth, marriage, or any other certificate, we’ve got you covered.',
+        'image' => 'images/content2.jpg',
+    ],
+    [
+        'heading' => 'Secure and Reliable Services',
+        'text' => 'We prioritize the security of your personal information, offering a reliable and trustworthy service to meet all your civil registration needs.',
+        'image' => 'images/content2.jpg',
+    ]
+];
+?>
+
+<?php 
 $cardArray = [
     [
         'image' => 'images/content1.jpg',
@@ -41,49 +62,79 @@ $cardArray = [
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CivilRegistrar</title>
+    <title>Civil Registrar</title>
     <link rel="icon" href="images/qcfavicon.svg" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    
+    <style>
+        body {
+            overflow-x: hidden;
+        }
 
-   
+        .swiper-container {
+            width: 100%;
+        }
+
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+        }
+
+        .swiper-pagination-bullet {
+            background-color: #000;
+            opacity: 0.6;
+        }
+
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
-    <div class="h-auto w-full ">
-    <?php include './layout/navbar.php'; ?>
-       <!--content -->
-      <div class="container mx-auto">
-            <div class="w-full grid grid-cols-1 md:grid-cols-2 h-auto mt-4 md:mt-4 px-2 md:px-0">
-                <div class="flex flex-col justify-center items-start">
-                <h1 class="font-[900] md:text-[45px] text-[30px] md:leading-[46px] leading-[32px] mb-3">
-                <span class="block md:hidden font-[900] md:text-[45px] text-[30px] md:leading-[46px] leading-[32px] mb-3">Streamlining Civil Registration for a Better Future</span>
-                <span class="hidden md:block font-[900] md:text-[45px] text-[30px] md:leading-[46px] leading-[32px] mb-3">Streamlining Civil <br /> Registration for a <br /> Better Future</span>
-                </h1>
-                <p class="text-[16px]">Welcome to the Local Civil Registrar System, where we simplify the process of registration, verification, and issuance of certificates. Our user-friendly platform ensures a hassle-free experience for all.</p>
+    <div class="h-auto w-full">
+        <?php include './layout/navbar.php'; ?>
 
-                    <div class="flex justify-center md:justify-start items-center gap-3 mt-6 ">
-                    <button class="p-2 bg-blue-600 rounded-sm">Get Started</button>
-                    <button class="p-2 border-[1px] border-[#000] rounded-sm">Learn More</button>
-
+        <!-- Slider Section -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <?php foreach ($slides as $slide): ?>
+                    <div class="swiper-slide">
+                        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 h-auto mt-4 px-2 md:px-0">
+                            <div class="flex flex-col justify-center items-start p-5">
+                                <h1 class="font-[900] md:text-[45px] text-[30px] md:leading-[46px] leading-[32px] mb-3">
+                                    <?php echo htmlspecialchars($slide['heading']); ?>
+                                </h1>
+                                <p class="text-[16px]"><?php echo htmlspecialchars($slide['text']); ?></p>
+                                <div class="flex justify-center md:justify-start items-center gap-3 mt-6">
+                                    <button class="p-2 bg-blue-600 rounded-sm text-white">Get Started</button>
+                                    <button class="p-2 border border-gray-500 rounded-sm">Learn More</button>
+                                </div>
+                            </div>
+                            <div class="flex justify-center items-center p-5">
+                                <div class="w-full md:h-[430px] h-[400px] flex justify-center items-center">
+                                    <img src="<?php echo htmlspecialchars($slide['image']); ?>" alt="Slide Image" class="md:w-[90%] w-full h-[290px] md:h-[400px] rounded-sm"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-                </div>
-
-                <div class="flex justify-center items-center">
-                <div class="w-full md:h-[430px] h-[400px] flex justify-center items-center md:mt-9 -mt-5">
-                    <img src='images/content2.jpg' alt='images' class=' md:w-[90%] w-full h-[290px] md:h-[400px] rounded-sm'/>
-                </div>
-                </div>
-                
+                <?php endforeach; ?>
             </div>
-      </div>
+            <div class="swiper-pagination"></div>
+        </div>
 
-      <div class="container mx-auto h-auto md:mt-10 mt-1 md:mb-10 mb-3">
+        <div class="container mx-auto h-auto md:mt-10 mt-1 md:mb-10 mb-3">
         <div class="flex flex-col justify-start items-start gap-10 px-2 md:px-0">
             <div>
                 <h1 class="font-[600] text-[25px] md:text-[30px] md:leading-[40px] leading-[32px] md:mt-10 mt-4 md:mb-4 mb-1">
@@ -223,18 +274,25 @@ $cardArray = [
 
       </div>
 
-      <?php include './layout/footer.php'; ?>
+        <?php include './layout/footer.php'; ?>
+    </div>
 
-
-
-
-
-
-
-
-   </div>
-    
-
-    
+    <!-- Swiper JS Initialization -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            loop: true, // Adds looping for continuous slides
+        });
+    </script>
 </body>
 </html>

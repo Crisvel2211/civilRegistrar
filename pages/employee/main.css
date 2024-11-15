@@ -1,0 +1,32 @@
+/* Modal Background Overlay */
+#viewBirthModal {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal Content */
+#viewBirthModal .max-w-lg {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-30%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Header Styling */
+#viewBirthModal .border-b {
+    border-color: #e2e8f0;
+}
+
+/* Footer Button */
+#viewBirthModal button {
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
