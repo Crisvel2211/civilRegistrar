@@ -6,6 +6,27 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method === 'GET') {
 
+    if (isset($_GET['residentId'])) {
+        $residentId = intval($_GET['residentId']);
+        
+        // SQL query to fetch birth records for the specific resident
+        $sql = "SELECT br.*, u.name AS user_name 
+                FROM marriage_registration br
+                JOIN users u ON br.userId = u.id 
+                WHERE br.userId = $residentId";
+
+        $result = $conn->query($sql);
+
+        if ($result) {
+            $marriageCertificates = $result->fetch_all(MYSQLI_ASSOC);
+            echo json_encode($marriageCertificates);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
+        }
+        exit;
+    }
+
     // Check for count parameter
     if (isset($_GET['count']) && $_GET['count'] === 'true') {
         // Count total users

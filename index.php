@@ -73,6 +73,7 @@ $cardArray = [
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
+    
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     
@@ -131,66 +132,38 @@ $cardArray = [
                     </div>
                 <?php endforeach; ?>
             </div>
-            <div class="swiper-pagination"></div>
+            <div class="swiper-pagination "></div>
         </div>
 
-        <div class="container mx-auto h-auto md:mt-10 mt-1 md:mb-10 mb-3">
-        <div class="flex flex-col justify-start items-start gap-10 px-2 md:px-0">
-            <div>
-                <h1 class="font-[600] text-[25px] md:text-[30px] md:leading-[40px] leading-[32px] md:mt-10 mt-4 md:mb-4 mb-1">
-                    Discover Civil Registration <br />Insights
-                </h1>
-                <p>Stay informed with our latest articles and resources.</p>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 -mt-6 md:-mt-0">
-                <?php foreach ($cardArray as $card): ?>
-                    <div class="cursor-pointer bg-gray-300 p-2 rounded-sm">
-                        <img src="<?php echo htmlspecialchars($card['image']); ?>" alt="image" class="rounded-sm"/>
-                        <h2 class="font-[600]"><?php echo htmlspecialchars($card['title']); ?></h2>
-                        <p class="text-[13px]"><?php echo htmlspecialchars($card['description']); ?></p>
-                        <div class="flex justify-start items-start gap-2 mt-4">
-                            <img src="<?php echo htmlspecialchars($card['userPic']); ?>" alt="user" class="w-5 h-5 rounded-[100%]"/>
-                            <div>
-                                <p class="text-[11px] font-[500]"><?php echo htmlspecialchars($card['user']); ?></p>
-                                <div class="flex justify-center items-center gap-3">
-                                    <p class="text-[10px]"><?php echo htmlspecialchars($card['date']); ?></p>
-                                    <p class="text-[8px]"><?php echo htmlspecialchars($card['time']); ?></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-      </div>
 
-      <div class='container mx-auto h-auto md:mt-10 mt-3 md:mb-[8rem] mb-[3rem]'>
+
+      <div class='container mx-auto h-auto md:mt-[18rem] mt-10 md:mb-10 mb-3'>
         <div class="w-full grid md:grid-cols-2 grid-cols-1  h-auto md:mt-[8rem] mt-[4rem] px-2 md:px-0">
-            <div class="flex justify-center items-center">
+            <div class="flex justify-center items-center order-last md:order-first p-4">
                <div class="w-full h-auto flex md:justify-start md:items-start justify-center items-center ">
                 <img src='images/content2.jpg' alt='images' class=' md:w-[90%] w-full md:h-[355px] h-[270px] rounded-sm'/>
                </div>
             </div>
 
-            <div class="flex flex-col justify-center items-start">
-                <h1 class="font-[900] md:text-[30px] text-[25px] md:leading-[40px] leading-[32px] mb-3 pt-6 text-center md:text-start md:pt-0">Welcome to the Local Civil<br />Registrar System - Simplifying Registration, Verification, and Issuance</h1>
+            <div class="flex flex-col justify-center items-start order-first md:order-last p-4">
+                <h1 class="font-[900] md:text-[30px] text-[25px] md:leading-[40px] leading-[32px] mb-3 pt-6 text-center md:text-start md:pt-0">Welcome to the E-Local Civil<br />Registrar System - Simplifying Registration, Verification, and Issuance</h1>
                 <p class="text-[15px] text-justify">Our system streamlines the process of registering, verifying, and issuing certificates, making it quick and convenient for individuals and organizations.</p>
                 <div class="flex justify-center items-center gap-10 mt-6">
 
-                    <div class="flex flex-col justify-center items-center bg-secondary dark:bg-darksecondary text-text dark:text-darktext shadow-md py-10 rounded-sm cursor-pointer">
-                       <div class="flex justify-center items-center">
-                         <MdAppRegistration class="text-[18px]99"/>
-                        </div>
+                    <div class="flex flex-col justify-center items-center bg-gray-200 text-text dark:text-darktext shadow-md py-10 rounded-sm cursor-pointer">
+                    <div class="flex justify-center items-center mb-2">
+                        <i class="fas fa-registered text-[24px] text-blue-600"></i>
+                    </div>
                         <h1 class="font-[700] text-[16px] mb-2 text-center">Efficient Registration</h1>
                         <p class="text-[13px] leading-4 text-center">Register births, marriages, and deaths with ease, ensuring accurate and reliable records.</p>
 
                     </div>
 
-                    <div class="flex flex-col justify-center items-center bg-secondary dark:bg-darksecondary text-text dark:text-darktext shadow-md py-10 rounded-sm cursor-pointer">
+                    <div class="flex flex-col justify-center items-center bg-gray-200 text-text dark:text-darktext shadow-md py-10 rounded-sm cursor-pointer">
 
-                        <div class="flex justify-center items-center">
-                         <FaUserLock class="text-[18px] "/>
-                        </div>
+                    <div class="flex justify-center items-center mb-2">
+                        <i class="fas fa-user-lock text-[24px] text-green-600"></i>
+                    </div>
                         
                        
                         <h1 class="font-[700] text-[16px] mb-2 text-center">Secure Verification</h1>
@@ -208,71 +181,50 @@ $cardArray = [
 
     </div>
 
-      <div class='container mx-auto h-auto md:mt-10 mt-1 mb-10 '>
-       <div class="grid grid-cols-1 md:grid-cols-3 place-items-center gap-10 px-2 md:px-0"> 
-          <div class="md:col-span-3 col-span-1">
-            <h1 class="font-[900] text-[30px] leading-[40px] mb-3 text-center hidden md:block">Register, Verify, and Request Certificates <br/>with Ease</h1>
-
-            <h1 class="font-[900] text-[25px] leading-[32px] mb-3 text-center md:hidden">Register, Verify, and Request Certificates with Ease</h1>
-
-          </div>
-
-          <div class="p-6 rounded-md bg-secondary dark:bg-darksecondary shadow-md cursor-pointer w-full h-[260px] text-text dark:text-darktext">
-            <div class="flex justify-center items-center mb-4">
-             <MdAppRegistration class="text-[18px]"/>
-            </div>
-            <div class="flex flex-col justify-center items-center">
-              <h2 class="font-[700] text-center mb-3">Simple and Efficient Certificate  <br/>Management</h2>
-            </div>
-            <div>
-              <p class="text-justify text-[14px]">Our Local Civil Registrar System provides a step-by-step guide on how to register, verify, and request the issuance of certificates. With our user-friendly interface, you can easily navigate through the process and complete your tasks hassle-free.</p>
-              <div class="flex justify-center items-center gap-1 mt-2 text-[13px]">
-                <button class="">Request</button>
-                <MdKeyboardArrowRight/>
-              </div>
-            </div>
-
-          </div>
-
-          
-
-          <div class="p-6 rounded-md bg-secondary dark:bg-darksecondary shadow-md cursor-pointer w-full h-[260px] text-text dark:text-darktext">
-            <div class="flex justify-center items-center mb-4">
-             <FaUserLock  class="text-[18px]"/>
-            </div>
-            <div class="flex flex-col justify-center items-center">
-              <h2 class="font-[700] text-center mb-3">Fast and Reliable Certificate<br/>Verification</h2>
-            </div>
-            <div>
-              <p class="text-justify text-[14px]">With our advanced verification system, you can quickly validate the authenticity of certificates. Say goodbye to manual verification processes and enjoy the convenience of our automated solution.</p>
-              <div class="flex justify-center items-center gap-1 mt-2 text-[13px]">
-                <button class="">Verify</button>
-                <MdKeyboardArrowRight/>
-              </div>
-            </div>
-
-          </div>
-         
-          <div class="p-6 rounded-md bg-secondary dark:bg-darksecondary shadow-md cursor-pointer w-full h-[260px] text-text dark:text-darktext">
-            <div class="flex justify-center items-center mb-4">
-             <MdAppRegistration class="text-[18px]"/>
-            </div>
-            <div class="flex flex-col justify-center items-center">
-              <h2 class="font-[700] text-center mb-3">Creating Certificates and Issuing <br/>them is an easy task.</h2>
-            </div>
-            <div>
-              <p class="text-justify text-[14px]">Requesting certificates has never been easier. Our system streamlines the issuance process, ensuring that you receive your certificates promptly. Experience hassle-free certificate management today.</p>
-              <div class="flex justify-center items-center gap-1 mt-2 text-[13px]">
-                <button class="">Request</button>
-                <MdKeyboardArrowRight/>
-              </div>
-            </div>
-
-          </div>
-          
+    <div class="container mx-auto h-auto md:mt-[6rem] md:mb-[6rem] mt-10  mb-3">
+    <div class="flex flex-col justify-start items-start gap-10 px-2 md:px-0">
+        <div class="flex flex-col justify-center items-center text-center mx-auto mb-10">
+            <h1 class="font-[900] md:text-[30px] text-[25px] md:leading-[40px] leading-[32px] mb-3 pt-6 text-center md:text-start md:pt-0">
+                Discover Our Civil Registration Services
+            </h1>
+            <p class="text-[15px] text-justify">Explore the key services we offer to simplify your civil registration needs.</p>
         </div>
 
-      </div>
+        <!-- Service Cards Section -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 -mt-6 md:-mt-0">
+            <!-- Card 1 -->
+            <div class="cursor-pointer bg-gray-200 p-5 rounded-sm shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                <div class="flex justify-center items-center mb-4">
+                    <i class="fas fa-registered text-[24px] text-blue-600"></i>
+                </div>
+                <h2 class="font-[600] text-xl text-center mb-3">Efficient Birth Registration</h2>
+                <p class="text-justify text-[14px] mb-5">Our registrar system guides you through registering and requesting certificates with ease. Navigate the process seamlessly, ensuring tasks are completed without stress, supported by a clear, user-friendly interface for efficient results.</p>
+                <button class="w-full py-2 bg-blue-600 text-white rounded-sm">Learn More</button>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="cursor-pointer bg-gray-200 p-5 rounded-sm shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                <div class="flex justify-center items-center mb-4">
+                    <i class="fas fa-user-lock text-[24px] text-green-600"></i>
+                </div>
+                <h2 class="font-[600] text-xl text-center mb-3">Secure Certificate Verification</h2>
+                <p class="text-justify text-[14px] mb-5">Verify certificate authenticity swiftly with our automated system, eliminating manual steps and ensuring reliable validation. Enjoy the benefits of a streamlined, accurate process tailored for convenience and peace of mind.</p>
+                <button class="w-full py-2 bg-green-600 text-white rounded-sm">Verify Now</button>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="cursor-pointer bg-gray-200 p-5 rounded-sm shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                <div class="flex justify-center items-center mb-4">
+                    <i class="fas fa-user-plus text-[24px] text-yellow-600"></i>
+                </div>
+                <h2 class="font-[600] text-xl text-center mb-3">Simple Certificate Requests</h2>
+                <p class="text-justify text-[14px] mb-5">Easily request certificates with our streamlined system, which simplifies the process and ensures prompt issuance. Manage your requests seamlessly and experience smooth, hassle-free certificate handling for peace of mind.</p>
+                <button class="w-full py-2 bg-yellow-600 text-white rounded-sm">Request Certificate</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
         <?php include './layout/footer.php'; ?>
     </div>

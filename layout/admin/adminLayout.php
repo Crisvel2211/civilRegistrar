@@ -32,7 +32,7 @@ function adminLayout($children) {
     </head>
     <body>
     <div class="w-full gap-[4px] flex h-screen flex-col md:flex md:flex-row">
-        <div class="bg-blue-900 md:w-[22%] hidden md:block transform translate-x-0 transition-transform duration-300 ease-in" id='sidebarpanel'>
+        <div class="bg-[#191f8a] md:w-[22%] hidden md:block transform translate-x-0 transition-transform duration-300 ease-in" id='sidebarpanel'>
             <div class="flex flex-col gap-1 w-full ">
                 <div class='flex relative justify-evenly items-center w-full mt-6 px-4 mb-5'>
                     <div>
@@ -125,7 +125,7 @@ function adminLayout($children) {
         <!--header-->
 
         <div class="bg-gray-200 md:w-[78%] w-full transform translate-x-0 transition-transform duration-300 ease-in-out mx-[1px] p-1 overflow-hidden overflow-y-scroll" id="contentpanel">
-            <div class='bg-blue-600 box-shadow border-b-[1px] border-[#e1e0e4] dark:border-darkHeader border-solid rounded-[5px]' id='header'>
+            <div class='bg-[#191f8a] box-shadow border-b-[1px] border-[#e1e0e4] dark:border-darkHeader border-solid rounded-[5px]' id='header'>
                 <div class='flex p-3 justify-between items-center'>
                     <!-- Menu Icon -->
                     <div class='flex justify-start items-center'>

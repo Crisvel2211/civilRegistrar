@@ -15,7 +15,6 @@ $updateProfileContent = "
                     <option value=''>All</option>
                     <option value='pending'>Pending</option>
                     <option value='processing'>Processing</option>
-                    <option value='verified'>Verified</option>
                     <option value='completed'>Completed</option>
                 </select>
             </div>
@@ -59,7 +58,7 @@ $updateProfileContent = "
                         <label for='newStatusInput' class='block text-sm font-medium text-gray-700 mb-2'>Select New Status</label>
                         <select id='newStatusInput' class='w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'>
                             <option value='pending'>Pending</option>
-                            <option value='verified'>Verified</option>
+                            <option value='processing'>Processing</option>
                             <option value='completed'>Completed</option>
                         </select>
                     </div>
@@ -149,10 +148,11 @@ const fetchdeathRegistrations = () => {
                             <td class='px-4 py-2 border-r border-gray-300'>${death.id}</td>
                             <td class='px-4 py-2 text-center border-r border-gray-300'>${death.user_name}</td> <!-- Display user name here -->
                             <td class='px-4 py-2 text-center border-r border-gray-300'>
-                                <span class='${(death.status === 'verified' || death.status === 'completed') ? 'bg-green-300 text-green-800' : 'bg-yellow-300 text-yellow-800'} text-xs font-medium px-2.5 py-0.5 rounded'>
+                                <span class='${(death.status === 'processing') ? 'bg-blue-200 text-blue-800' : (death.status === 'completed') ? 'bg-green-300 text-green-800' : (death.status === 'pending') ? 'bg-yellow-300 text-yellow-800' : 'bg-gray-200 text-gray-800'} text-xs font-medium px-2.5 py-0.5 rounded'>
                                     ${death.status}
                                 </span>
                             </td>
+
 
                             <td class='px-4 py-2 text-center border-r border-gray-300'>
                                 <button class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 transition duration-300' onclick='viewdeath(${death.id})'>View</button>

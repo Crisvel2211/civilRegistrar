@@ -15,7 +15,6 @@ $updateProfileContent = "
                     <option value=''>All</option>
                     <option value='pending'>Pending</option>
                     <option value='processing'>Processing</option>
-                    <option value='verified'>Verified</option>
                     <option value='completed'>Completed</option>
                 </select>
             </div>
@@ -59,7 +58,7 @@ $updateProfileContent = "
                         <label for='newStatusInput' class='block text-sm font-medium text-gray-700 mb-2'>Select New Status</label>
                         <select id='newStatusInput' class='w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'>
                             <option value='pending'>Pending</option>
-                            <option value='verified'>Verified</option>
+                            <option value='processing'>Processing</option>
                             <option value='completed'>Completed</option>
                         </select>
                     </div>
@@ -149,7 +148,7 @@ const fetchmarriageRegistrations = () => {
                             <td class='px-4 py-2 border-r border-gray-300'>${marriage.id}</td>
                             <td class='px-4 py-2 text-center border-r border-gray-300'>${marriage.user_name}</td> <!-- Display user name here -->
                             <td class='px-4 py-2 text-center border-r border-gray-300'>
-                                <span class='${(marriage.status === 'verified' || marriage.status === 'completed') ? 'bg-green-300 text-green-800' : 'bg-yellow-300 text-yellow-800'} text-xs font-medium px-2.5 py-0.5 rounded'>
+                                <span class='${(marriage.status === 'processing') ? 'bg-blue-200 text-blue-800' : (marriage.status === 'completed') ? 'bg-green-300 text-green-800' : (marriage.status === 'pending') ? 'bg-yellow-300 text-yellow-800' : 'bg-gray-200 text-gray-800'} text-xs font-medium px-2.5 py-0.5 rounded'>
                                     ${marriage.status}
                                 </span>
                             </td>

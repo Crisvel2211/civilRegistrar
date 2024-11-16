@@ -55,6 +55,7 @@ function residentLayout($children) {
     background-color: transparent;
     
   }
+  
   #usernameSection {
     overflow-y: auto; /* Enable vertical scrolling */
     max-height: 200px; /* Adjust this value as needed */
@@ -65,7 +66,7 @@ function residentLayout($children) {
     </head>
     <body>
         <div class="w-full gap-[4px] flex h-screen flex-col md:flex md:flex-row">
-            <div class="bg-blue-900 md:w-[22%] hidden md:block transform translate-x-0 transition-transform duration-300 ease-in" id='sidebarpanel'>
+            <div class="bg-[#191f8a] md:w-[22%] hidden md:block transform translate-x-0 transition-transform duration-300 ease-in" id='sidebarpanel'>
                 <div class="flex flex-col gap-1 w-full ">
                     <div class='flex relative justify-evenly items-center w-full mt-6 px-4 mb-5'>
                         <div>
@@ -116,9 +117,7 @@ function residentLayout($children) {
             <a href='http://localhost/civil-registrar/pages/resident/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
                 <h1 class='text-[13px] font-[600] pl-[2rem]'>Death Certificate</h1>
             </a>
-            <a href='http://localhost/civil-registrar/pages/resident/multi.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
-                <h1 class='text-[13px] font-[600] pl-[2rem]'>Multi Certificate</h1>
-            </a>
+           
         </div>
         <a href='http://localhost/civil-registrar/pages/resident/verifyDocuments.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <div>
@@ -147,7 +146,7 @@ function residentLayout($children) {
             </div>
 
         <div class="bg-gray-200 md:w-[78%] w-full transform translate-x-0 transition-transform duration-300 ease-in-out mx-[1px] p-1 overflow-hidden overflow-y-scroll relative" id="contentpanel">
-            <div class='bg-blue-600 box-shadow border-b-[1px] border-[#e1e0e4] dark:border-darkHeader border-solid rounded-[5px]' id='header'>
+            <div class='bg-[#191f8a] box-shadow border-b-[1px] border-[#e1e0e4] dark:border-darkHeader border-solid rounded-[5px]' id='header'>
                 <div class='flex p-3 justify-between items-center'>
                     <!-- Menu Icon -->
                     <div class='flex justify-start items-center'>
@@ -232,7 +231,7 @@ function residentLayout($children) {
               <!-- Voice Features -->
 
                      
-    <div class="absolute bottom-8 right-8">
+<div class="absolute bottom-8 right-8">
     <div id="voiceButton" class="bg-[#3448c5] w-[50px] h-[50px] hover:w-[60px] hover:h-[60px] transition duration-150 delay-150 ease-out cursor-pointer rounded-full flex justify-center items-center">
         <img src="../../images/voicelogo.png" alt="logo" class="w-[40px] h-[40px] rounded-full" id="voiceLogo" />
         <svg id="arrowDown" class="text-white text-[20px] hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -272,7 +271,7 @@ function residentLayout($children) {
 
         </div>
     </div>
-    </div>
+</div>
 
 
 
@@ -336,9 +335,7 @@ function residentLayout($children) {
             <a href='http://localhost/civil-registrar/pages/resident/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
                 <h1 class='text-[13px] font-[600] pl-[2rem]'>Death Certificate</h1>
             </a>
-            <a href='http://localhost/civil-registrar/pages/resident/multi.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
-                <h1 class='text-[13px] font-[600] pl-[2rem]'>Multi Certificate</h1>
-            </a>
+            
         </div>
         <a href='http://localhost/civil-registrar/pages/resident/verifyDocuments.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <div>
@@ -387,54 +384,56 @@ function residentLayout($children) {
 
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-    <script>
+<script>
 
-let openVoice = false;
-let recognition;
+    let openVoice = false;
+    let recognition;
 
-// Function to handle voice button click
-document.getElementById('voiceButton').onclick = function() {
-    openVoice = !openVoice; // Toggle state
-    document.getElementById('voicePanel').classList.toggle('hidden', !openVoice); // Show or hide the panel
-    document.getElementById('arrowDown').classList.toggle('hidden', !openVoice); // Show/hide the arrow
-    document.getElementById('voiceLogo').classList.toggle('hidden', openVoice); // Show/hide the logo
-    setActiveState('homeButton'); // Set default active state to Home
-    setVoiceButtonColor(); // Set the voice button color
-};
+    // Function to handle voice button click
+    document.getElementById('voiceButton').onclick = function() {
+        openVoice = !openVoice; // Toggle state
+        document.getElementById('voicePanel').classList.toggle('hidden', !openVoice); // Show or hide the panel
+        document.getElementById('arrowDown').classList.toggle('hidden', !openVoice); // Show/hide the arrow
+        document.getElementById('voiceLogo').classList.toggle('hidden', openVoice); // Show/hide the logo
+        setActiveState('homeButton'); // Set default active state to Home
+        setVoiceButtonColor(); // Set the voice button color
+    };
 
-// Initialize SpeechRecognition
-function initializeSpeechRecognition() {
-    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-        recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        recognition.interimResults = true;
-        recognition.lang = 'en-US';
+    // Initialize SpeechRecognition
+    function initializeSpeechRecognition() {
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
 
-        // Handle results
-        recognition.onresult = function(event) {
-            const transcript = Array.from(event.results)
-                .map(result => result[0].transcript)
-                .join('');
-            document.getElementById('transcript').textContent = transcript; // Display transcript
-            processVoiceCommand(transcript.trim().toLowerCase()); // Process the command
-        };
+            // Handle results
+            recognition.onresult = function(event) {
+                const transcript = Array.from(event.results)
+                    .map(result => result[0].transcript)
+                    .join('');
+                document.getElementById('transcript').textContent = transcript; // Display transcript
+                processVoiceCommand(transcript.trim().toLowerCase()); // Process the command
+            };
 
-        // Handle errors
-        recognition.onerror = function(event) {
-            console.error('Speech recognition error:', event.error);
-        };
-    } else {
-        console.error('Speech Recognition API not supported in this browser.');
+            // Handle errors
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+            };
+        } else {
+            console.error('Speech Recognition API not supported in this browser.');
+        }
     }
-}
 
-// Call initializeSpeechRecognition when the document is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    setMessage('homeButton'); // Sets default view to Home
-    initializeSpeechRecognition(); // Initialize speech recognition
-});
+    // Call initializeSpeechRecognition when the document is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        setMessage('homeButton'); // Sets default view to Home
+        initializeSpeechRecognition(); // Initialize speech recognition
+    });
+    
+    
 
-// Process voice commands
-function processVoiceCommand(command) {
+    
+    function processVoiceCommand(command) {
     let reply = ''; // Default empty reply
 
     if (command.includes("ml")) {
@@ -457,6 +456,69 @@ function processVoiceCommand(command) {
         reply = 'Opening messages section.';
         speak(reply);
         setMessage('messagesButton');
+    } else if (command.includes("navigate dashboard") || command.includes("dashboard")) {
+        reply = 'Navigating to the Dashboard.';
+        speak(reply);
+
+        // Trigger the click event to navigate to the dashboard
+        const dashboardLink = document.querySelector('a[href="http://localhost/civil-registrar/pages/resident/residentDashboard.php"]');
+        if (dashboardLink) {
+            dashboardLink.click(); // Simulates a click on the dashboard link
+        }
+    } else if (command.includes("go to verification") || command.includes("verification")) {
+        reply = 'Navigating to the Verification page.';
+        speak(reply);
+
+        // Trigger the click event to navigate to the Verification page
+        const verificationLink = document.querySelector('a[href="http://localhost/civil-registrar/pages/resident/verifyDocuments.php"]');
+        if (verificationLink) {
+            verificationLink.click(); // Simulates a click on the verification link
+        }
+    } else if (command.includes("open certificates") || command.includes("certificates")) {
+        reply = 'Opening Certificates submenu.';
+        speak(reply);
+
+        // Trigger the click event to open the Certificates submenu
+        const certificatesLink = document.querySelector('a[onclick="toggleCertificates(event)"]');
+        if (certificatesLink) {
+            certificatesLink.click(); // Simulates a click to toggle the certificates submenu
+        }
+    } else if (command.includes("birth certificate")) {
+        reply = 'Navigating to the Birth Certificate page.';
+        speak(reply);
+        const birthCertLink = document.querySelector('a[href="http://localhost/civil-registrar/pages/resident/birthRegistration.php"]');
+        if (birthCertLink) {
+            birthCertLink.click(); // Simulates a click to go to Birth Certificate page
+        }
+    } else if (command.includes("marriage certificate")) {
+        reply = 'Navigating to the Marriage Certificate page.';
+        speak(reply);
+        const marriageCertLink = document.querySelector('a[href="http://localhost/civil-registrar/pages/resident/marriageRegistration.php"]');
+        if (marriageCertLink) {
+            marriageCertLink.click(); // Simulates a click to go to Marriage Certificate page
+        }
+    } else if (command.includes("death certificate")) {
+        reply = 'Navigating to the Death Certificate page.';
+        speak(reply);
+        const deathCertLink = document.querySelector('a[href="http://localhost/civil-registrar/pages/resident/deathRegistration.php"]');
+        if (deathCertLink) {
+            deathCertLink.click(); // Simulates a click to go to Death Certificate page
+        }
+    } else if (command.includes("multi certificate")) {
+        reply = 'Navigating to the Multi Certificate page.';
+        speak(reply);
+        const multiCertLink = document.querySelector('a[href="http://localhost/civil-registrar/pages/resident/multi.php"]');
+        if (multiCertLink) {
+            multiCertLink.click(); // Simulates a click to go to Multi Certificate page
+        }
+    } else if (command.includes("appointment") || command.includes("schedule appointment")) {
+        reply = 'Navigating to the Appointment page.';
+        speak(reply);
+        // Trigger the click event to navigate to the Appointment page
+        const appointmentLink = document.querySelector('a[href="http://localhost/civil-registrar/pages/resident/appointment.php"]');
+        if (appointmentLink) {
+            appointmentLink.click(); // Simulates a click on the appointment link
+        }
     }
 
     // Display the reply in the transcript or response section
@@ -465,258 +527,267 @@ function processVoiceCommand(command) {
     }
 }
 
-// Display content based on active section
-function setMessage(activeButton = 'homeButton') {
-    const messageSection = document.getElementById('usernameSection');
-    messageSection.innerHTML = ''; // Clear previous content
-    const username = localStorage.getItem('name');
 
-    if (activeButton === 'messagesButton') {
-        messageSection.innerHTML = `
-            <h1 class="text-white">Hi <span>${username} 👋</span></h1>
-            <div class="voicescript bg-white rounded-md text-black p-2 cursor-pointer text-justify mt-1 overflow-y-auto">
-                <p>This is a message section. You can write messages here.</p>
-            </div>`;
-        setActiveState('messagesButton');
-    } else if (activeButton === 'voicesButton') {
-        messageSection.innerHTML = `
-            <h1 class="text-white" >Voices Available</h1>
-            <div class="voicescript bg-white rounded-md text-black p-2 cursor-pointer text-justify mt-1 overflow-y-auto">
-                <p>Here you can explore different voice options and settings.</p>
-                <p>Use the dropdown menu to select a voice.(ml,open messages,log out,show voices,home)</p>
+
+    // Display content based on active section
+    function setMessage(activeButton = 'homeButton') {
+        const messageSection = document.getElementById('usernameSection');
+        messageSection.innerHTML = ''; // Clear previous content
+        const username = localStorage.getItem('name');
+
+        if (activeButton === 'messagesButton') {
+            messageSection.innerHTML = `
+                <h1 class="text-white">Hi <span>${username} 👋</span></h1>
+                <div class="voicescript bg-white rounded-md text-black p-2 cursor-pointer text-justify mt-1 overflow-y-auto">
+                    <p>This is a message section. You can write messages here.</p>
+                </div>`;
+            setActiveState('messagesButton');
+        } else if (activeButton === 'voicesButton') {
+            messageSection.innerHTML = `
+                <h1 class="text-white text-center">Voices Available</h1>
+
+            <div class="voicescript bg-white rounded-md text-black p-2 cursor-pointer text-justify mt-1 overflow-y-auto w-full">
+
+                <div id="transcript" class="mt-2 p-2 bg-gray-100 rounded"></div>
+            </div>
+            <div class="flex justify-center items-center w-full mb-3 mt-3">
                 <button id="startRecognition" class="mt-2 bg-green-500 text-white p-2 rounded">Start Listening</button>
                 <button id="stopRecognition" class="mt-2 bg-red-500 text-white p-2 rounded hidden">Stop Listening</button>
-                <div id="transcript" class="mt-2 p-2 bg-gray-100 rounded"></div>
-            </div>`;
-        setActiveState('voicesButton');
+            </div>
 
-        // Start recognition when the button is clicked
-        document.getElementById('startRecognition').onclick = function() {
-            recognition.start();
-            this.classList.add('hidden');
-            document.getElementById('stopRecognition').classList.remove('hidden');
-        };
+            
+            
 
-        // Stop recognition
-        document.getElementById('stopRecognition').onclick = function() {
-            recognition.stop();
-            this.classList.add('hidden');
-            document.getElementById('startRecognition').classList.remove('hidden');
-        };
-    } else {
-        messageSection.innerHTML = `
-            <h1 class="text-white">Welcome Back!</h1>
-            <div class="voicescript bg-white rounded-md text-black p-2 cursor-pointer text-justify mt-1 overflow-y-auto">
-                <p>This is Home section. You can write messages here.</p>
-            </div>`;
-        setActiveState('homeButton');
-    }
-}
+        `;
+            setActiveState('voicesButton');
 
-// Function to set the active state of the buttons
-function setActiveState(activeId) {
-    const buttons = ['homeButton', 'voicesButton', 'messagesButton'];
-    buttons.forEach(id => {
-        const button = document.getElementById(id);
-        if (id === activeId) {
-            button.classList.add('text-[#3448c5]'); // Active color
-            button.classList.remove('text-gray-600'); // Remove inactive color
+            // Start recognition when the button is clicked
+            document.getElementById('startRecognition').onclick = function() {
+                recognition.start();
+                this.classList.add('hidden');
+                document.getElementById('stopRecognition').classList.remove('hidden');
+            };
+
+            // Stop recognition
+            document.getElementById('stopRecognition').onclick = function() {
+                recognition.stop();
+                this.classList.add('hidden');
+                document.getElementById('startRecognition').classList.remove('hidden');
+            };
         } else {
-            button.classList.remove('text-[#3448c5]'); // Remove active color
-            button.classList.add('text-gray-600'); // Inactive color
+            messageSection.innerHTML = `
+                <h1 class="text-white">Welcome Back!</h1>
+                <div class="voicescript bg-white rounded-md text-black p-2 cursor-pointer text-justify mt-1 overflow-y-auto">
+                    <p>This is Home section. You can write messages here.</p>
+                </div>`;
+            setActiveState('homeButton');
+        }
+    }
+
+    // Function to set the active state of the buttons
+    function setActiveState(activeId) {
+        const buttons = ['homeButton', 'voicesButton', 'messagesButton'];
+        buttons.forEach(id => {
+            const button = document.getElementById(id);
+            if (id === activeId) {
+                button.classList.add('text-[#3448c5]'); // Active color
+                button.classList.remove('text-gray-600'); // Remove inactive color
+            } else {
+                button.classList.remove('text-[#3448c5]'); // Remove active color
+                button.classList.add('text-gray-600'); // Inactive color
+            }
+        });
+    }
+
+    // Function to set the voice button color
+    function setVoiceButtonColor() {
+        const voiceButton = document.getElementById('voiceButton');
+        voiceButton.classList.toggle('bg-red-600', openVoice); // Change to red if voice panel is open
+        voiceButton.classList.toggle('bg-[#3448c5]', !openVoice); // Revert to original color if closed
+    }
+
+    // Close the voice panel when clicking outside of it
+    document.addEventListener('click', function(event) {
+        const voiceButton = document.getElementById('voiceButton');
+        const voicePanel = document.getElementById('voicePanel');
+
+        // Check if the click was outside the voice button and the voice panel
+        if (openVoice && !voiceButton.contains(event.target) && !voicePanel.contains(event.target)) {
+            openVoice = false; // Set the open state to false
+            voicePanel.classList.add('hidden'); // Hide the voice panel
+            document.getElementById('arrowDown').classList.add('hidden'); // Hide the arrow
+            document.getElementById('voiceLogo').classList.remove('hidden'); // Show the logo
+            setVoiceButtonColor(); // Set the voice button color
         }
     });
-}
 
-// Function to set the voice button color
-function setVoiceButtonColor() {
-    const voiceButton = document.getElementById('voiceButton');
-    voiceButton.classList.toggle('bg-red-600', openVoice); // Change to red if voice panel is open
-    voiceButton.classList.toggle('bg-[#3448c5]', !openVoice); // Revert to original color if closed
-}
-
-// Close the voice panel when clicking outside of it
-document.addEventListener('click', function(event) {
-    const voiceButton = document.getElementById('voiceButton');
-    const voicePanel = document.getElementById('voicePanel');
-
-    // Check if the click was outside the voice button and the voice panel
-    if (openVoice && !voiceButton.contains(event.target) && !voicePanel.contains(event.target)) {
-        openVoice = false; // Set the open state to false
-        voicePanel.classList.add('hidden'); // Hide the voice panel
-        document.getElementById('arrowDown').classList.add('hidden'); // Hide the arrow
-        document.getElementById('voiceLogo').classList.remove('hidden'); // Show the logo
-        setVoiceButtonColor(); // Set the voice button color
+    // Function to speak responses
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        window.speechSynthesis.speak(utterance);
     }
-});
-
-// Function to speak responses
-function speak(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    window.speechSynthesis.speak(utterance);
-}
-  
- 
-
-
-// Function to display the logout modal
-        function showLogoutModal() {
-            document.getElementById("logoutModal").classList.remove("hidden");
-        }
-
-        // Function to hide the logout modal
-        function closeLogoutModal() {
-            document.getElementById("logoutModal").classList.add("hidden");
-        }
-
-        // Logout Function with Modal
-    function logout() {
-        localStorage.clear();
-        showToast('You have successfully logged out.', 'success');
-        window.location.href = 'http://localhost/civil-registrar/index.php';
-    }
-
-
-         function showToast(message, type) {
-            Toastify({
-                text: message,
-                style: {
-                    background: type === 'success' ? 'linear-gradient(to right, #00b09b, #96c93d)' : 'linear-gradient(to right, #ff5f6d, #ffc371)'
-                },
-                duration: 3000
-            }).showToast();
-        }
     
+    
+
+
+    // Function to display the logout modal
+            function showLogoutModal() {
+                document.getElementById("logoutModal").classList.remove("hidden");
+            }
+
+            // Function to hide the logout modal
+            function closeLogoutModal() {
+                document.getElementById("logoutModal").classList.add("hidden");
+            }
+
+            // Logout Function with Modal
+        function logout() {
+            localStorage.clear();
+            showToast('You have successfully logged out.', 'success');
+            window.location.href = 'http://localhost/civil-registrar/index.php';
+        }
+
+
+            function showToast(message, type) {
+                Toastify({
+                    text: message,
+                    style: {
+                        background: type === 'success' ? 'linear-gradient(to right, #00b09b, #96c93d)' : 'linear-gradient(to right, #ff5f6d, #ffc371)'
+                    },
+                    duration: 3000
+                }).showToast();
+            }
+        
+
+            
+        const modal = document.getElementById("mobilesidebarpanel");
+        const openModalButton = document.getElementById("mobilemenuButton");
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const authDisplay = document.getElementById('authDisplay');
+            const profileImage = localStorage.getItem('profileImage'); // Base64 image stored, or null
+
+            if (profileImage) {
+                // User is authenticated, show profile image from localStorage
+                authDisplay.innerHTML = `<img src="${profileImage}" alt="Profile" class='w-[21px] h-[21px] font-semibold cursor-pointer rounded-[100%]' id='profileButton'/>`;
+            }
+        });
+
+        // Function to toggle modal visibility
+        const toggleModal = () => {
+        modal.classList.toggle("hidden");
+        };
+
+        // Open/Close modal on button click
+        openModalButton.addEventListener("click", toggleModal);
 
         
-    const modal = document.getElementById("mobilesidebarpanel");
-    const openModalButton = document.getElementById("mobilemenuButton");
+            function toggleCertificates(event) {
+                event.preventDefault();
+                const submenu = document.getElementById('certificate-submenu');
+                const toggleIcon = document.getElementById('certificate-toggle-icon');
 
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const authDisplay = document.getElementById('authDisplay');
-        const profileImage = localStorage.getItem('profileImage'); // Base64 image stored, or null
-
-        if (profileImage) {
-            // User is authenticated, show profile image from localStorage
-            authDisplay.innerHTML = `<img src="${profileImage}" alt="Profile" class='w-[21px] h-[21px] font-semibold cursor-pointer rounded-[100%]' id='profileButton'/>`;
-        }
-    });
-
-    // Function to toggle modal visibility
-    const toggleModal = () => {
-      modal.classList.toggle("hidden");
-    };
-
-    // Open/Close modal on button click
-    openModalButton.addEventListener("click", toggleModal);
-
-    
-        function toggleCertificates(event) {
-            event.preventDefault();
-            const submenu = document.getElementById('certificate-submenu');
-            const toggleIcon = document.getElementById('certificate-toggle-icon');
-
-            // Toggle submenu visibility
-            submenu.classList.toggle('hidden');
-            
-            // Update toggle icon
-            if (submenu.classList.contains('hidden')) {
-                toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[20px] h-[20px]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>';
-            } else {
-                toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[20px] h-[20px]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 15l-7-7-7 7"/></svg>';
-            }
-        }
-
-        function mobiletoggleCertificates(event) {
-            event.preventDefault();
-            const submenu = document.getElementById('mobilecertificate-submenu');
-            const toggleIcon = document.getElementById('certificate-toggle-icon');
-
-            // Toggle submenu visibility
-            submenu.classList.toggle('hidden');
-            
-            // Update toggle icon
-            if (submenu.classList.contains('hidden')) {
-                toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[20px] h-[20px]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>';
-            } else {
-                toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[20px] h-[20px]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 15l-7-7-7 7"/></svg>';
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const sidebarLinks = document.querySelectorAll(".sidebar-link");
-            const currentPath = window.location.pathname;
-
-            sidebarLinks.forEach(link => {
-                if (link.href === window.location.href) {
-                    link.classList.add("active");
-                }
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const notificationButton = document.getElementById('notificationButton');
-            const profileButton = document.getElementById('profileButton');
-            const notificationPanel = document.getElementById('notificationPanel');
-            const profilePanel = document.getElementById('profilePanel');
-            const sidebarPanel = document.getElementById('sidebarpanel');
-            const menuButton = document.getElementById('menuButton');
-            const contentPanel = document.getElementById('contentpanel');
-
-            // Toggle sidebar visibility
-            menuButton.addEventListener('click', () => {
-                sidebarPanel.classList.toggle('-translate-x-full');
-                sidebarPanel.classList.toggle('translate-x-0');
-
-                // Adjust content panel width
-                contentPanel.classList.toggle('md:-ml-[22.2%]');
-                contentPanel.classList.toggle('md:w-full');
-                contentPanel.classList.toggle('md:mr-[1px]');
-            });
-
-            // Toggle notification panel visibility
-            notificationButton.addEventListener('click', () => {
-                notificationPanel.classList.toggle('hidden');
-                profilePanel.classList.add('hidden'); // Hide profile panel if open
-            });
-
-            // Toggle profile panel visibility
-            profileButton.addEventListener('click', (event) => {
-                event.stopPropagation(); // Prevents the event from bubbling up
-                profilePanel.classList.toggle('hidden');
-                notificationPanel.classList.add('hidden'); // Hide notification panel if open
-            });
-
-           
-
-            // Hide panels if clicking outside
-            document.addEventListener('click', (event) => {
-                if (!event.target.closest('#notificationButton') && !event.target.closest('#notificationPanel')) {
-                    notificationPanel.classList.add('hidden');
-                }
-                if (!event.target.closest('#profileButton') && !event.target.closest('#profilePanel')) {
-                    profilePanel.classList.add('hidden');
-                }
-                if (!event.target.closest('#mobilemenuButton') && !event.target.closest('#mobilesidebarpanel')) {
-                    mobilesidebarpanel.classList.add('hidden');
-                }
+                // Toggle submenu visibility
+                submenu.classList.toggle('hidden');
                 
+                // Update toggle icon
+                if (submenu.classList.contains('hidden')) {
+                    toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[20px] h-[20px]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>';
+                } else {
+                    toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[20px] h-[20px]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 15l-7-7-7 7"/></svg>';
+                }
+            }
+
+            function mobiletoggleCertificates(event) {
+                event.preventDefault();
+                const submenu = document.getElementById('mobilecertificate-submenu');
+                const toggleIcon = document.getElementById('certificate-toggle-icon');
+
+                // Toggle submenu visibility
+                submenu.classList.toggle('hidden');
+                
+                // Update toggle icon
+                if (submenu.classList.contains('hidden')) {
+                    toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[20px] h-[20px]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>';
+                } else {
+                    toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[20px] h-[20px]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 15l-7-7-7 7"/></svg>';
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                const sidebarLinks = document.querySelectorAll(".sidebar-link");
+                const currentPath = window.location.pathname;
+
+                sidebarLinks.forEach(link => {
+                    if (link.href === window.location.href) {
+                        link.classList.add("active");
+                    }
+                });
             });
-        });
 
-        // Get the email from localStorage
-        const email = localStorage.getItem('email');
+            document.addEventListener('DOMContentLoaded', () => {
+                const notificationButton = document.getElementById('notificationButton');
+                const profileButton = document.getElementById('profileButton');
+                const notificationPanel = document.getElementById('notificationPanel');
+                const profilePanel = document.getElementById('profilePanel');
+                const sidebarPanel = document.getElementById('sidebarpanel');
+                const menuButton = document.getElementById('menuButton');
+                const contentPanel = document.getElementById('contentpanel');
 
-        // If email exists, display it, otherwise do nothing
-        if (email) {
-            document.getElementById('email-display').textContent = email;
-        }
+                // Toggle sidebar visibility
+                menuButton.addEventListener('click', () => {
+                    sidebarPanel.classList.toggle('-translate-x-full');
+                    sidebarPanel.classList.toggle('translate-x-0');
+
+                    // Adjust content panel width
+                    contentPanel.classList.toggle('md:-ml-[22.2%]');
+                    contentPanel.classList.toggle('md:w-full');
+                    contentPanel.classList.toggle('md:mr-[1px]');
+                });
+
+                // Toggle notification panel visibility
+                notificationButton.addEventListener('click', () => {
+                    notificationPanel.classList.toggle('hidden');
+                    profilePanel.classList.add('hidden'); // Hide profile panel if open
+                });
+
+                // Toggle profile panel visibility
+                profileButton.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevents the event from bubbling up
+                    profilePanel.classList.toggle('hidden');
+                    notificationPanel.classList.add('hidden'); // Hide notification panel if open
+                });
+
+            
+
+                // Hide panels if clicking outside
+                document.addEventListener('click', (event) => {
+                    if (!event.target.closest('#notificationButton') && !event.target.closest('#notificationPanel')) {
+                        notificationPanel.classList.add('hidden');
+                    }
+                    if (!event.target.closest('#profileButton') && !event.target.closest('#profilePanel')) {
+                        profilePanel.classList.add('hidden');
+                    }
+                    if (!event.target.closest('#mobilemenuButton') && !event.target.closest('#mobilesidebarpanel')) {
+                        mobilesidebarpanel.classList.add('hidden');
+                    }
+                    
+                });
+            });
+
+            // Get the email from localStorage
+            const email = localStorage.getItem('email');
+
+            // If email exists, display it, otherwise do nothing
+            if (email) {
+                document.getElementById('email-display').textContent = email;
+            }
 
 
 
 
-    </script>
+</script>
     </body>
     </html>
     <?php
