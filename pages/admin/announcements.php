@@ -59,7 +59,7 @@ adminLayout($announcementContent);
 
 
         try {
-            const response = await fetch('http://localhost/civil-registrar/api/announcements.php', {
+            const response = await fetch('http://localhost/group69/api/announcements.php', {
                 method: 'POST',
                 body: formData,
             });

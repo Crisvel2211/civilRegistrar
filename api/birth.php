@@ -1,6 +1,11 @@
 <?php
-header('Content-Type: application/json');
-include 'db.php'; // Include your database connection file
+header("Access-Control-Allow-Origin: *"); // Allow all origins
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Credentials: true");
+
+
+include 'db.php'; // Include your database connection
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -96,9 +101,8 @@ if ($method === 'GET') {
         $sql .= " AND br.employee_id = $employeeId";
     }
 
-    // Filter by resident name instead of first name and last name
     if ($search) {
-        $sql .= " AND (CONCAT(u.name) LIKE '%$search%')";
+        $sql .= " AND br.reference_number LIKE '%$search%'";
     }
 
     // Filter by status if provided
@@ -123,7 +127,12 @@ if ($method === 'POST') {
     // Create a new birth certificate
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // Define expected fields, including userId and employeeId
+    // Generate a unique reference number (Format: BR-YYYYMMDD-RANDOM)
+    $date = date("Ymd");
+    $randomNumber = mt_rand(1000, 9999);
+    $referenceNumber = "BR-" . $date . "-" . $randomNumber;
+
+    // Define expected fields
     $fields = [
         'userId', 'employee_id', 'child_first_name', 'child_last_name', 'child_middle_name', 'child_sex',
         'child_date_of_birth', 'child_time_of_birth', 'child_place_of_birth',
@@ -134,11 +143,10 @@ if ($method === 'POST') {
         'mother_date_of_birth', 'mother_place_of_birth', 'parents_married_at_birth', 'status'
     ];
 
-    // Validate and prepare data, including userId and employee_id
+    // Validate and prepare data
     $values = [];
     foreach ($fields as $field) {
         if ($field === 'status') {
-            // Set default status if not provided
             $values[] = "pending"; // Default status
         } elseif (isset($data[$field])) {
             $values[] = $conn->real_escape_string($data[$field]);
@@ -149,47 +157,27 @@ if ($method === 'POST') {
         }
     }
 
-    // Validate employee_id by checking if it's a valid employee
-    $employeeId = intval($data['employee_id']);
-    $employeeCheckSql = "SELECT id FROM users WHERE id = $employeeId AND role = 'employee'";
-    $employeeCheckResult = $conn->query($employeeCheckSql);
+    // Add reference number to the values
+    $fields[] = 'reference_number';
+    $values[] = $referenceNumber;
 
-    if ($employeeCheckResult->num_rows === 0) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Invalid employee_id.']);
-        exit;
-    }
-
-    // Insert the new record, including userId and employee_id
-    $sql = "INSERT INTO birth_registration (" . implode(', ', $fields) . ", created_at) VALUES ('" . implode("', '", $values) . "', NOW())"; // Capture created_at
+    // Insert the new record
+    $sql = "INSERT INTO birth_registration (" . implode(', ', $fields) . ", created_at) VALUES ('" . implode("', '", $values) . "', NOW())";
     
     if ($conn->query($sql) === TRUE) {
-        // Get the ID of the newly registered birth certificate
         $birthId = $conn->insert_id;
 
-        // Prepare the child's full name for the notification
-        $childFullName = "{$data['child_first_name']} {$data['child_last_name']}";
-        
-        // Get the created_at timestamp
-        $createdAt = date("F j, Y, g:i a"); // Adjust format as needed
-
-        // Create the notification message
-        $notificationMessage = "A new birth certificate has been registered for $childFullName (ID: $birthId) at $createdAt.";
-
-        // Insert notification for the employee
-        $notificationSql = "INSERT INTO notifications (employee_id, message, type, read_status) VALUES ($employeeId, '$notificationMessage', 'birth_registration', 0)";
-        
-        if ($conn->query($notificationSql) === TRUE) {
-            echo json_encode(['message' => 'Birth certificate registered successfully and notification sent to employee.']);
-        } else {
-            http_response_code(500);
-            echo json_encode(['error' => 'Failed to insert notification: ' . $conn->error]);
-        }
+        echo json_encode([
+            'message' => 'Birth certificate registered successfully.',
+            'birthId' => $birthId,
+            'reference_number' => $referenceNumber
+        ]);
     } else {
         http_response_code(500);
         echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
     }
 }
+
 
 
 

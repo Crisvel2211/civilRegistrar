@@ -28,7 +28,7 @@ employeeLayout($updateProfileContent);
     async function fetchVerificationDocuments(searchTerm = '') {
         try {
             // Prepare the API URL with the search term as a query parameter
-            const apiUrl = `http://localhost/civil-registrar/api/verification.php?search=${encodeURIComponent(searchTerm)}`;
+            const apiUrl = `http://localhost/group69/api/verification.php?search=${encodeURIComponent(searchTerm)}`;
 
             const response = await fetch(apiUrl);
             if (!response.ok) {
@@ -55,7 +55,7 @@ employeeLayout($updateProfileContent);
     documents.forEach(document => {
 
         const card = `
-            <a href='http://localhost/civil-registrar/pages/employee/singleDocument.php?id=${document.id}' class='bg-white shadow-md rounded-lg p-4 block hover:shadow-lg transition-shadow'>
+            <a href='http://localhost/group69/pages/employee/singleDocument.php?id=${document.id}' class='bg-white shadow-md rounded-lg p-4 block hover:shadow-lg transition-shadow'>
                 <img src='${document.image}' alt='Verification Document' class='w-full h-32 object-cover rounded-md mb-2' onerror="this.onerror=null; this.src='path/to/placeholder.jpg';"> <!-- Optional placeholder -->
                 <h2 class='text-xl font-bold'>${document.full_name}</h2>
                 <p class='text-gray-700'>User ID: <span class='font-medium'>${document.user_id}</span></p>

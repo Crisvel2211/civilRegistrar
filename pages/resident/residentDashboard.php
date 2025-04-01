@@ -56,7 +56,7 @@ residentLayout($homeContent);
     // Fetch Announcements
     const fetchAnnouncements = async () => {
         try {
-            const response = await fetch(`http://localhost/civil-registrar/api/announcements.php?role=${role}&userId=${residentId}`);
+            const response = await fetch(`http://localhost/group69/api/announcements.php?role=${role}&userId=${residentId}`);
             if (!response.ok) throw new Error('Failed to fetch announcements.');
             
             const announcements = await response.json();
@@ -73,7 +73,7 @@ residentLayout($homeContent);
                         <div class="bg-white p-4 rounded-lg shadow">
                             <h2 class="text-xl font-semibold text-gray-700">${announcement.title}</h2>
                             <p class="text-gray-600 mt-2">${announcement.description}</p>
-                            ${announcement.image ? `<img src="http://localhost/civil-registrar/api/${announcement.image}" class="mt-4 w-full" alt="Announcement Image">` : ''}
+                            ${announcement.image ? `<img src="http://localhost/group69/api/${announcement.image}" class="mt-4 w-full" alt="Announcement Image">` : ''}
                             <p class="text-gray-500 text-sm mt-4">Posted on: ${createdAt}</p>
                         </div>
                     `;
@@ -91,9 +91,9 @@ residentLayout($homeContent);
     const fetchCertificateRecords = async () => {
         try {
             const responses = await Promise.all([
-                fetch(`http://localhost/civil-registrar/api/birth.php?residentId=${residentId}`),
-                fetch(`http://localhost/civil-registrar/api/marriage.php?residentId=${residentId}`),
-                fetch(`http://localhost/civil-registrar/api/death.php?residentId=${residentId}`)
+                fetch(`http://localhost/group69/api/birth.php?residentId=${residentId}`),
+                fetch(`http://localhost/group69/api/marriage.php?residentId=${residentId}`),
+                fetch(`http://localhost/group69/api/death.php?residentId=${residentId}`)
             ]);
 
             const [birthRecords, marriageRecords, deathRecords] = await Promise.all(responses.map(res => {

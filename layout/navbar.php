@@ -2,7 +2,7 @@
     <div class="container mx-auto">
         <nav class="flex justify-between items-center p-2 relative">
             <div>
-                <a href="/civil-registrar/index.php">
+                <a href="/group69/index.php">
                 <img src="images/qclogo.png" alt='logo' class='cursor-pointer w-full h-[49px]' />
                 </a>
                
@@ -14,9 +14,9 @@
             </form>
 
             <div class="justify-center items-center gap-4 md:flex text-white">
-                <a href="/civil-registrar/services.php" class="nav-link font-[500] hidden md:flex">Services</a>
-                <a href="/civil-registrar/about.php" class="nav-link font-[500] hidden md:flex">About</a>
-                <a href="/civil-registrar/contact.php" class="nav-link font-[500] hidden md:flex">Contact us</a>
+                <a href="/group69/services.php" class="nav-link font-[500] hidden md:flex">Services</a>
+                <a href="/group69/about.php" class="nav-link font-[500] hidden md:flex">About</a>
+                <a href="/group69/contact.php" class="nav-link font-[500] hidden md:flex">Contact us</a>
 
                 <!-- Dynamic Profile Image or Sign In Button -->
                 <div id="authDisplay"></div>
@@ -33,11 +33,11 @@
 
         if (profileImage) {
             // User is authenticated, show profile image from localStorage
-            authDisplay.innerHTML = `<a href="/civil-registrar/pages/${navigate}/${navigate}Dashboard.php">
+            authDisplay.innerHTML = `<a href="/group69/pages/${navigate}/${navigate}Dashboard.php">
             <img src="${profileImage}" alt="Profile" class="w-[21px] h-[21px] font-semibold cursor-pointer rounded-[100%]" /></a>`;
         } else {
             // No profile image, show sign-in button
-            authDisplay.innerHTML = `<a href="/civil-registrar/pages/login.php" class="font-[500] border px-2 py-1 rounded-md">Sign In</a>`;
+            authDisplay.innerHTML = `<a href="/group69/pages/login.php" class="font-[500] border px-2 py-1 rounded-md">Sign In</a>`;
         }
 
         // Highlight the active link based on current URL

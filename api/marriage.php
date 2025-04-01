@@ -97,9 +97,8 @@ if ($method === 'GET') {
 
     // Filter by resident name instead of first name and last name
     if ($search) {
-        $sql .= " AND (CONCAT(u.name) LIKE '%$search%')";
+        $sql .= " AND br.reference_number LIKE '%$search%'";
     }
-
     // Filter by status if provided
     if ($status) {
         $sql .= " AND br.status = '$status'";
@@ -119,27 +118,24 @@ if ($method === 'POST') {
     // Create a new marriage certificate
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // Define expected fields, including userId and employeeId for the marriage registration
+    // Define expected fields
     $fields = [
         'userId', 'employee_id', 'groom_first_name', 'groom_middle_name', 'groom_last_name', 
-        'groom_suffix', 'groom_dob', 'groom_civil_status', 'groom_nationality', 
+        'groom_suffix', 'groom_dob', 'groom_birth_place', 'bride_birth_place', 'groom_civil_status', 'groom_nationality', 
         'groom_father_name', 'groom_mother_name', 'bride_first_name', 'bride_middle_name', 
         'bride_last_name', 'bride_maiden_name', 'bride_suffix', 'bride_dob', 
         'bride_civil_status', 'bride_nationality', 'bride_father_name', 'bride_mother_name', 
         'marriage_date', 'marriage_place', 'groom_witness', 'bride_witness', 'status'
     ];
 
-    // Validate and prepare data, including userId and employee_id
+    // Validate and prepare data
     $values = [];
     foreach ($fields as $field) {
         if ($field === 'status') {
-            // Set default status if not provided
             $values[] = "pending"; // Default status
         } elseif (isset($data[$field])) {
-            // Escape input for security
             $values[] = $conn->real_escape_string($data[$field]);
         } elseif ($field === 'groom_suffix' || $field === 'bride_suffix') {
-            // Set default suffix to an empty string if not provided
             $values[] = ''; // Default to empty string if not set
         } else {
             http_response_code(400);
@@ -148,7 +144,7 @@ if ($method === 'POST') {
         }
     }
 
-    // Validate employee_id by checking if it's a valid employee
+    // Validate employee_id
     $employeeId = intval($data['employee_id']);
     $employeeCheckSql = "SELECT id FROM users WHERE id = $employeeId AND role = 'employee'";
     $employeeCheckResult = $conn->query($employeeCheckSql);
@@ -159,28 +155,34 @@ if ($method === 'POST') {
         exit;
     }
 
-    // Insert the new marriage certificate record, including userId and employee_id
-    $sql = "INSERT INTO marriage_registration (" . implode(', ', $fields) . ", created_at) VALUES ('" . implode("', '", $values) . "', NOW())"; // Capture created_at
-    
+    // Generate a unique reference number
+    $referenceNumber = "MR-" . date("Ymd") . "-" . rand(1000, 9999);
+
+    // Insert into database
+    $sql = "INSERT INTO marriage_registration (" . implode(', ', $fields) . ", reference_number, created_at) 
+            VALUES ('" . implode("', '", $values) . "', '$referenceNumber', NOW())";
+
     if ($conn->query($sql) === TRUE) {
-        // Get the ID of the newly registered marriage certificate
+        // Get the ID of the new marriage registration
         $marriageId = $conn->insert_id;
 
-        // Prepare the groom's and bride's full names for the notification
+        // Prepare notification message
         $groomFullName = "{$data['groom_first_name']} {$data['groom_last_name']}";
         $brideFullName = "{$data['bride_first_name']} {$data['bride_last_name']}";
+        $createdAt = date("F j, Y, g:i a");
 
-        // Get the created_at timestamp
-        $createdAt = date("F j, Y, g:i a"); // Adjust format as needed
-
-        // Create the notification message
         $notificationMessage = "A new marriage certificate has been registered for $groomFullName and $brideFullName (ID: $marriageId) at $createdAt.";
 
-        // Insert notification for the employee
-        $notificationSql = "INSERT INTO notifications (employee_id, message, type, read_status) VALUES ($employeeId, '$notificationMessage', 'marriage_registration', 0)";
+        // Insert notification
+        $notificationSql = "INSERT INTO notifications (employee_id, message, type, read_status) 
+                            VALUES ($employeeId, '$notificationMessage', 'marriage_registration', 0)";
         
         if ($conn->query($notificationSql) === TRUE) {
-            echo json_encode(['message' => 'Marriage certificate registered successfully and notification sent to employee.']);
+            echo json_encode([
+                'message' => 'Marriage certificate registered successfully and notification sent to employee.',
+                'marriageId' => $marriageId,
+                'reference_number' => $referenceNumber
+            ]);
         } else {
             http_response_code(500);
             echo json_encode(['error' => 'Failed to insert notification: ' . $conn->error]);
@@ -190,6 +192,7 @@ if ($method === 'POST') {
         echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
     }
 }
+
 
 
 

@@ -97,30 +97,43 @@
                 </p>
             </div>
 
-            <!-- Contact Form -->
-            <div class="form-container">
-                <form action="/submit-contact-form" method="POST" class="contact-form space-y-6">
-                    <div>
-                        <label for="name" class="block text-gray-700">Full Name</label>
-                        <input type="text" id="name" name="name" required class="input-field" placeholder="Enter your full name">
-                    </div>
-                    
-                    <div>
-                        <label for="email" class="block text-gray-700">Email Address</label>
-                        <input type="email" id="email" name="email" required class="input-field" placeholder="Enter your email">
-                    </div>
+            <!-- Flex container for form and GIF -->
+            <div class="flex flex-col md:flex-row items-center justify-center gap-12">
+              <!-- Left Side: Video -->
+                <div class="flex-shrink-0 w-full md:w-1/2">
+                    <video class="w-[800px] h-[600px] object-cover rounded-lg shadow-lg" autoplay loop muted>
+                        <source src="./images/contactUs.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
 
-                    <div>
-                        <label for="message" class="block text-gray-700">Message</label>
-                        <textarea id="message" name="message" rows="4" required class="textarea-field" placeholder="Enter your message"></textarea>
-                    </div>
 
-                    <div>
-                        <button type="submit" class="w-full bg-[#191f8a] text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-[#191f8a] transition-all">
-                            Send Message
-                        </button>
-                    </div>
-                </form>
+
+                <!-- Right Side: Contact Form -->
+                <div class="form-container w-full md:w-1/2">
+                    <form action="/submit-contact-form" method="POST" class="contact-form space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-700">Full Name</label>
+                            <input type="text" id="name" name="name" required class="input-field" placeholder="Enter your full name">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-gray-700">Email Address</label>
+                            <input type="email" id="email" name="email" required class="input-field" placeholder="Enter your email">
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-gray-700">Message</label>
+                            <textarea id="message" name="message" rows="4" required class="textarea-field" placeholder="Enter your message"></textarea>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="w-full bg-[#191f8a] text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-[#191f8a] transition-all">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </section>
 

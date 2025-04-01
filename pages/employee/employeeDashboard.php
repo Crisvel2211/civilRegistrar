@@ -60,7 +60,7 @@ const role = localStorage.getItem('role'); // Assume the role is stored in local
 
 const fetchAnnouncements = async () => {
     try {
-        const response = await fetch(`http://localhost/civil-registrar/api/announcements.php?role=${role}&userId=${employeeId}`);
+        const response = await fetch(`http://localhost/group69/api/announcements.php?role=${role}&userId=${employeeId}`);
         
         // Check if response is OK
         if (!response.ok) {
@@ -91,7 +91,7 @@ const fetchAnnouncements = async () => {
                     <div class="bg-white p-4 rounded-lg shadow">
                         <h2 class="text-xl font-semibold text-gray-700">${announcement.title}</h2>
                         <p class="text-gray-600 mt-2">${announcement.description}</p>
-                        ${announcement.image ? `<img src="http://localhost/civil-registrar/api/${announcement.image}" class="mt-4 w-full" alt="Announcement Image">` : ''}
+                        ${announcement.image ? `<img src="http://localhost/group69/api/${announcement.image}" class="mt-4 w-full" alt="Announcement Image">` : ''}
                           <p class="text-gray-500 text-sm mt-4">Posted on: ${createdAt}</p>
                     </div>
                 `;
@@ -112,7 +112,7 @@ const fetchAnnouncements = async () => {
         const fetchDeathCount = async () => {
             const employeeId = localStorage.getItem('userId');
             try {
-                const response = await fetch(`http://localhost/civil-registrar/api/death.php?get_employee_counts=true&employee_id=${employeeId}`);
+                const response = await fetch(`http://localhost/group69/api/death.php?get_employee_counts=true&employee_id=${employeeId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -136,7 +136,7 @@ const fetchAnnouncements = async () => {
         const fetchBirthCount = async () => {
             const employeeId = localStorage.getItem('userId');
             try {
-                const response = await fetch(`http://localhost/civil-registrar/api/birth.php?get_employee_counts=true&employee_id=${employeeId}`);
+                const response = await fetch(`http://localhost/group69/api/birth.php?get_employee_counts=true&employee_id=${employeeId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -161,7 +161,7 @@ const fetchAnnouncements = async () => {
         const fetchMarriageCount = async () => {
             const employeeId = localStorage.getItem('userId');
             try {
-                const response = await fetch(`http://localhost/civil-registrar/api/marriage.php?get_employee_counts=true&employee_id=${employeeId}`);
+                const response = await fetch(`http://localhost/group69/api/marriage.php?get_employee_counts=true&employee_id=${employeeId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

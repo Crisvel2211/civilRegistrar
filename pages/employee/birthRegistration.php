@@ -24,10 +24,10 @@ $updateProfileContent = "
                 <table class='w-full table-auto bg-white'>
                     <thead class='bg-gray-200'>
                         <tr>
-                            <th class='px-4 py-2'>ID</th>
+                            <th class='px-4 py-2'>Reference Number</th>
                             <th class='px-4 py-2'>Resident Name</th> <!-- New column for userId -->
                             <th class='px-4 py-2'>Status</th>
-                            <th class='px-4 py-2'>Verification</th>
+                            <th class='px-4 py-2'>Details</th>
                             <th class='px-4 py-2'>Actions</th>
                         </tr>
                     </thead>
@@ -134,7 +134,7 @@ const fetchBirthRegistrations = () => {
     // Make sure to encode the search parameter for safe URL usage
     const encodedSearch = encodeURIComponent(search);
 
-    fetch(`http://localhost/civil-registrar/api/birth.php?employee_id=${employeeId}&search=${encodedSearch}&status=${status}`)
+    fetch(`http://localhost/group69/api/birth.php?employee_id=${employeeId}&search=${encodedSearch}&status=${status}`)
         .then(response => response.json())
         .then(data => {
             if (Array.isArray(data)) {
@@ -145,7 +145,7 @@ const fetchBirthRegistrations = () => {
                     console.log(birth.status);
                     const row = `
                         <tr class='border-b border-x border-gray-300'>
-                            <td class='px-4 py-2 border-r border-gray-300'>${birth.id}</td>
+                            <td class='px-4 py-2 border-r border-gray-300'>${birth.reference_number}</td>
                             <td class='px-4 py-2 text-center border-r border-gray-300'>${birth.user_name}</td> <!-- Display user name here -->
                             <td class='px-4 py-2 text-center border-r border-gray-300'>
                                 <span class='${(birth.status === 'processing') ? 'bg-blue-200 text-blue-800' : (birth.status === 'completed') ? 'bg-green-300 text-green-800' : (birth.status === 'pending') ? 'bg-yellow-300 text-yellow-800' : 'bg-gray-200 text-gray-800'} text-xs font-medium px-2.5 py-0.5 rounded'>
@@ -201,7 +201,7 @@ document.getElementById('modalConfirmButton').addEventListener('click', () => {
             employee_id: employeeId
         };
 
-        fetch(`http://localhost/civil-registrar/api/birth.php`, {
+        fetch(`http://localhost/group69/api/birth.php`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -230,7 +230,7 @@ function updateStatus(birthId) {
     currentBirthId = birthId; // Set the birth ID
 
     // Fetch the current birth registration data to get the current status
-    fetch(`http://localhost/civil-registrar/api/birth.php?id=${birthId}`)
+    fetch(`http://localhost/group69/api/birth.php?id=${birthId}`)
         .then(response => response.json())
         .then(data => {
             if (data && data.status) {
@@ -302,7 +302,7 @@ document.getElementById('deleteModalConfirmButton').addEventListener('click', ()
     const employeeId = localStorage.getItem('userId');
 
     // Send the delete request
-    fetch(`http://localhost/civil-registrar/api/birth.php`, {
+    fetch(`http://localhost/group69/api/birth.php`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -335,13 +335,13 @@ document.getElementById('deleteModalCancelButton').addEventListener('click', () 
 
     // Open the modal and populate details
     function viewBirth(birthId) {
-        fetch(`http://localhost/civil-registrar/api/birth.php?id=${birthId}`)
+        fetch(`http://localhost/group69/api/birth.php?id=${birthId}`)
             .then(response => response.json())
             .then(data => {
                 if (data) {
                     const birthDetailsContent = `
                     <div class="grid grid-cols-2 gap-4">
-                    <p><strong>ID:</strong> ${data.id}</p>
+                    <p><strong>RN:</strong> ${data.reference_number}</p>
                     <p><strong>Child Name:</strong> ${data.child_first_name} ${data.child_middle_name} ${data.child_last_name}</p>
                     <p><strong>Sex:</strong> ${data.child_sex}</p>
                     <p><strong>Date of Birth:</strong> ${data.child_date_of_birth}</p>

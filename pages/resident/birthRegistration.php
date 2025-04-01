@@ -312,7 +312,7 @@ residentLayout($homeContent);
 
         // Send the data to the server
         try {
-            const response = await fetch('http://localhost/civil-registrar/api/birth.php', {
+            const response = await fetch('http://localhost/group69/api/birth.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -339,7 +339,7 @@ residentLayout($homeContent);
     const selectElement = document.getElementById('employee');
 
 // Fetch the list of employees from the backend
-fetch('http://localhost/civil-registrar/api/employees.php') // Adjust the URL based on your API structure
+fetch('http://localhost/group69/api/employees.php') // Adjust the URL based on your API structure
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');

@@ -95,7 +95,7 @@ if ($method === 'GET') {
 
     // Filter by resident name instead of first name and last name
     if ($search) {
-        $sql .= " AND (CONCAT(u.name) LIKE '%$search%')";
+        $sql .= " AND br.reference_number LIKE '%$search%'";
     }
 
     // Filter by status if provided
@@ -116,6 +116,11 @@ if ($method === 'GET') {
 if ($method === 'POST') {
     // Create a new death certificate
     $data = json_decode(file_get_contents('php://input'), true);
+
+    // Generate a unique reference number (Format: DR-YYYYMMDD-RANDOM)
+    $date = date("Ymd");
+    $randomNumber = mt_rand(1000, 9999);
+    $referenceNumber = "DR-" . $date . "-" . $randomNumber;
 
     // Define expected fields, including userId and employeeId for the death registration
     $fields = [
@@ -141,6 +146,18 @@ if ($method === 'POST') {
         }
     }
 
+    // Add reference number to the values
+    $fields[] = 'reference_number';
+    $values[] = $referenceNumber;
+
+    // Ensure the reference_number column exists in the database
+    $alterTableSql = "ALTER TABLE death_registration ADD COLUMN IF NOT EXISTS reference_number VARCHAR(20) DEFAULT NULL";
+    $conn->query($alterTableSql);
+
+    // Make reference number unique
+    $alterUniqueSql = "ALTER TABLE death_registration ADD UNIQUE (reference_number)";
+    $conn->query($alterUniqueSql);
+
     // Validate employee_id by checking if it's a valid employee
     $employeeId = intval($data['employee_id']);
     $employeeCheckSql = "SELECT id FROM users WHERE id = $employeeId AND role = 'employee'";
@@ -152,27 +169,29 @@ if ($method === 'POST') {
         exit;
     }
 
-    // Insert the new death certificate record, including userId and employee_id
-    $sql = "INSERT INTO death_registration (" . implode(', ', $fields) . ", created_at) VALUES ('" . implode("', '", $values) . "', NOW())"; // Capture created_at
-    
+    // Insert the new death certificate record, including reference number
+    $sql = "INSERT INTO death_registration (" . implode(', ', $fields) . ", created_at) VALUES ('" . implode("', '", $values) . "', NOW())";
+
     if ($conn->query($sql) === TRUE) {
         // Get the ID of the newly registered death certificate
         $deathId = $conn->insert_id;
 
-        
         $FullName = "{$data['deceased_first_name']} {$data['deceased_last_name']}";
 
         // Get the created_at timestamp
         $createdAt = date("F j, Y, g:i a"); // Adjust format as needed
 
         // Create the notification message
-        $notificationMessage = "A new death certificate has been registered for $FullName and (ID: $deathId) at $createdAt.";
+        $notificationMessage = "A new death certificate (Ref: $referenceNumber) has been registered for $FullName (ID: $deathId) at $createdAt.";
 
         // Insert notification for the employee
         $notificationSql = "INSERT INTO notifications (employee_id, message, type, read_status) VALUES ($employeeId, '$notificationMessage', 'death_registration', 0)";
-        
+
         if ($conn->query($notificationSql) === TRUE) {
-            echo json_encode(['message' => 'death certificate registered successfully and notification sent to employee.']);
+            echo json_encode([
+                'message' => 'Death certificate registered successfully and notification sent to employee.',
+                'reference_number' => $referenceNumber
+            ]);
         } else {
             http_response_code(500);
             echo json_encode(['error' => 'Failed to insert notification: ' . $conn->error]);

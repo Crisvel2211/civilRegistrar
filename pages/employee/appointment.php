@@ -95,7 +95,7 @@ employeeLayout($updateProfileContent);
     let residents = []; // Store the residents globally
 
     window.onload = function() {
-        fetch('http://localhost/civil-registrar/api/residents.php')
+        fetch('http://localhost/group69/api/residents.php')
             .then(response => response.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -161,7 +161,7 @@ employeeLayout($updateProfileContent);
         const formData = new FormData(form); // Create a FormData object
 
         // Send the form data to the PHP API
-        fetch('http://localhost/civil-registrar/api/appointments.php', {
+        fetch('http://localhost/group69/api/appointments.php', {
             method: 'POST',
             body: formData,
         })

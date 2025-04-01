@@ -24,10 +24,10 @@ $updateProfileContent = "
                 <table class='w-full table-auto bg-white'>
                     <thead class='bg-gray-200'>
                         <tr>
-                            <th class='px-4 py-2'>ID</th>
+                            <th class='px-4 py-2'>Reference Number</th>
                             <th class='px-4 py-2'>Resident Name</th> <!-- New column for userId -->
                             <th class='px-4 py-2'>Status</th>
-                            <th class='px-4 py-2'>Verification</th>
+                            <th class='px-4 py-2'>Details</th>
                             <th class='px-4 py-2'>Actions</th>
                         </tr>
                     </thead>
@@ -134,7 +134,7 @@ const fetchdeathRegistrations = () => {
     // Make sure to encode the search parameter for safe URL usage
     const encodedSearch = encodeURIComponent(search);
 
-    fetch(`http://localhost/civil-registrar/api/death.php?employee_id=${employeeId}&search=${encodedSearch}&status=${status}`)
+    fetch(`http://localhost/group69/api/death.php?employee_id=${employeeId}&search=${encodedSearch}&status=${status}`)
         .then(response => response.json())
         .then(data => {
             if (Array.isArray(data)) {
@@ -145,7 +145,7 @@ const fetchdeathRegistrations = () => {
                     console.log(death.status);
                     const row = `
                         <tr class='border-b border-x border-gray-300'>
-                            <td class='px-4 py-2 border-r border-gray-300'>${death.id}</td>
+                            <td class='px-4 py-2 border-r border-gray-300'>${death.reference_number}</td>
                             <td class='px-4 py-2 text-center border-r border-gray-300'>${death.user_name}</td> <!-- Display user name here -->
                             <td class='px-4 py-2 text-center border-r border-gray-300'>
                                 <span class='${(death.status === 'processing') ? 'bg-blue-200 text-blue-800' : (death.status === 'completed') ? 'bg-green-300 text-green-800' : (death.status === 'pending') ? 'bg-yellow-300 text-yellow-800' : 'bg-gray-200 text-gray-800'} text-xs font-medium px-2.5 py-0.5 rounded'>
@@ -202,7 +202,7 @@ document.getElementById('modalConfirmButton').addEventListener('click', () => {
             employee_id: employeeId
         };
 
-        fetch(`http://localhost/civil-registrar/api/death.php`, {
+        fetch(`http://localhost/group69/api/death.php`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -231,7 +231,7 @@ function updateStatus(deathId) {
     currentdeathId = deathId; // Set the death ID
 
     // Fetch the current death registration data to get the current status
-    fetch(`http://localhost/civil-registrar/api/death.php?id=${deathId}`)
+    fetch(`http://localhost/group69/api/death.php?id=${deathId}`)
         .then(response => response.json())
         .then(data => {
             if (data && data.status) {
@@ -303,7 +303,7 @@ document.getElementById('deleteModalConfirmButton').addEventListener('click', ()
     const employeeId = localStorage.getItem('userId');
 
     // Send the delete request
-    fetch(`http://localhost/civil-registrar/api/death.php`, {
+    fetch(`http://localhost/group69/api/death.php`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -336,13 +336,13 @@ document.getElementById('deleteModalCancelButton').addEventListener('click', () 
 
     // Open the modal and populate details
     function viewdeath(deathId) {
-        fetch(`http://localhost/civil-registrar/api/death.php?id=${deathId}`)
+        fetch(`http://localhost/group69/api/death.php?id=${deathId}`)
             .then(response => response.json())
             .then(data => {
                 if (data) {
                     const deathDetailsContent = `
                     <div class="grid grid-cols-2 gap-4">
-                    <p><strong>ID:</strong> ${data.id}</p>
+                    <p><strong>RN:</strong> ${data.reference_number}</p>
                     <p><strong>Deceased's First Name:</strong> ${data.deceased_first_name} ${data.deceased_middle_name} ${data.deceased_last_name}</p>
                     <p><strong>Deceased's Middle Name:</strong> ${data.deceased_dob}</p>
                     <p><strong>Deceased's Last Name:</strong> ${data.date_of_death}</p>

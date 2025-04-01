@@ -12,7 +12,7 @@
     <style>
         /* Custom background */
         body {
-            background-image: url('https://quezoncity.gov.ph/wp-content/uploads/2024/07/quezon-city-official-website-hero-banner.jpg');
+            background-image: url('https://a.travel-assets.com/findyours-php/viewfinder/images/res70/129000/129166-Quezon-City.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -31,7 +31,7 @@
         }
         .strength-bar {
             height: 100%;
-            transition: width 0.3s ease;
+            transition: width 0.2s ease;
         }
         .weak { background-color: #f87171; }     /* Red */
         .medium { background-color: #facc15; }   /* Yellow */
@@ -97,17 +97,17 @@
                 </button>
             </div>
             <div id="register-message" class="text-center mt-4"></div>
-            <p class="text-center mt-4 text-sm">Already have an account? <a href="login.php" class="text-blue-600 hover:underline">login here</a></p>
+            <p class="text-center mt-4 text-sm">Already have an account? <a href="login.php" class="text-blue-600 hover:underline">Login here</a></p>
         </div>
 
         <!-- OTP Verification Form -->
         <div id="otp-verification" class="hidden">
-            <label for="otp-input" class="block text-sm font-medium text-gray-700">Enter OTP sent to your email</label>
+            <label for="otp-input" class="block text-sm font-medium text-gray-700">OTP Code sent to your email</label>
             <input type="text" id="otp-input" placeholder="Enter OTP" class="mt-1 block w-full px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md">
             <div id="otp-timer" class="text-red-500 mt-2 text-center"></div>
         
             <button id="verify-otp-btn" onclick="verifyOTP()" class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 mt-2">
-                Verify OTP
+                Verify OTP Code
             </button>
             
         </div>
@@ -124,7 +124,7 @@ function resetForm() {
 }
 
 let otpTimer;
-let timeLeft = 60; // 1 minute in seconds
+let timeLeft = 120; // 1 minute in seconds
 
 function startOTPTimer() {
     const timerDisplay = document.getElementById('otp-timer');
@@ -132,10 +132,10 @@ function startOTPTimer() {
     otpTimer = setInterval(() => {
         if (timeLeft <= 0) {
             clearInterval(otpTimer);
-            timerDisplay.innerText = "OTP expired. Please register again.";
+            timerDisplay.innerText = "OTP Code expired. Please register again.";
             const email = document.getElementById('register-email').value;
             deletePendingUser(email);
-            showToast("OTP expired. Please register again.", "error"), 
+            showToast("OTP Code expired. Please register again.", "error"), 
             setTimeout(() => 
             location.reload(), 2000);
         } else {
@@ -148,7 +148,7 @@ function startOTPTimer() {
 }
 
 function deletePendingUser(email) {
-    fetch('http://localhost/civil-registrar/api/auth.php?action=delete_pending_user', {
+    fetch('http://localhost/group69/api/auth.php?action=delete_pending_user', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -258,7 +258,7 @@ function deletePendingUser(email) {
             try {
                 await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate delay
 
-                const response = await fetch('http://localhost/civil-registrar/api/auth.php?action=register', {
+                const response = await fetch('http://localhost/group69/api/auth.php?action=register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, email, password, role: 'resident' })
@@ -305,7 +305,7 @@ function deletePendingUser(email) {
             }
 
             try {
-                const response = await fetch('http://localhost/civil-registrar/api/auth.php?action=verify_otp', {
+                const response = await fetch('http://localhost/group69/api/auth.php?action=verify_otp', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, otp }) // Include email in the request

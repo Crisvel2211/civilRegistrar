@@ -14,7 +14,7 @@
      <style>
         /* Add custom styles for the background image */
         body {
-            background-image: url('https://quezoncity.gov.ph/wp-content/uploads/2024/07/quezon-city-official-website-hero-banner.jpg');
+            background-image: url('https://a.travel-assets.com/findyours-php/viewfinder/images/res70/129000/129166-Quezon-City.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -141,7 +141,7 @@
             // Simulate a delay to show the spinner for 3 seconds (you can adjust the duration)
             await new Promise((resolve) => setTimeout(resolve, 2000));
 
-            const response = await fetch('http://localhost/civil-registrar/api/auth.php?action=login', {
+            const response = await fetch('http://localhost/group69/api/auth.php?action=login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

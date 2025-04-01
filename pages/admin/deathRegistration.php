@@ -59,7 +59,7 @@ const fetchdeathRegistrations = () => {
     // Make sure to encode the search parameter for safe URL usage
     const encodedSearch = encodeURIComponent(search);
 
-    fetch(`http://localhost/civil-registrar/api/death.php?search=${encodedSearch}&status=${status}`)
+    fetch(`http://localhost/group69/api/death.php?search=${encodedSearch}&status=${status}`)
         .then(response => response.json())
         .then(data => {
             if (Array.isArray(data)) {
@@ -116,7 +116,7 @@ document.getElementById('modalConfirmButton').addEventListener('click', () => {
         };
 
         // Send the update request
-        fetch(`http://localhost/civil-registrar/api/death.php`, {
+        fetch(`http://localhost/group69/api/death.php`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -158,7 +158,7 @@ document.getElementById('deleteModalConfirmButton').addEventListener('click', ()
     const employeeId = localStorage.getItem('userId');
 
     // Send the delete request
-    fetch(`http://localhost/civil-registrar/api/death.php`, {
+    fetch(`http://localhost/group69/api/death.php`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -191,7 +191,7 @@ document.getElementById('deleteModalCancelButton').addEventListener('click', () 
 
 function viewdeath(deathId) {
     // Fetch the death registration details
-    fetch(`http://localhost/civil-registrar/api/death.php?id=${deathId}`)
+    fetch(`http://localhost/group69/api/death.php?id=${deathId}`)
         .then(response => response.json())
         .then(data => {
             if (data) {

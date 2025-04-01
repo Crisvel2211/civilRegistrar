@@ -28,7 +28,7 @@ include '../../layout/employee/employeeLayout.php';
 $singleDocumentContent = '';
 
 if ($document) {
-    $imageUrl = "http://localhost/civil-registrar/api/{$document['image']}"; // Use the image path directly
+    $imageUrl = "http://localhost/group69/api/{$document['image']}"; // Use the image path directly
 
     $singleDocumentContent = "
         <div class='container mx-auto w-full h-[88vh] overflow-y-scroll'>
@@ -130,7 +130,7 @@ employeeLayout($singleDocumentContent);
 
     // Submit the form data to the PHP backend
     try {
-        const response = await fetch('http://localhost/civil-registrar/api/verify.php', {
+        const response = await fetch('http://localhost/group69/api/verify.php', {
             method: 'POST',
             body: formData
         });

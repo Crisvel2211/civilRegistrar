@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fetchCounts = () => {
         return Promise.all([
             // Fetch birth count from the API
-            fetch('http://localhost/civil-registrar/api/birth.php?count=true')
+            fetch('http://localhost/group69/api/birth.php?count=true')
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }),
 
             // Fetch marriage count from the API
-            fetch('http://localhost/civil-registrar/api/marriage.php?count=true')
+            fetch('http://localhost/group69/api/marriage.php?count=true')
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }),
 
             // Fetch death count from the API
-            fetch('http://localhost/civil-registrar/api/death.php?count=true')
+            fetch('http://localhost/group69/api/death.php?count=true')
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }),
 
             // Fetch user count from the API
-            fetch('http://localhost/civil-registrar/api/users.php?count=true')
+            fetch('http://localhost/group69/api/users.php?count=true')
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch role-based counts
     const fetchRoleCounts = () => {
-        return fetch('http://localhost/civil-registrar/api/users.php?roleCounts=true')
+        return fetch('http://localhost/group69/api/users.php?roleCounts=true')
             .then(response => response.json())
             .then(data => {
                 const { admin, employee, resident } = data;

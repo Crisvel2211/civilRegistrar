@@ -34,7 +34,9 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 2rem;
             margin-bottom: 2rem;
+            height: 550px;
         }
+        
 
         .card-title {
             color: #191f8a;
@@ -108,40 +110,42 @@
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-extrabold text-gray-800 text-center mb-5">About Us</h2>
                 <p class="text-lg text-gray-600 text-center mb-6">
-                    Discover the Vision, Mission, and Values behind our Civil Registrar Services.
+                    Explore the Comprehensive Services We Offer to Meet Your Civil Registration Needs.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 ">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div class="section-content bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <h3 class="card-title">Our Mission</h3>
                     <p class="card-text">
-                        Our mission is to provide essential civil services with compassion and efficiency. Whether it's registering a birth, marriage, or death, we strive to make the process as smooth and secure as possible.
+                        Our mission is to provide essential civil registration services that support individuals and families through life's major milestones. We make registration for births, marriages, and deaths efficient, secure, and seamless.
                     </p>
                     <p class="card-text">
-                        We are dedicated to supporting individuals and families, ensuring that all legal processes are handled with the utmost respect and professionalism. 
+                        With a focus on customer-centric service, we are committed to simplifying legal documentation processes and ensuring every client’s needs are met with professionalism and care.
                     </p>
                 </div>
 
                 <div class="section-content bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <h3 class="card-title">Our Vision</h3>
                     <p class="card-text">
-                        Our vision is to become the most trusted and accessible civil registration service provider in the region. We aim to create a seamless experience for all individuals navigating legal documentation processes.
+                        Our vision is to be the most reliable and accessible provider of civil registration services, offering both traditional and digital solutions to ensure a smooth experience for our clients.
                     </p>
                     <p class="card-text">
-                        We see a future where technology and excellent customer service are combined to create an accessible, fast, and reliable experience for our users.
+                        We aim to blend technology with customer service to create an accessible, fast, and secure process for all our clients, bringing the future of civil registration to life.
                     </p>
                 </div>
-            </div>
 
-            <div class="section-content bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <h3 class="card-title">Why Choose Us?</h3>
-                <ul class="list-items">
-                    <li>Efficient and secure registration process.</li>
-                    <li>Expert team dedicated to customer satisfaction.</li>
-                    <li>Fully online platform for ease of access.</li>
-                    <li>Transparent and reliable service for every step of your journey.</li>
-                </ul>
+                <div class="section-content bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="card-title">Why Choose Us?</h3>
+                    <ul class="list-items">
+                        <li>Comprehensive Civil Registration Services (Birth, Marriage, Death Certificates).</li>
+                        <li>Easy-to-use, fully online registration platform for convenience.</li>
+                        <li>Secure and transparent processes with real-time status updates.</li>
+                        <li>Expert team committed to providing personalized customer support.</li>
+                        <li>Fast processing times to ensure timely and accurate document issuance.</li>
+                        <li>Seamless integration of digital technologies to enhance service delivery.</li>
+                    </ul>
+                </div>
             </div>
         </section>
 

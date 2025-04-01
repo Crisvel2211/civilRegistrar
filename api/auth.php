@@ -89,7 +89,7 @@ if ($method === 'POST' && isset($_GET['action']) && $_GET['action'] === 'verify_
         $otp = $conn->real_escape_string($data['otp']);
 
         // Automatically delete OTP entries older than 1 minute
-        $conn->query("DELETE FROM pending_users WHERE created_at < NOW() - INTERVAL 1 MINUTE");
+        $conn->query("DELETE FROM pending_users WHERE created_at < NOW() - INTERVAL 2 MINUTE");
 
         // Query to get the user's OTP and its age
         $sql = "SELECT *, TIMESTAMPDIFF(minute, created_at, NOW()) AS otp_age FROM pending_users WHERE email = '$email'";
@@ -102,7 +102,7 @@ if ($method === 'POST' && isset($_GET['action']) && $_GET['action'] === 'verify_
             $user = $result->fetch_assoc();
 
             // Check if the OTP is within the 1-minute limit
-            if ($user['otp_age'] <= 1) {
+            if ($user['otp_age'] <= 2) {
                 if ($otp === $user['otp']) {
                     // Insert the user into the users table
                     $sql_insert = "INSERT INTO users (name, email, password, role, otp) VALUES ('{$user['name']}', '{$user['email']}', '{$user['password']}', '{$user['role']}', '{$user['otp']}')";

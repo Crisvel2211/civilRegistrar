@@ -1,10 +1,25 @@
 <?php
-header('Content-Type: application/json');
-include 'db.php'; // Include your database connection file
+
+header("Access-Control-Allow-Origin: *"); // Allow all origins
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Credentials: true");
+
+// Handle preflight request
+if ($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
+    http_response_code(200);
+    exit();
+}
+
+include 'db.php'; // Include your database connection
+
+
+
+
 
 $method = $_SERVER['REQUEST_METHOD'];
 // Define the base URL for the uploaded images
-$base_url = 'http://localhost/civil-registrar/api/uploads/';
+$base_url = 'http://localhost/group69/api/uploads/';
 
 if ($method === 'GET') {
     // Check for count parameter
@@ -80,55 +95,44 @@ if ($method === 'GET') {
 
 
 if ($method === 'POST') {
-    // Create a new user
     $data = json_decode(file_get_contents('php://input'), true);
-    $name = $conn->real_escape_string($data['name']);
-    $email = $conn->real_escape_string($data['email']);
+
+    if (!isset($data['name'], $data['email'], $data['password'], $data['role'])) {
+        echo json_encode(['error' => 'Invalid input']);
+        exit();
+    }
+
+    $name = trim($conn->real_escape_string($data['name']));
+    $email = trim($conn->real_escape_string($data['email']));
     $password = password_hash($data['password'], PASSWORD_BCRYPT);
-    $role = $conn->real_escape_string($data['role']);
+    $role = trim($conn->real_escape_string($data['role']));
 
-    // Handle file uploads
-    $image = $_FILES['image'] ?? null;
-    $upload_dir = 'uploads/'; // Directory where files will be uploaded
-    $file_path = ''; 
+    $sql_check = "SELECT id FROM users WHERE email = '$email'";
+    $result_check = $conn->query($sql_check);
 
-    // Check and create upload directory if it doesn't exist
-    if (!is_dir($upload_dir)) {
-        mkdir($upload_dir, 0755, true);
+    if (!$result_check) {
+        echo json_encode(['error' => 'Query error: ' . $conn->error]);
+        exit();
     }
 
-    // Check for file upload
-    if ($image && $image['error'] === UPLOAD_ERR_OK) {
-        $file_name = basename($image['name']);
-        $target_file = $upload_dir . uniqid() . '_' . $file_name;
-
-        // Validate file extension
-        $imageFileType = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'webp', 'svg']; // Added pdf support
-
-        if (in_array($imageFileType, $allowed_extensions)) {
-            if (move_uploaded_file($image['tmp_name'], $target_file)) {
-                // If the file is uploaded successfully, set the file path
-                $file_path = $base_url . basename($target_file); // Store the full URL to the image
-            } else {
-                echo json_encode(["error" => "Failed to upload file: $file_name"]);
-                exit;
-            }
-        } else {
-            echo json_encode(["error" => "Invalid file type. Only image and PDF files are allowed."]);
-            exit;
-        }
+    if ($result_check->num_rows > 0) {
+        echo json_encode(['error' => 'Email already exists']);
+        exit();
     }
 
-    // Insert user into the database with userProfile
-    $sql = "INSERT INTO users (name, email, password, role, userProfile) VALUES ('$name', '$email', '$password', '$role', '$file_path')";
-
+    $sql = "INSERT INTO users (name, email, password, role) VALUES ('$name', '$email', '$password', '$role')";
+    
     if ($conn->query($sql) === TRUE) {
-        echo json_encode(['message' => 'User created successfully']);
+        echo json_encode(true); // No message, just a success response
     } else {
-        echo json_encode(['error' => $conn->error]);
+        echo json_encode(['error' => 'Database error: ' . $conn->error]);
     }
+
+    exit();
 }
+
+
+
 
 
 if ($method === 'PUT') {

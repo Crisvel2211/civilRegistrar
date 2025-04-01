@@ -81,7 +81,7 @@ residentLayout($updateProfileContent);
         }
 
         try {
-            const response = await fetch('http://localhost/civil-registrar/api/verification.php', {
+            const response = await fetch('http://localhost/group69/api/verification.php', {
                 method: 'POST',
                 body: formData,
             });

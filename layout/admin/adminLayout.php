@@ -45,7 +45,7 @@ function adminLayout($children) {
                 <div class='border-t-[.01px] border-[#6b7280] w-full '>
 
    <div class='flex flex-col w-[93%] mx-2 mt-6 mb-8' id="sidebar-links">
-    <a href="/civil-registrar/pages/admin/adminDashboard.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href="/group69/pages/admin/adminDashboard.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
@@ -57,7 +57,7 @@ function adminLayout($children) {
         </div>
     </a>
 
-    <a href="/civil-registrar/pages/admin/users.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href="/group69/pages/admin/users.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
@@ -75,7 +75,7 @@ function adminLayout($children) {
             </svg>
         </div>
         <div class='flex justify-between items-center w-full'>
-            <h1 class='font-[500] '>Certificates</h1>
+            <h1 class='font-[500] '>Services</h1>
             <span id="certificate-toggle-icon" class="text-[20px]">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[20px] h-[20px]">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/>
@@ -85,18 +85,18 @@ function adminLayout($children) {
     </a>
 
     <div id="certificate-submenu" class="hidden mt-2  flex-col gap-1 w-[90%] pl-10">
-        <a href='/civil-registrar/pages/admin/birthRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/group69/pages/admin/birthRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Birth Certificate</h1>
         </a>
-        <a href='/civil-registrar/pages/admin/marriageRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/group69/pages/admin/marriageRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Marriage Certificate</h1>
         </a>
-        <a href='/civil-registrar/pages/admin/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/group69/pages/admin/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Death Certificate</h1>
         </a>
     </div>
 
-    <a href='/civil-registrar/pages/admin/announcements.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href='/group69/pages/admin/announcements.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
@@ -107,7 +107,7 @@ function adminLayout($children) {
         </div>
     </a>
 
-    <a href='/civil-registrar/pages/admin/customizeHomepage.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href='/group69/pages/admin/customizeHomepage.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
@@ -176,7 +176,7 @@ function adminLayout($children) {
                                     </div>
                                 </div>
                                   <div class='border-b-[.01px] border-[#e5e8eb]'>
-                                    <a href='/civil-registrar/pages/admin/adminProfile.php' class='hover:bg-gray-900 hover:bg-opacity-[.12] cursor-pointer p-2 my-[4px] w-full flex justify-start items-center gap-4'>
+                                    <a href='/group69/pages/admin/adminProfile.php' class='hover:bg-gray-900 hover:bg-opacity-[.12] cursor-pointer p-2 my-[4px] w-full flex justify-start items-center gap-4'>
                                         <img src='../../images/profile-icon.svg' alt='profile-icon' class='w-[21px] h-[21px] font-semibold cursor-pointer'/>
                                         <p class='text-[14px] font-[400] text-[#324153]'>Profile</p>
                                     </a>
@@ -213,7 +213,7 @@ function adminLayout($children) {
                 <div class='border-t-[.01px] border-[#6b7280] w-full '>
 
    <div class='flex flex-col w-[93%] mx-2 mt-6 mb-8' id="sidebar-link">
-    <a href="/civil-registrar/pages/admin/adminDashboard.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href="/group69/pages/admin/adminDashboard.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
@@ -225,7 +225,7 @@ function adminLayout($children) {
         </div>
     </a>
 
-    <a href="/civil-registrar/pages/admin/users.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href="/group69/pages/admin/users.php" class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
@@ -253,18 +253,18 @@ function adminLayout($children) {
     </a>
 
     <div id="mobilecertificate-submenu" class="hidden mt-2  flex-col gap-1 w-[90%] pl-10">
-        <a href='/civil-registrar/pages/admin/birthRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/group69/pages/admin/birthRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Birth Certificate</h1>
         </a>
-        <a href='/civil-registrar/pages/admin/marriageRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/group69/pages/admin/marriageRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Marriage Certificate</h1>
         </a>
-        <a href='/civil-registrar/pages/admin/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+        <a href='/group69/pages/admin/deathRegistration.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <h1 class='text-[13px] font-[600] pl-[2rem]'>Death Certificate</h1>
         </a>
     </div>
 
-    <a href='/civil-registrar/pages/admin/announcements.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href='/group69/pages/admin/announcements.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
@@ -275,7 +275,7 @@ function adminLayout($children) {
         </div>
     </a>
 
-    <a href='/civil-registrar/pages/admin/customizeHomepage.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+    <a href='/group69/pages/admin/customizeHomepage.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
@@ -326,7 +326,7 @@ function adminLayout($children) {
     function logout() {
         localStorage.clear();
         showToast('You have successfully logged out.', 'success');
-        window.location.href = 'http://localhost/civil-registrar/index.php';
+        window.location.href = 'http://localhost/group69/index.php';
     }
 
          function showToast(message, type) {

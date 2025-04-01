@@ -100,7 +100,7 @@ const fetchmarriageRegistrations = () => {
     // Make sure to encode the search parameter for safe URL usage
     const encodedSearch = encodeURIComponent(search);
 
-    fetch(`http://localhost/civil-registrar/api/marriage.php?search=${encodedSearch}&status=${status}`)
+    fetch(`http://localhost/group69/api/marriage.php?search=${encodedSearch}&status=${status}`)
         .then(response => response.json())
         .then(data => {
             if (Array.isArray(data)) {
@@ -158,7 +158,7 @@ document.getElementById('modalConfirmButton').addEventListener('click', () => {
         };
 
         // Send the update request
-        fetch(`http://localhost/civil-registrar/api/marriage.php`, {
+        fetch(`http://localhost/group69/api/marriage.php`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -236,7 +236,7 @@ document.getElementById('deleteModalConfirmButton').addEventListener('click', ()
     const employeeId = localStorage.getItem('userId');
 
     // Send the delete request
-    fetch(`http://localhost/civil-registrar/api/marriage.php`, {
+    fetch(`http://localhost/group69/api/marriage.php`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -269,7 +269,7 @@ document.getElementById('deleteModalCancelButton').addEventListener('click', () 
 
 function viewmarriage(marriageId) {
     // Fetch the marriage registration details
-    fetch(`http://localhost/civil-registrar/api/marriage.php?id=${marriageId}`)
+    fetch(`http://localhost/group69/api/marriage.php?id=${marriageId}`)
         .then(response => response.json())
         .then(data => {
             if (data) {

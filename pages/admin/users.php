@@ -112,7 +112,7 @@ adminLayout($homeContent);
 
     // Load users from the API
     function loadUsers(search = '', role = '') {
-        const url = `http://localhost/civil-registrar/api/users.php${search || role ? `?${search ? `search=${search}` : ''}${search && role ? '&' : ''}${role ? `role=${role}` : ''}` : ''}`;
+        const url = `http://localhost/group69/api/users.php${search || role ? `?${search ? `search=${search}` : ''}${search && role ? '&' : ''}${role ? `role=${role}` : ''}` : ''}`;
 
         fetch(url, {
             method: 'GET',
@@ -161,30 +161,40 @@ adminLayout($homeContent);
             showToast('Error loading users!', 'error');
         });
     }
-
-    // Add user function
-    function addUser(name, email, password, role) {
-        fetch('http://localhost/civil-registrar/api/users.php', {
+// Add user function using async/await
+async function addUser(name, email, password, role) {
+    try {
+        const response = await fetch('http://localhost/group69/api/users.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ name, email, password, role })
-        })
-        .then(response => response.json())
-        .then(data => {
-            showToast(data.message, 'success');
-            loadUsers();
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            showToast('Added successfully', 'success'); // Notification only once
+            loadUsers(); // Reload the users list dynamically
             document.getElementById('addUserForm').reset();
             document.getElementById('userId').value = '';
             document.getElementById('submitButton').value = 'Add User';
             closeModal();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showToast('Error adding user!', 'error');
-        });
+            setTimeout(() => {
+            window.location.reload();
+        }, 2000);
+        } else {
+            showToast(data.error || 'Error adding user!', 'error');
+        }
+    } catch (error) {
+        showToast('Network error or server is down!', 'error');
     }
+}
+
+
+
+
 
    // Populate the form with user data for editing
 function editUser(id, name, email, role) {
@@ -203,9 +213,8 @@ function editUser(id, name, email, role) {
     openModal();
 }
 
-// Handle form submission (Add/Update User)
 document.getElementById('addUserForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default form submission
 
     const id = document.getElementById('userId').value;
     const name = document.getElementById('userName').value;
@@ -218,14 +227,15 @@ document.getElementById('addUserForm').addEventListener('submit', function(event
     } else {
         addUser(name, email, password, role);
     }
-});
+}, { once: true }); // This ensures the event listener runs only once
+
 
 // Update user function
 function updateUser(id, name, email, password, role) {
     const userRole = localStorage.getItem('role');
     const userId = localStorage.getItem('userId');
 
-    fetch('http://localhost/civil-registrar/api/users.php', {
+    fetch('http://localhost/group69/api/users.php', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -245,7 +255,9 @@ function updateUser(id, name, email, password, role) {
             document.getElementById('addUserForm').reset();
             document.getElementById('userId').value = '';
             document.getElementById('submitButton').value = 'Add User';
-            location.reload();
+            setTimeout(() => {
+            window.location.reload();
+        }, 2000);
         }
     })
     .catch(error => {
@@ -254,43 +266,47 @@ function updateUser(id, name, email, password, role) {
     });
 }
 
-    // Delete user function
-    function deleteUser(id) {
-        fetch('http://localhost/civil-registrar/api/users.php', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id })
-        })
-        .then(response => response.json())
-        .then(data => {
-            showToast(data.message, 'success');
-            loadUsers();
-            closeDeleteModal();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showToast('Error deleting user!', 'error');
-        });
-    }
-
-    // Handle form submission (Add/Update User)
-    document.getElementById('addUserForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const id = document.getElementById('userId').value;
-        const name = document.getElementById('userName').value;
-        const email = document.getElementById('userEmail').value;
-        const password = document.getElementById('userPassword').value;
-        const role = document.getElementById('userRole').value;
-
-        if (id) {
-            updateUser(id, name, email, password, role);
-        } else {
-            addUser(name, email, password, role);
-        }
+function deleteUser(id) {
+    fetch('http://localhost/group69/api/users.php', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id })
+    })
+    .then(response => response.json())
+    .then(data => {
+        showToast(data.message, 'success');
+        loadUsers(); // Reload the users list
+        closeDeleteModal();
+        
+        // Reload the page after a short delay (optional)
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000); // Reload after 1 second
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showToast('Error deleting user!', 'error');
     });
+}
+
+document.getElementById('addUserForm').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const id = document.getElementById('userId').value;
+    const name = document.getElementById('userName').value;
+    const email = document.getElementById('userEmail').value;
+    const password = document.getElementById('userPassword').value;
+    const role = document.getElementById('userRole').value;
+
+    if (id) {
+        updateUser(id, name, email, password, role);
+    } else {
+        addUser(name, email, password, role);
+    }
+});
+
 
     // Open and close modals
     function openModal() {
@@ -298,8 +314,11 @@ function updateUser(id, name, email, password, role) {
     }
 
     function closeModal() {
-        document.getElementById('userModal').classList.add('hidden');
-    }
+    document.getElementById('userModal').classList.add('hidden');
+    document.getElementById('addUserForm').reset(); // Reset the form fields
+    document.getElementById('userId').value = ''; // Reset the user ID field
+    document.getElementById('submitButton').value = 'Add User';
+}
 
     function openDeleteModal() {
         document.getElementById('deleteUserModal').classList.remove('hidden');
