@@ -5,9 +5,15 @@ include '../../layout/admin/adminLayout.php';
 // Define the content for the create announcement page
 $announcementContent = "
 <div class='flex flex-col'>
+       <div class='flex items-center space-x-2 p-4'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M12 8v4m0 4h.01M3 10h18M3 14h18M6 18h12M3 6h18'/>
+            </svg>
+            <h1 class='text-2xl font-bold text-gray-800'>ANNOUNCEMENT</h1>
+        </div>
     <div class='container mx-auto my-10'>
-        <h1 class='text-2xl font-bold mb-5'>Create Announcement</h1>
-        <form id='announcementForm' enctype='multipart/form-data' class='bg-white p-5 rounded shadow-md grid grid-cols-1 md:grid-cols-2 gap-4'>
+
+        <form id='announcementForm' enctype='multipart/form-data' class='bg-white p-5 rounded shadow-md grid grid-cols-1 md:grid-cols-2 gap-4 w-[88%] mx-auto'>
            <input type='hidden' id='userId' name='userId'> <!-- Hidden User ID -->
             <div class='mb-4'>
                 <label for='title' class='block text-sm font-medium text-gray-700'>Title</label>
@@ -34,7 +40,7 @@ $announcementContent = "
             </div>
 
             <div class='col-span-1 md:col-span-2'>
-                <input type='submit' value='Submit Announcement' class='bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 w-full'>
+                <input type='submit' value='Submit Announcement' class='bg-indigo-600 text-white font-bold py-2 px-4 rounded hover:bg-indigo-700 w-full cursor-pointer'>
             </div>
         </form>
     </div>

@@ -5,7 +5,13 @@ include '../../layout/admin/adminLayout.php';
 $updateProfileContent = "
     <div class='bg-gray-300 w-full h-[88vh] overflow-y-scroll'>
         <!-- Main Container -->
-        <div class='container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg relative'>
+         <div class='flex items-center space-x-2 p-4'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M3 12h18M12 5l-3 3m3-3l3 3m0 9H6M9 17h6'/>
+            </svg>
+            <h1 class='text-2xl font-bold text-gray-800'>MARRIAGE RECORDS</h1>
+        </div>
+        <div class='container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg relative w-[88%]'>
         
             <!-- Search and Filter Section -->
             <div class='flex items-center justify-between mb-6'>
@@ -15,7 +21,6 @@ $updateProfileContent = "
                     <option value=''>All</option>
                     <option value='pending'>Pending</option>
                     <option value='processing'>Processing</option>
-                    <option value='verified'>Verified</option>
                     <option value='completed'>Completed</option>
                 </select>
             </div>
@@ -25,7 +30,7 @@ $updateProfileContent = "
                 <table class='w-full table-auto bg-white'>
                     <thead class='bg-gray-200'>
                         <tr>
-                            <th class='px-4 py-2'>ID</th>
+                            <th class='px-4 py-2'>Reference Number</th>
                             <th class='px-4 py-2'>Resident Name</th> 
                             <th class='px-4 py-2'>Status</th>
                             <th class='px-4 py-2'>Employee Assigned</th>
@@ -110,7 +115,7 @@ const fetchmarriageRegistrations = () => {
                 data.forEach(marriage => {
                     const row = `
                         <tr class='border-b border-x border-gray-300'> 
-                            <td class='px-4 py-2 border-r border-gray-300'>${marriage.id}</td>
+                            <td class='px-4 py-2 border-r border-gray-300'>${marriage.reference_number}</td>
                             <td class='px-4 py-2 text-center border-r border-gray-300'>${marriage.user_name}</td> <!-- Display user name here -->
                             <td class='px-4 py-2 text-center border-r border-gray-300'>
                                 <span class='${(marriage.status === "verified" || marriage.status === "completed") ? "bg-green-300 text-green-800" : "bg-yellow-300 text-yellow-800"} text-xs font-medium px-2.5 py-0.5 rounded'>

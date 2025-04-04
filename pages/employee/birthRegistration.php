@@ -5,7 +5,15 @@ include '../../layout/employee/employeeLayout.php';
 $updateProfileContent = "
     <div class='bg-gray-300 w-full h-[88vh] overflow-y-scroll'>
         <!-- Main Container -->
-        <div class='container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg relative'>
+        <div class='flex items-center space-x-2 p-4'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M12 4v7m0 0l3-3m-3 3l-3-3m3 3v10M5 12H3m2 0h12'/>
+            </svg>
+            <h1 class='text-2xl font-bold text-gray-800'>BIRTH RECORDS</h1>
+        </div>
+
+    
+        <div class='container mx-auto p-6 bg-white rounded-lg shadow-lg relative w-[88%] mt-[3rem]'>
         
             <!-- Search and Filter Section -->
             <div class='flex items-center justify-between mb-6'>

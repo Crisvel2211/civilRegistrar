@@ -1,123 +1,304 @@
 <?php
-header("Content-Type: application/json");
-include 'db.php'; // Include database connection
+header("Access-Control-Allow-Origin: *"); // Allow all origins
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Credentials: true");
+
+
+include 'db.php'; // Include your database connection
 
 $method = $_SERVER['REQUEST_METHOD'];
 
+if ($method === 'GET') {
+
+    if (isset($_GET['residentId'])) {
+        $residentId = intval($_GET['residentId']);
+        
+        // SQL query to fetch birth records for the specific resident
+        $sql = "SELECT br.*, u.name AS user_name 
+                FROM permit_requests br
+                JOIN users u ON br.userId = u.id 
+                WHERE br.userId = $residentId";
+
+        $result = $conn->query($sql);
+
+        if ($result) {
+            $birthCertificates = $result->fetch_all(MYSQLI_ASSOC);
+            echo json_encode($birthCertificates);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
+        }
+        exit;
+    }
+
+    // Check for count parameter
+    if (isset($_GET['count']) && $_GET['count'] === 'true') {
+        // Count total users
+        $count_sql = "SELECT COUNT(*) AS total_birth FROM permit_requests";
+        $count_result = $conn->query($count_sql);
+        $total_count = $count_result ? $count_result->fetch_assoc()['total_birth'] : 0;
+
+        echo json_encode(['total' => $total_count]);
+        exit;
+    }
+    // Check if an ID parameter is provided for a single birth registration view
+    if (isset($_GET['id'])) {
+        // Retrieve a single birth registration by ID
+        $id = intval($_GET['id']);
+        
+        // Update the SQL query to join with the users table to get the name
+        $sql = "SELECT br.*, u.name AS user_name 
+                FROM permit_requests br
+                JOIN users u ON br.userId = u.id 
+                WHERE br.id = $id";
+        $result = $conn->query($sql);
+        
+        if ($result && $result->num_rows > 0) {
+            $birthCertificate = $result->fetch_assoc();
+            echo json_encode($birthCertificate);
+        } else {
+            http_response_code(404);
+            echo json_encode(['error' => 'Birth registration not found.']);
+        }
+        exit; // Exit after handling single record request
+    }
+
+    // Get counts of death certificates based on assigned employee
+    if (isset($_GET['get_employee_counts']) && isset($_GET['employee_id'])) {
+        $employeeId = intval($_GET['employee_id']);
+        
+        // SQL query to get the count of death registrations assigned to the employee
+        $sql = "SELECT COUNT(*) AS total_certificates 
+                FROM permit_requests 
+                WHERE employee_id = $employeeId";
+        
+        $result = $conn->query($sql);
+        
+        if ($result) {
+            $data = $result->fetch_assoc();
+            echo json_encode(['total_certificates' => $data['total_certificates']]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
+        }
+        exit; // Exit after handling employee count request
+    }
+    if (isset($_GET['get_resident_counts']) && isset($_GET['userId'])) {
+        $userId = intval($_GET['userId']);
+       
+        
+        // SQL query to get the count of death registrations assigned to the employee
+        $sql = "SELECT COUNT(*) AS total_certificates 
+                FROM permit_requests 
+                WHERE userId = $userId";
+        
+        $result = $conn->query($sql);
+        
+        if ($result) {
+            $data = $result->fetch_assoc();
+            echo json_encode(['total_certificates' => $data['total_certificates']]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
+        }
+        exit; // Exit after handling employee count request
+    }
+
+    // Retrieve birth certificates with optional employee filter and search query
+    $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+    $employeeId = isset($_GET['employee_id']) ? intval($_GET['employee_id']) : null;
+    $status = isset($_GET['status']) ? $conn->real_escape_string($_GET['status']) : '';
+
+    // Update the SQL query to include the join
+    $sql = "SELECT br.*, u.name AS user_name 
+            FROM permit_requests br
+            JOIN users u ON br.userId = u.id 
+            WHERE 1=1";
+
+    // Filter by employee ID if provided
+    if ($employeeId) {
+        $sql .= " AND br.employee_id = $employeeId";
+    }
+
+    if ($search) {
+        $sql .= " AND br.reference_number LIKE '%$search%'";
+    }
+
+    // Filter by status if provided
+    if ($status) {
+        $sql .= " AND br.status = '$status'";
+    }
+
+    $result = $conn->query($sql);
+    if ($result) {
+        $birthCertificates = $result->fetch_all(MYSQLI_ASSOC);
+        echo json_encode($birthCertificates);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
+    }
+}
+
+
+
+
 if ($method === 'POST') {
-    // Create a new permit request
-    $data = json_decode(file_get_contents("php://input"), true);
+    // Create a new birth certificate
+    $data = json_decode(file_get_contents('php://input'), true);
 
-    if (!isset($data['permit_type'], $data['resident_name'], $data['date_of_request'], $data['user_id'], $data['employee_id'])) {
-        echo json_encode(["error" => "Missing required fields"]);
-        exit();
+    $referenceNumber = 'PR-' . strtoupper(uniqid());
+
+    // Define expected fields
+    $fields = [
+        'userId', 'employee_id', 'permit_type', 'resident_name', 'date_of_request', 'additional_details',
+         'status'
+    ];
+
+    // Validate and prepare data
+    $values = [];
+    foreach ($fields as $field) {
+        if ($field === 'status') {
+            $values[] = "pending"; // Default status
+        } elseif (isset($data[$field])) {
+            $values[] = $conn->real_escape_string($data[$field]);
+        } else {
+            http_response_code(400);
+            echo json_encode(['error' => "$field is required."]);
+            exit;
+        }
     }
 
-    // Generate a unique reference number
-    $reference_number = 'PR-' . strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 8));
+    // Add reference number to the values
+    $fields[] = 'reference_number';
+    $values[] = $referenceNumber;
 
-    $permit_type = $data['permit_type'];
-    $resident_name = $data['resident_name'];
-    $date_of_request = $data['date_of_request'];
-    $additional_details = isset($data['additional_details']) ? $data['additional_details'] : '';
-    $user_id = $data['user_id'];
-    $employee_id = $data['employee_id'];
+    // Insert the new record
+    $sql = "INSERT INTO permit_requests (" . implode(', ', $fields) . ", created_at) VALUES ('" . implode("', '", $values) . "', NOW())";
+    
+    if ($conn->query($sql) === TRUE) {
+        $permitId = $conn->insert_id;
 
-    $query = "INSERT INTO permit_requests (reference_number, permit_type, resident_name, date_of_request, additional_details, user_id, employee_id) 
-              VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("sssssii", $reference_number, $permit_type, $resident_name, $date_of_request, $additional_details, $user_id, $employee_id);
-
-    if ($stmt->execute()) {
-        echo json_encode(["message" => "Permit request submitted successfully", "reference_number" => $reference_number]);
+        echo json_encode([
+            'message' => 'Permit registered successfully.',
+            'permitId' => $permitId,
+            'reference_number' => $referenceNumber
+        ]);
     } else {
-        echo json_encode(["error" => "Failed to submit request", "details" => $stmt->error]);
+        http_response_code(500);
+        echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
     }
-
-    $stmt->close();
 }
 
-elseif ($method === 'GET' && isset($_GET['id'])) {
-    // Get a single permit request
-    $id = $_GET['id'];
-    $query = "SELECT * FROM permit_requests WHERE id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
 
-    if ($row = $result->fetch_assoc()) {
-        echo json_encode($row);
+
+
+if ($method === 'PUT') {
+    // Read the JSON input and decode it
+    $data = json_decode(file_get_contents('php://input'), true);
+    
+    if ($data === null) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid JSON input.']);
+        exit;
+    }
+
+    // Check if ID and employee_id are provided
+    $id = isset($data['id']) ? intval($data['id']) : null;
+    $employeeId = isset($data['employee_id']) ? intval($data['employee_id']) : null;
+
+    if ($id === null || $employeeId === null) {
+        http_response_code(400);
+        echo json_encode(['error' => 'ID and employee_id are required.']);
+        exit;
+    }
+
+    // Validate employee_id by checking if it's a valid employee
+    $employeeCheckSql = "SELECT id FROM users WHERE id = $employeeId AND role = 'employee'";
+    $employeeCheckResult = $conn->query($employeeCheckSql);
+
+    if ($employeeCheckResult->num_rows === 0) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid employee_id.']);
+        exit;
+    }
+
+    // Ensure only status is being updated
+    if (isset($data['status'])) {
+        $status = $conn->real_escape_string($data['status']);
+
+        // Construct the SQL UPDATE query
+        $sql = "UPDATE permit_requests SET status = '$status' WHERE id = $id AND employee_id = $employeeId";
+        
+        // Execute the query
+        if ($conn->query($sql) === TRUE) {
+            echo json_encode(['success' => true, 'message' => 'Permit status updated successfully']);
+        } else {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Database query failed: ' . $conn->error]);
+        }
+        
+        
     } else {
-        echo json_encode(["error" => "Permit request not found"]);
+        http_response_code(400);
+        echo json_encode(['error' => 'Status is required for update']);
     }
-
-    $stmt->close();
 }
 
-elseif ($method === 'GET') {
-    // Get all permit requests
-    $query = "SELECT * FROM permit_requests ORDER BY created_at DESC";
-    $result = $conn->query($query);
 
-    $requests = [];
-    while ($row = $result->fetch_assoc()) {
-        $requests[] = $row;
-    }
 
-    echo json_encode($requests);
-}
 
-elseif ($method === 'PUT' && isset($_GET['id'])) {
-    // Update a permit request
-    $id = $_GET['id'];
-    $data = json_decode(file_get_contents("php://input"), true);
 
-    if (!isset($data['permit_type'], $data['resident_name'], $data['date_of_request'], $data['user_id'], $data['employee_id'])) {
-        echo json_encode(["error" => "Missing required fields"]);
-        exit();
-    }
 
-    $permit_type = $data['permit_type'];
-    $resident_name = $data['resident_name'];
-    $date_of_request = $data['date_of_request'];
-    $additional_details = isset($data['additional_details']) ? $data['additional_details'] : '';
-    $user_id = $data['user_id'];
-    $employee_id = $data['employee_id'];
+if ($method === 'DELETE') {
+    // Get the Content-Type header
+    $contentType = isset($_SERVER['CONTENT_TYPE']) ? trim($_SERVER['CONTENT_TYPE']) : '';
 
-    $query = "UPDATE permit_requests SET permit_type=?, resident_name=?, date_of_request=?, additional_details=?, user_id=?, employee_id=? WHERE id=?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssssiii", $permit_type, $resident_name, $date_of_request, $additional_details, $user_id, $employee_id, $id);
-
-    if ($stmt->execute()) {
-        echo json_encode(["message" => "Permit request updated successfully"]);
+    // Parse input based on Content-Type
+    if ($contentType === 'application/json') {
+        $data = json_decode(file_get_contents('php://input'), true);
     } else {
-        echo json_encode(["error" => "Failed to update request"]);
+        parse_str(file_get_contents('php://input'), $data);
     }
 
-    $stmt->close();
-}
+    if ($data === null) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid input.']);
+        exit;
+    }
 
-elseif ($method === 'DELETE' && isset($_GET['id'])) {
-    // Delete a permit request
-    $id = $_GET['id'];
-    $query = "DELETE FROM permit_requests WHERE id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $id);
+    // Ensure ID and employee_id are provided
+    $id = isset($data['id']) ? intval($data['id']) : null;
+    $employeeId = isset($data['employee_id']) ? intval($data['employee_id']) : null;
 
-    if ($stmt->execute()) {
-        echo json_encode(["message" => "Permit request deleted successfully"]);
+    if ($id === null || $employeeId === null) {
+        http_response_code(400);
+        echo json_encode(['error' => 'ID and employee_id are required.']);
+        exit;
+    }
+
+    // Validate employee_id by checking if it's a valid employee
+    $employeeCheckSql = "SELECT id FROM users WHERE id = $employeeId AND role = 'employee'";
+    $employeeCheckResult = $conn->query($employeeCheckSql);
+
+    if ($employeeCheckResult->num_rows === 0) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid employee_id.']);
+        exit;
+    }
+
+    // Prepare and execute the DELETE query
+    $sql = "DELETE FROM permit_requests WHERE id = $id AND employee_id = $employeeId";
+
+    if ($conn->query($sql) === TRUE) {
+        echo json_encode(['message' => 'Permit Requests deleted successfully.']);
     } else {
-        echo json_encode(["error" => "Failed to delete request"]);
+        http_response_code(500);
+        echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
     }
-
-    $stmt->close();
 }
 
-else {
-    echo json_encode(["error" => "Invalid request method"]);
-}
 
-$conn->close();
+
+
 ?>

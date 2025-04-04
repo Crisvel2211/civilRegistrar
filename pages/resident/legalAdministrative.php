@@ -5,10 +5,13 @@ include '../../layout/resident/residentLayout.php';
 $updateProfileContent = "
     <div class='container mx-auto w-full md:mt-1 px-[8px] h-[88vh] overflow-y-scroll'>
         <div class='container mx-auto p-6'>
-            <div class='mb-8'>
-                <h1 class='text-3xl font-bold text-center text-gray-500'>Legal and Administrative Form</h1>
-            </div>
-            <form id='legalForm' action='#' method='POST' class='grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-6 rounded-lg shadow-md'>
+             <div class='flex items-center space-x-2 p-4 -ml-7 -mt-6 mb-5'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M12 8v4m0 4h.01M6 8l6 6 6-6'/>
+            </svg>
+            <h1 class='text-2xl font-bold text-gray-800'>LEGAL AND ADMINISTRATIVE</h1>
+        </div class='w-full mx-auto mt-8'>
+            <form id='legalForm' class='grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-6 rounded-lg shadow-md w-[88%] mx-auto'>
                 <div class='mb-4'>
                     <label for='service_name' class='block text-sm font-medium text-gray-700'>Service Name</label>
                     <select id='service_name' name='service_name' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
@@ -47,8 +50,8 @@ $updateProfileContent = "
                 </div>
 
                <div class='mb-4 hidden'>
-                    <label for='user_id' class='block text-sm font-medium text-gray-700'>User ID</label>
-                    <input type='number' id='user_id' name='user_id' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
+                    <label for='userId' class='block text-sm font-medium text-gray-700'>User ID</label>
+                    <input type='number' id='userId' name='userId' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
                 </div>
 
 
@@ -90,9 +93,9 @@ residentLayout($updateProfileContent);
         const submitButton = this.querySelector('button[type="submit"]');
 
         // Retrieve user ID from local storage
-        const user_id = localStorage.getItem('userId');
-        if (user_id) {
-            data.user_id = user_id; // Set userId in the data object
+        const userId = localStorage.getItem('userId');
+        if (userId) {
+            data.userId = userId; // Set userId in the data object
         } else {
             showToast('User ID is not found in local storage.', 'error');
             return; // Stop the form submission if userId is not found
@@ -128,6 +131,9 @@ residentLayout($updateProfileContent);
             if (response.ok) {
                 showToast('Success: ' + result.message, 'success'); // Success toast
                 this.reset(); // Clear the form
+                setTimeout(() => {
+                    redirectToCheckout();
+              }, 2000);
             } else {
                 showToast('Error: ' + result.error, 'error'); // Error toast
             }
@@ -137,6 +143,32 @@ residentLayout($updateProfileContent);
             submitButton.disabled = false; // Re-enable the button in all cases
         }
     });
+
+    function redirectToCheckout() {
+        const customerData = {
+            name: localStorage.getItem("name") || "Default Name",
+            email: localStorage.getItem("email") || "default@example.com"
+        };
+
+        fetch("http://localhost/group69/api/legalPaymentApi.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(customerData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.checkout_url) {
+                window.location.href = data.checkout_url; // Redirect to PayMongo checkout
+            } else {
+                console.error("Error:", data.error);
+                showToast('Payment initialization failed!', 'error');
+            }
+        })
+        .catch(error => {
+            console.error("Fetch error:", error);
+            showToast('Network error while processing payment.', 'error');
+        });
+    }
 
     const selectElement = document.getElementById('employee');
 

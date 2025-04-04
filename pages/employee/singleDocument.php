@@ -32,9 +32,15 @@ if ($document) {
 
     $singleDocumentContent = "
         <div class='container mx-auto w-full h-[88vh] overflow-y-scroll'>
-            <h1 class='text-2xl font-bold mb-4'>{$document['full_name']} Verification </h1>
-            <div class='grid grid-cols-1 md:grid-cols-2 place-items-center'>
-                <div class='bg-green-300 p-2 rounded-sm'>
+            <div class='flex items-center space-x-2 p-4'>
+                <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+                    <path stroke-linecap='round' stroke-linejoin='round' d='M7 8V3a2 2 0 012-2h6a2 2 0 012 2v5m-4 4h4m-5 0h-3a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2v-6a2 2 0 00-2-2H9z'/>
+                </svg> 
+                <h1 class='text-2xl font-bold text-gray-800'>VERIFYING SUPPORTING DOCUMENTS</h1>
+            </div>
+
+            <div class='grid grid-cols-1 md:grid-cols-2 place-items-center w-[88%] mx-auto mt-5'>
+                <div class='bg-green-400 p-2 rounded-sm'>
                     <img src='{$imageUrl}' alt='Verification Document' class='w-full h-64 fill rounded-md mb-4'>
                     <p class='text-gray-700'>User ID: <span class='font-medium'>{$document['user_id']}</span></p>
                     <p class='text-gray-700'>Date of Birth: <span class='font-medium'>{$document['date_of_birth']}</span></p>
@@ -54,7 +60,7 @@ if ($document) {
                                     <input type='file' name='image' id='image' accept='image/*' required class='hidden'>
                                 </div>
                             </div>
-                            <button type='submit' class='w-full bg-blue-600 text-white py-2 rounded-md'>Verify Identify</button>
+                            <button type='submit' class='w-full bg-indigo-600 text-white py-2 rounded-md'>Verify Identify</button>
                         </form>
                         <!-- Output area for verification result -->
                         <div class='mt-6 p-4 bg-gray-50 rounded-md' id='verification-result'></div>
@@ -121,12 +127,23 @@ employeeLayout($singleDocumentContent);
             }
         }
 
-        form.onsubmit = async (e) => {
+form.onsubmit = async (e) => {
     e.preventDefault();
+
+
+        
     const formData = new FormData(form);
 
-    // Clear previous result
-    resultDiv.textContent = 'Verifying document...';
+    // Show spinner while verifying
+    resultDiv.innerHTML = `
+        <div class="flex items-center space-x-2">
+            <svg class='animate-spin h-6 w-6 text-blue-500' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
+                <circle class='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'></circle>
+                <path class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8v8H4z'></path>
+            </svg>
+            <p class="text-gray-700">Verifying document...</p>
+        </div>
+    `;
 
     // Submit the form data to the PHP backend
     try {
@@ -136,20 +153,24 @@ employeeLayout($singleDocumentContent);
         });
 
         const result = await response.json();
+        
+        // Remove spinner and show result
         if (result.success) {
-            resultDiv.innerHTML = `<p class="text-green-600">Verification successful: ${result.message}</p>`;
+                    // Auto reload the page after 5 seconds
+                setTimeout(() => {
+                    
+                    resultDiv.innerHTML = `<p class="text-green-600">Verification successful: ${result.message}</p>`;
+                }, 7000);
+            
         } else {
             resultDiv.innerHTML = `<p class="text-red-600">Error: ${result.message}</p>`;
         }
 
-        // Auto reload the page after 5 seconds
-        setTimeout(() => {
-            location.reload();
-        }, 5000); // 5000 milliseconds = 5 seconds
+        
 
     } catch (error) {
         resultDiv.innerHTML = `<p class="text-red-600">Error: ${error.message}</p>`;
-        
+
         // Auto reload the page after 5 seconds, even on error
         setTimeout(() => {
             location.reload();
@@ -157,5 +178,6 @@ employeeLayout($singleDocumentContent);
     }
 };
 
-    });
+
+});
 </script>

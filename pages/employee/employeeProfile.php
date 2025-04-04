@@ -5,25 +5,34 @@ include '../../layout/employee/employeeLayout.php';
 // Define the content for the update profile page
 $updateProfileContent = "
  <div class='flex flex-col'>
+        <div class='flex items-center space-x-2 p-4'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M12 11c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-4 0-7 2-7 4v2h14v-2c0-2-3-4-7-4z'/>
+            </svg>
+            <h1 class='text-2xl font-bold text-gray-800'>PROFILE</h1>
+        </div>
     <div class='container mx-auto my-10'>
-        <div class='bg-white p-6 rounded-lg shadow-lg'>
+        <div class='bg-white p-6 rounded-lg shadow-lg mx-auto w-[88%]'>
             <h2 class='text-2xl mb-4'>Update Profile</h2>
-            <form id='updateProfileForm' class='space-y-4'>
+            <form id='updateProfileForm' class='grid grid-cols-2 gap-4'>
                 <div>
+                   <label for='userName' class='block text-gray-700 font-medium'>Name</label>
                     <input type='text' id='userName' placeholder='Name' class='w-full p-2 border border-gray-300 rounded' required>
                 </div>
                 <div>
+                  <label for='userEmail' class='block text-gray-700 font-medium'>Email</label>
                     <input type='text' id='userEmail' placeholder='Email' class='w-full p-2 border border-gray-300 rounded' required>
                 </div>
                 <div>
+                   <label for='userPassword' class='block text-gray-700 font-medium'>New Password (optional)</label>
                     <input type='password' id='userPassword' class='w-full p-2 border border-gray-300 rounded' placeholder='New Password (optional)'>
                 </div>
                 <div>
-                    <label class='block text-gray-700'>Role:</label>
+                    <label for='userRole' class='block text-gray-700 font-medium'>Role</label>
                     <p id='userRole' class='w-full p-2 border border-gray-300 rounded bg-gray-100' readonly></p>
                 </div>
                 <div>
-                    <input type='submit' value='Update Profile' id='submitButton' class='bg-gray-800 text-white px-4 py-2 rounded cursor-pointer hover:bg-gray-700'>
+                    <input type='submit' value='Update Profile' id='submitButton' class='bg-indigo-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-indigo-700'>
                 </div>
             </form>
         </div>

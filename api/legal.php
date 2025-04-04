@@ -1,216 +1,306 @@
 <?php
-header('Content-Type: application/json');
-require 'db.php';  // Assumes $conn is set up here
+header("Access-Control-Allow-Origin: *"); // Allow all origins
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Credentials: true");
+
+
+include 'db.php'; // Include your database connection
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-switch ($method) {
-    // GET - Retrieve one or all records
-    case 'GET':
-        if (isset($_GET['id'])) {
-            // Get a single record by id
-            $id = intval($_GET['id']);
-            $stmt = $conn->prepare("SELECT * FROM legal_admin_services WHERE id = ?");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if ($result->num_rows > 0) {
-                echo json_encode($result->fetch_assoc());
-            } else {
-                echo json_encode(['message' => 'Record not found']);
-            }
-            $stmt->close();
-        } else {
-            // Get all records
-            $result = $conn->query("SELECT * FROM legal_admin_services");
-            $records = [];
-            while ($row = $result->fetch_assoc()) {
-                $records[] = $row;
-            }
-            echo json_encode($records);
-        }
-        break;
+if ($method === 'GET') {
 
-    // POST - Create a new record
-    case 'POST':
-        // Read JSON input
-        $data = json_decode(file_get_contents("php://input"), true);
+    if (isset($_GET['residentId'])) {
+        $residentId = intval($_GET['residentId']);
         
-        // Check required fields; now also require user_id
-        if (
-            empty($data['service_name']) ||
-            empty($data['applicant_name']) ||
-            empty($data['applicant_contact']) ||
-            empty($data['applicant_address']) ||
-            empty($data['reason_for_change']) ||
-            empty($data['reference_number']) ||
-            empty($data['user_id'])
-        ) {
-            echo json_encode([
-                'success' => false,
-                'message' => 'Missing required fields.'
-            ]);
-            exit;
-        }
+        // SQL query to fetch birth records for the specific resident
+        $sql = "SELECT br.*, u.name AS user_name 
+                FROM legal_admin_services br
+                JOIN users u ON br.userId = u.id 
+                WHERE br.userId = $residentId";
 
-        // Generate a unique case_reference_no
-        $case_reference_no = 'CASE-' . strtoupper(uniqid());
+        $result = $conn->query($sql);
 
-        $service_name      = $data['service_name'];
-        $applicant_name    = $data['applicant_name'];
-        $applicant_contact = $data['applicant_contact'];
-        $applicant_address = $data['applicant_address'];
-        $reason_for_change = $data['reason_for_change'];
-        $reference_number  = $data['reference_number'];
-        $user_id           = $data['user_id'];
-        $employee_id       = isset($data['employee_id']) ? $data['employee_id'] : null;  // Optional
-
-        $stmt = $conn->prepare("INSERT INTO legal_admin_services (case_reference_no, service_name, applicant_name, applicant_contact, applicant_address, reason_for_change, reference_number, user_id, employee_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        // Use "ssssssiii" if employee_id is integer and may be null (using "i" for both user_id and employee_id)
-        $stmt->bind_param("sssssssii", $case_reference_no, $service_name, $applicant_name, $applicant_contact, $applicant_address, $reason_for_change, $reference_number, $user_id, $employee_id);
-
-        if ($stmt->execute()) {
-            echo json_encode([
-                'success' => true,
-                'message' => 'Record created successfully.',
-                'case_reference_no' => $case_reference_no
-            ]);
+        if ($result) {
+            $birthCertificates = $result->fetch_all(MYSQLI_ASSOC);
+            echo json_encode($birthCertificates);
         } else {
-            echo json_encode([
-                'success' => false,
-                'message' => 'Failed to create record.',
-                'error'   => $stmt->error
-            ]);
+            http_response_code(500);
+            echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
         }
-        $stmt->close();
-        break;
+        exit;
+    }
 
-    // PUT - Update an existing record
-    case 'PUT':
-        if (!isset($_GET['id'])) {
-            echo json_encode([
-                'success' => false,
-                'message' => 'ID is required for updating a record.'
-            ]);
-            exit;
-        }
+    // Check for count parameter
+    if (isset($_GET['count']) && $_GET['count'] === 'true') {
+        // Count total users
+        $count_sql = "SELECT COUNT(*) AS total_birth FROM legal_admin_services";
+        $count_result = $conn->query($count_sql);
+        $total_count = $count_result ? $count_result->fetch_assoc()['total_birth'] : 0;
 
+        echo json_encode(['total' => $total_count]);
+        exit;
+    }
+    // Check if an ID parameter is provided for a single birth registration view
+    if (isset($_GET['id'])) {
+        // Retrieve a single birth registration by ID
         $id = intval($_GET['id']);
-        $data = json_decode(file_get_contents("php://input"), true);
-
-        // Build dynamic update query based on provided fields
-        $fields = [];
-        $params = [];
-        $types  = "";
-
-        if (isset($data['service_name'])) {
-            $fields[] = "service_name = ?";
-            $params[] = $data['service_name'];
-            $types   .= "s";
-        }
-        if (isset($data['applicant_name'])) {
-            $fields[] = "applicant_name = ?";
-            $params[] = $data['applicant_name'];
-            $types   .= "s";
-        }
-        if (isset($data['applicant_contact'])) {
-            $fields[] = "applicant_contact = ?";
-            $params[] = $data['applicant_contact'];
-            $types   .= "s";
-        }
-        if (isset($data['applicant_address'])) {
-            $fields[] = "applicant_address = ?";
-            $params[] = $data['applicant_address'];
-            $types   .= "s";
-        }
-        if (isset($data['reason_for_change'])) {
-            $fields[] = "reason_for_change = ?";
-            $params[] = $data['reason_for_change'];
-            $types   .= "s";
-        }
-        if (isset($data['reference_number'])) {
-            $fields[] = "reference_number = ?";
-            $params[] = $data['reference_number'];
-            $types   .= "s";
-        }
-        if (isset($data['status'])) {
-            $fields[] = "status = ?";
-            $params[] = $data['status'];
-            $types   .= "s";
-        }
-        if (isset($data['user_id'])) {
-            $fields[] = "user_id = ?";
-            $params[] = $data['user_id'];
-            $types   .= "i";
-        }
-        if (isset($data['employee_id'])) {
-            $fields[] = "employee_id = ?";
-            $params[] = $data['employee_id'];
-            $types   .= "i";
-        }
-
-        if (empty($fields)) {
-            echo json_encode([
-                'success' => false,
-                'message' => 'No fields provided for update.'
-            ]);
-            exit;
-        }
-
-        $query = "UPDATE legal_admin_services SET " . implode(", ", $fields) . " WHERE id = ?";
-        $params[] = $id;
-        $types   .= "i";
-
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param($types, ...$params);
         
-        if ($stmt->execute()) {
-            echo json_encode([
-                'success' => true,
-                'message' => 'Record updated successfully.'
-            ]);
+        // Update the SQL query to join with the users table to get the name
+        $sql = "SELECT br.*, u.name AS user_name 
+                FROM legal_admin_services br
+                JOIN users u ON br.userId = u.id 
+                WHERE br.id = $id";
+        $result = $conn->query($sql);
+        
+        if ($result && $result->num_rows > 0) {
+            $birthCertificate = $result->fetch_assoc();
+            echo json_encode($birthCertificate);
         } else {
-            echo json_encode([
-                'success' => false,
-                'message' => 'Failed to update record.',
-                'error'   => $stmt->error
-            ]);
+            http_response_code(404);
+            echo json_encode(['error' => 'Birth registration not found.']);
         }
-        $stmt->close();
-        break;
+        exit; // Exit after handling single record request
+    }
 
-    // DELETE - Remove a record
-    case 'DELETE':
-        if (!isset($_GET['id'])) {
-            echo json_encode([
-                'success' => false,
-                'message' => 'ID is required for deletion.'
-            ]);
-            exit;
-        }
-        $id = intval($_GET['id']);
-        $stmt = $conn->prepare("DELETE FROM legal_admin_services WHERE id = ?");
-        $stmt->bind_param("i", $id);
-        if ($stmt->execute()) {
-            echo json_encode([
-                'success' => true,
-                'message' => 'Record deleted successfully.'
-            ]);
+    // Get counts of death certificates based on assigned employee
+    if (isset($_GET['get_employee_counts']) && isset($_GET['employee_id'])) {
+        $employeeId = intval($_GET['employee_id']);
+        
+        // SQL query to get the count of death registrations assigned to the employee
+        $sql = "SELECT COUNT(*) AS total_certificates 
+                FROM legal_admin_services 
+                WHERE employee_id = $employeeId";
+        
+        $result = $conn->query($sql);
+        
+        if ($result) {
+            $data = $result->fetch_assoc();
+            echo json_encode(['total_certificates' => $data['total_certificates']]);
         } else {
-            echo json_encode([
-                'success' => false,
-                'message' => 'Failed to delete record.',
-                'error'   => $stmt->error
-            ]);
+            http_response_code(500);
+            echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
         }
-        $stmt->close();
-        break;
+        exit; // Exit after handling employee count request
+    }
 
-    default:
-        echo json_encode([
-            'success' => false,
-            'message' => 'Invalid request method.'
-        ]);
-        break;
+    if (isset($_GET['get_resident_counts']) && isset($_GET['userId'])) {
+        $userId = intval($_GET['userId']);
+        
+        // SQL query to get the count of death registrations assigned to the employee
+        $sql = "SELECT COUNT(*) AS total_certificates 
+                FROM legal_admin_services 
+                WHERE userId = $userId";
+        
+        $result = $conn->query($sql);
+        
+        if ($result) {
+            $data = $result->fetch_assoc();
+            echo json_encode(['total_certificates' => $data['total_certificates']]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
+        }
+        exit; // Exit after handling employee count request
+    }
+
+    // Retrieve birth certificates with optional employee filter and search query
+    $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+    $employeeId = isset($_GET['employee_id']) ? intval($_GET['employee_id']) : null;
+    $status = isset($_GET['status']) ? $conn->real_escape_string($_GET['status']) : '';
+
+    // Update the SQL query to include the join
+    $sql = "SELECT br.*, u.name AS user_name 
+            FROM legal_admin_services br
+            JOIN users u ON br.userId = u.id 
+            WHERE 1=1";
+
+    // Filter by employee ID if provided
+    if ($employeeId) {
+        $sql .= " AND br.employee_id = $employeeId";
+    }
+
+    if ($search) {
+        $sql .= " AND br.reference_number LIKE '%$search%'";
+    }
+
+    // Filter by status if provided
+    if ($status) {
+        $sql .= " AND br.status = '$status'";
+    }
+
+    $result = $conn->query($sql);
+    if ($result) {
+        $birthCertificates = $result->fetch_all(MYSQLI_ASSOC);
+        echo json_encode($birthCertificates);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
+    }
 }
+
+
+
+
+if ($method === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    $case_reference_no = 'CASE-' . strtoupper(uniqid());
+
+    // Define expected fields
+    $fields = [
+        'userId', 'employee_id', 'service_name', 'applicant_name',
+        'applicant_contact', 'applicant_address', 'reason_for_change',
+        'reference_number', 'status'
+    ];
+
+    // Validate and prepare data
+    $values = [];
+    foreach ($fields as $field) {
+        if ($field === 'status') {
+            $values[] = "pending"; // Default status
+        } elseif (isset($data[$field]) && trim($data[$field]) !== '') {
+            $values[] = $conn->real_escape_string($data[$field]);
+        } else {
+            http_response_code(400);
+            echo json_encode(['error' => "$field is required and cannot be empty."]);
+            exit;
+        }
+    }
+
+    // Add the case_reference_no to the fields and values
+    $fields[] = 'case_reference_no';
+    $values[] = $conn->real_escape_string($case_reference_no);
+
+    // Insert the new record
+    $sql = "INSERT INTO legal_admin_services (" . implode(', ', $fields) . ", created_at) 
+            VALUES ('" . implode("', '", $values) . "', NOW())";
+
+    if ($conn->query($sql) === TRUE) {
+        $legalId = $conn->insert_id;
+
+        echo json_encode([
+            'message' => 'Legal registered successfully.',
+            'legalId' => $legalId,
+            'case_reference_no' => $case_reference_no
+        ]);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
+    }
+}
+
+
+
+
+
+if ($method === 'PUT') {
+    // Read the JSON input and decode it
+    $data = json_decode(file_get_contents('php://input'), true);
+    
+    if ($data === null) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid JSON input.']);
+        exit;
+    }
+
+    // Check if ID and employee_id are provided
+    $id = isset($data['id']) ? intval($data['id']) : null;
+    $employeeId = isset($data['employee_id']) ? intval($data['employee_id']) : null;
+
+    if ($id === null || $employeeId === null) {
+        http_response_code(400);
+        echo json_encode(['error' => 'ID and employee_id are required.']);
+        exit;
+    }
+
+    // Validate employee_id by checking if it's a valid employee
+    $employeeCheckSql = "SELECT id FROM users WHERE id = $employeeId AND role = 'employee'";
+    $employeeCheckResult = $conn->query($employeeCheckSql);
+
+    if ($employeeCheckResult->num_rows === 0) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid employee_id.']);
+        exit;
+    }
+
+    // Ensure only status is being updated
+    if (isset($data['status'])) {
+        $status = $conn->real_escape_string($data['status']);
+
+        // Construct the SQL UPDATE query
+        $sql = "UPDATE legal_admin_services SET status = '$status' WHERE id = $id AND employee_id = $employeeId";
+        
+        // Execute the query
+        if ($conn->query($sql) === TRUE) {
+            echo json_encode(['success' => true, 'message' => 'Status updated successfully']);
+        } else {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Database query failed: ' . $conn->error]);
+        }
+        
+        
+    } else {
+        http_response_code(400);
+        echo json_encode(['error' => 'Status is required for update']);
+    }
+}
+
+
+
+
+
+
+if ($method === 'DELETE') {
+    // Get the Content-Type header
+    $contentType = isset($_SERVER['CONTENT_TYPE']) ? trim($_SERVER['CONTENT_TYPE']) : '';
+
+    // Parse input based on Content-Type
+    if ($contentType === 'application/json') {
+        $data = json_decode(file_get_contents('php://input'), true);
+    } else {
+        parse_str(file_get_contents('php://input'), $data);
+    }
+
+    if ($data === null) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid input.']);
+        exit;
+    }
+
+    // Ensure ID and employee_id are provided
+    $id = isset($data['id']) ? intval($data['id']) : null;
+    $employeeId = isset($data['employee_id']) ? intval($data['employee_id']) : null;
+
+    if ($id === null || $employeeId === null) {
+        http_response_code(400);
+        echo json_encode(['error' => 'ID and employee_id are required.']);
+        exit;
+    }
+
+    // Validate employee_id by checking if it's a valid employee
+    $employeeCheckSql = "SELECT id FROM users WHERE id = $employeeId AND role = 'employee'";
+    $employeeCheckResult = $conn->query($employeeCheckSql);
+
+    if ($employeeCheckResult->num_rows === 0) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid employee_id.']);
+        exit;
+    }
+
+    // Prepare and execute the DELETE query
+    $sql = "DELETE FROM legal_admin_services WHERE id = $id AND employee_id = $employeeId";
+
+    if ($conn->query($sql) === TRUE) {
+        echo json_encode(['message' => 'Deleted successfully.']);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
+    }
+}
+
+
+
+
 ?>

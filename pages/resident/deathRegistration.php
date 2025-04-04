@@ -5,10 +5,13 @@ include '../../layout/resident/residentLayout.php';
 // Define the content for the death registration form
 $deathContent = "
     <div class='bg-gray-300 w-full h-[88vh] overflow-y-scroll'>
-        <div class='pt-2 mb-3'>
-            <h1 class='text-center font-bold text-[23px]'>DEATH REGISTRATION FORM</h1>
+        <div class='flex items-center space-x-2 p-4'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M12 8v4m0 4h.01M6 9h12M6 15h12M6 12h12'/>
+            </svg>
+            <h1 class='text-2xl font-bold text-gray-800'>DEATH RECORDS</h1>
         </div>
-        <div class='m-4 bg-white p-4 rounded-[8px]'>
+        <div class='m-4 bg-white p-4 rounded-[8px] w-[88%] mx-auto'>
             <form class='grid grid-cols-1 md:grid-cols-3 gap-2 w-full' id='deathCertificateForm'>
            
               <!-- Hidden Input for userId -->
@@ -31,7 +34,7 @@ $deathContent = "
                 <div class='col-span-3 md:col-span-1 w-full'>
                   <label class='text-[12.5px]'>Deceased's Middle Name</label>
                   <div class='col-span-3 md:col-span-1'>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='deceased_middle_name'/>
+                    <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='deceased_middle_name'/>
                   </div>
                 </div>
 
@@ -39,7 +42,7 @@ $deathContent = "
                 <div class='col-span-3 md:col-span-1 w-full'>
                    <label class='text-[12.5px]'>Deceased's Last Name</label>
                    <div class='col-span-3 md:col-span-1'>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='deceased_last_name' />
+                    <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='deceased_last_name' />
                    </div>
                 </div>
 
@@ -47,7 +50,7 @@ $deathContent = "
                  <label class='text-[12.5px]'>Date of Birth</label>
                   <div class='col-span-3 md:col-span-1'>
                    
-                    <input type='date' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='deceased_dob' />
+                    <input type='date' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='deceased_dob' />
                   </div>
                 </div>
 
@@ -55,7 +58,7 @@ $deathContent = "
                  <label class='text-[12.5px]'>Date of Death</label>
                     <div class='col-span-3 md:col-span-1'>
                        
-                        <input type='date' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='date_of_death' />
+                        <input type='date' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='date_of_death' />
                     </div>
                 
                 </div>
@@ -64,7 +67,7 @@ $deathContent = "
                  <label class='text-[12.5px]'>Place of Death</label>
                     <div class='col-span-3 md:col-span-1'>
                        
-                        <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='place_of_death' />
+                        <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='place_of_death' />
                     </div>
                 </div>
                 
@@ -73,7 +76,7 @@ $deathContent = "
                 <label class='text-[12.5px]'>Cause of Death</label>
                     <div class='col-span-3 md:col-span-1'>
                         
-                        <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='cause_of_death' />
+                        <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='cause_of_death' />
                     </div>
                 </div>
 
@@ -87,7 +90,7 @@ $deathContent = "
                  <label class='text-[12.5px]'>Informant's Name</label>
                     <div class='col-span-3 md:col-span-1'>
                        
-                        <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='informant_name' />
+                        <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='informant_name' />
                     </div>
                 </div>
 
@@ -95,7 +98,7 @@ $deathContent = "
                  <label class='text-[12.5px]'>Relationship to Deceased</label>
                     <div class='col-span-3 md:col-span-1'>
                        
-                        <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='relationship_to_deceased' />
+                        <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='relationship_to_deceased' />
                     </div>
                 </div>
 
@@ -103,7 +106,7 @@ $deathContent = "
                 <label class='text-[12.5px]'>Informant's Contact Number</label>
                     <div class='col-span-3 md:col-span-1'>
                         
-                        <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='informant_contact' />
+                        <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='informant_contact' />
                     </div>
                 </div>
 
@@ -117,7 +120,7 @@ $deathContent = "
                 <label class='text-[12.5px]'>Method of Disposition</label>
                     <div class='col-span-3 md:col-span-1'>
                         
-                        <select name='disposition_method' class='outline-none border border-gray-700 p-1 rounded-md w-full' >
+                        <select name='disposition_method' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' >
                             <option value='Burial'>Burial</option>
                             <option value='Cremation'>Cremation</option>
                         </select>
@@ -129,7 +132,7 @@ $deathContent = "
                 <label class='text-[12.5px]'>Date of Disposition</label>
                 <div class='col-span-3 md:col-span-1'>
                     
-                    <input type='date' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='disposition_date' />
+                    <input type='date' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='disposition_date' />
                 </div>
                 </div>
 
@@ -137,7 +140,7 @@ $deathContent = "
                 <label class='text-[12.5px]'>Location of Disposition</label>
                     <div class='col-span-3 md:col-span-1'>
                         
-                        <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='disposition_location' />
+                        <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='disposition_location' />
                     </div>
 
                 </div>
@@ -155,7 +158,7 @@ $deathContent = "
                  <div class='col-span-3 md:col-span-1 w-full'>
                  <label for='employee' class='text-[12.5px]'>Select Employee</label>
                     <div class='col-span-3 md:col-span-1'>
-                        <select name='employee_id' id='employee' class='outline-none border border-gray-700 p-1 rounded-md w-full'>
+                        <select name='employee_id' id='employee' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
                             <option value=''>Select an Employee</option>
                             <!-- Dynamic employee options will be inserted here -->
                         </select>
@@ -164,7 +167,7 @@ $deathContent = "
 
                  <!-- Submit Button -->
                 <div class='col-span-3 flex justify-center mt-2'>
-                    <button type='submit' class='bg-blue-500 text-white py-2 px-4 rounded-md'>Submit Registration</button>
+                    <button type='submit' class='w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500'>Submit Registration</button>
                 </div>
 
             </form>
@@ -192,7 +195,7 @@ residentLayout($deathContent);
     function validateForm(data) {
         // Example validation rules
         if (!data.deceased_first_name || !data.deceased_last_name) {
-            showToast('deceased first and last names are .', 'error');
+            showToast('deceased first and last names are required', 'error');
             return false;
         }
 
@@ -239,6 +242,9 @@ residentLayout($deathContent);
             if (response.ok) {
                 showToast(result.message, 'success'); // Show success toast
                 this.reset(); // Clear the form
+                setTimeout(() => {
+                  window.location.href = "http://localhost/group69/pages/resident/deathDoc.php";
+              }, 2000);
             } else {
                 showToast(result.error, 'error'); // Show error toast
             }

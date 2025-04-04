@@ -4,24 +4,31 @@ include '../../layout/employee/employeeLayout.php';
 
 $updateProfileContent = "
     <div class='container mx-auto w-full h-[88vh] overflow-y-scroll'>
-        <div class='bg-white p-8 rounded-lg shadow-lg w-full'>
-            <h2 class='text-2xl font-bold text-center mb-6 text-gray-800'>Release Certificates</h2>
+        <div class='flex items-center space-x-2 p-4'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M12 8v4m0 0v4m0-4H8m4 0h4m3 6h-2a2 2 0 00-2 2v2a2 2 0 002 2h2m-6 0h-4a2 2 0 00-2 2v2a2 2 0 002 2h4'/>
+            </svg>
+            <h1 class='text-2xl font-bold text-gray-800'>ISSUED CERTIFICATES AND PERMIT</h1>
+        </div>
+
+        <div class='bg-white p-8 rounded-lg shadow-lg w-[80%] mt-3 mx-auto'>
+    
             
-            <form id='issuedform' enctype='multipart/form-data'>
+            <form id='issuedform' enctype='multipart/form-data' class='grid grid-cols-2 gap-4'>
                 <!-- Resident ID (hidden input) -->
                 <input type='hidden' name='resident_id' id='resident_id' value=''>
-    
+
                 <!-- Resident Selection (Searchable Input) -->
-                <div class='mb-4'>
+                <div class=''>
                     <label class='block text-gray-700 text-sm font-bold mb-2' for='resident'>
                         Resident Name
                     </label>
                     <input type='text' id='resident-search' class='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300' placeholder='Type to search resident' required>
-                    <ul id='resident-list' class='absolute bg-white border border-gray-300 rounded-lg w-[100%] z-10 hidden'></ul>
+                    <ul id='resident-list' class='absolute bg-white border border-gray-300 rounded-lg w-[36.5%] mt-1 z-10 hidden'></ul>
                 </div>
-    
+
                 <!-- Issued Type (Birth, Marriage, Death) -->
-                <div class='mb-4'>
+                <div>
                     <label class='block text-gray-700 text-sm font-bold mb-2' for='issued-type'>
                         Issued Type
                     </label>
@@ -32,27 +39,33 @@ $updateProfileContent = "
                         <option value='death'>Death</option>
                     </select>
                 </div>
-    
-                <!-- Submit Button -->
-                <div class='flex justify-center'>
-                    <button type='button' id='confirm-Issued' class='bg-blue-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300'>
+
+                <!-- Empty div to maintain 2-column alignment -->
+                <div></div>
+
+                <!-- Submit Button (Spanning 2 columns to center it) -->
+                <div class='col-span-2 flex justify-center'>
+                    <button type='button' id='confirm-Issued' class='bg-indigo-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-blue-300 w-full'>
                         Create
                     </button>
                 </div>
             </form>
 
+
             <!-- Certificate Display Section -->
             <div id='certificate-display' class='mt-8 hidden'>
-                <div class='bg-white p-6 rounded-lg shadow-lg'>
+                <div>
                  
-                    <div id='certificate-content' class='mb-6'></div>
+                    <div id='certificate-content' class='mb-6'>
+                    
+                    </div>
 
                     <!-- Buttons for Download and Print -->
                     <div class='flex justify-center'>
                         <button id='download-btn' class='bg-green-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300 mr-4'>
                             Download
                         </button>
-                        <button id='print-btn' class='bg-blue-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300'>
+                        <button id='print-btn' class='bg-indigo-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300'>
                             Print
                         </button>
                     </div>

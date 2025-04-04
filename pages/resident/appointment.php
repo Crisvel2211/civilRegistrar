@@ -4,13 +4,16 @@ include '../../layout/resident/residentLayout.php';
 
 $updateProfileContent = "
     <div class='container mx-auto w-full md:mt-1 px-[8px] h-[88vh] overflow-y-scroll'>
-        <div class='container mx-auto p-6'>
-            <div class='mb-8'>
-                <h1 class='text-3xl font-bold text-center text-gray-500'>Appointment Schedule</h1>
-            </div>
+        <div class='container mx-auto p-6 '>
+             <div class='flex items-center space-x-2 p-4 -ml-7 -mt-6'>
+        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+            <path stroke-linecap='round' stroke-linejoin='round' d='M16 4h2a2 2 0 012 2v12a2 2 0 01-2 2h-2m-4 0H8a2 2 0 01-2-2V6a2 2 0 012-2h4m-4 12h4'/>
+        </svg>
+        <h1 class='text-2xl font-bold text-gray-800'>RESPONSE TO RESIDENT</h1>
+    </div>
             
             <!-- Appointments Grid -->
-            <div id='appointments-grid' class='grid grid-cols-1 md:grid-cols-3 gap-6'>
+            <div id='appointments-grid' class='grid grid-cols-1 md:grid-cols-3 gap-6 mt-5'>
                 <!-- Dynamic content will be inserted here -->
             </div>
         </div>
@@ -92,4 +95,5 @@ residentLayout($updateProfileContent);
 
     // Fetch appointments when the page loads
     window.onload = fetchAppointments; // Call fetchAppointments when the page loads
+
 </script>

@@ -7,40 +7,54 @@ $homeContent = "
 <div class='bg-gray-300 w-full h-[88vh] overflow-y-scroll'>
  <div class='container mx-auto w-full md:mt-1 px-[8px] mb-10'>
 
-    <div class='flex justify-start items-center gap-[10px] w-full h-auto mt-2 '>
-        <i class='fas fa-tasks text-[#93A3BC] text-[25px]'></i>
-        <h1 class='font-bold text-gray-700 text-[21px]'>Overview</h1>
+    <div class='flex items-center space-x-2 p-4'>
+        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+            <path stroke-linecap='round' stroke-linejoin='round' d='M3 3h18M3 3v18h18V3M12 12l6 6M12 12l-6 6'/>
+        </svg>
+        <h1 class='text-2xl font-bold text-gray-800'>DASHBOARD</h1>
     </div>
 
-    <div class='grid grid-cols-1 md:grid-cols-4 gap-6 mt-5'>
-      <div class='flex flex-col justify-center items-center bg-gray-100 p-4 rounded-lg shadow'>
-         <i class='fas fa-baby text-blue-500 text-[30px] mb-2'></i>
+
+<div class='grid grid-cols-1 md:grid-cols-5 gap-6 mt-5 w-[90%] mt-3 mx-auto'>
+    <div class='flex flex-col justify-center items-center bg-blue-400 p-4 rounded-lg shadow'>
+        <i class='fas fa-baby text-blue-500 text-[30px] mb-2'></i>
         <h2 class='font-semibold text-gray-700'>Birth Total <span id='birth-count' class='font-bold'>0</span></h2>
-      </div>
-      
-      <div class='flex flex-col justify-center items-center bg-gray-100 p-4 rounded-lg shadow'>
-         <i class='fas fa-cross text-red-500 text-[30px] mb-2'></i>
-         <h2 class='font-semibold text-gray-700'>Death Total <span id='death-count' class='font-bold'>0</span></h2>
-      </div>
-      
-      <div class='flex flex-col justify-center items-center bg-gray-100 p-4 rounded-lg shadow'>
-         <i class='fas fa-ring text-green-500 text-[30px] mb-2'></i>
-        <h2 class='font-semibold text-gray-700'>Marriage Total <span id='marriage-count' class='font-bold'>0</span></h2>
-      </div>
-      
-      <div class='flex flex-col justify-center items-center bg-gray-100 p-4 rounded-lg shadow'>
-         <i class='fas fa-calendar-check text-yellow-500 text-[30px] mb-2'></i>
-         <h2 class='font-semibold text-gray-700'>Appointment Total</h2>
-      </div>
     </div>
 
-    <div class='flex justify-start items-center gap-[10px] w-full h-auto mt-8'>
-        <i class='fas fa-bullhorn text-[#93A3BC] text-[25px]'></i>
-        <h1 class='font-bold text-gray-700 text-[21px]'>Announcements</h1>
+    <div class='flex flex-col justify-center items-center bg-red-400 p-4 rounded-lg shadow'>
+        <i class='fas fa-cross text-red-500 text-[30px] mb-2'></i>
+        <h2 class='font-semibold text-gray-700'>Death Total <span id='death-count' class='font-bold'>0</span></h2>
     </div>
+
+    <div class='flex flex-col justify-center items-center bg-green-400 p-4 rounded-lg shadow'>
+        <i class='fas fa-ring text-green-500 text-[30px] mb-2'></i>
+        <h2 class='font-semibold text-gray-700'>Marriage Total <span id='marriage-count' class='font-bold'>0</span></h2>
+    </div>
+
+   
+    <div class='flex flex-col justify-center items-center bg-purple-400 p-4 rounded-lg shadow'>
+        <i class='fas fa-id-card text-purple-500 text-[30px] mb-2'></i>
+        <h2 class='font-semibold text-gray-700'>Permit Total <span id='permit-count' class='font-bold'>0</span></h2>
+    </div>
+
+    
+    <div class='flex flex-col justify-center items-center bg-teal-400 p-4 rounded-lg shadow'>
+        <i class='fas fa-gavel text-teal-500 text-[30px] mb-2'></i>
+        <h2 class='font-semibold text-gray-700 text-center'>Legal Administrative Total <span id='legal-admin-count' class='font-bold'>0</span></h2>
+    </div>
+</div>
+
+
+    <div class='flex items-center space-x-2 p-4 mt-[5rem]'>
+        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+            <path stroke-linecap='round' stroke-linejoin='round' d='M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-9 4h4m-2-2v4m-1 10h6'/>
+        </svg>
+        <h1 class='text-2xl font-bold text-gray-800'>ANNOUNCEMENT</h1>
+    </div>
+
 
     <!-- Announcements List -->
-    <div id='announcements-container' class='mt-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
+    <div id='announcements-container' class='mt-4 grid grid-cols-1 md:grid-cols-2 gap-4  w-[90%] mt-3 mx-auto'>
         <!-- Announcements will be populated here -->
     </div>
  </div>
@@ -99,8 +113,14 @@ const fetchAnnouncements = async () => {
                 announcementsContainer.innerHTML += announcementCard;
             });
         } else {
-            // If no announcements, display a message
-            announcementsContainer.innerHTML = '<p class="text-gray-600">No announcements available.</p>';
+            announcementsContainer.innerHTML = `
+                <div class="p-4 flex justify-center w-full">
+                    <video class="h-[200px]" autoplay loop muted>
+                        <source src="http://localhost/group69/images/announcements.webm" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            `;
         }
     } catch (error) {
         console.error('Error fetching announcements:', error);
@@ -180,6 +200,51 @@ const fetchAnnouncements = async () => {
             }
         };
 
+
+        const fetchPermitCount = async () => {
+            const employeeId = localStorage.getItem('userId');
+            try {
+                const response = await fetch(`http://localhost/group69/api/permit_request_api.php?get_employee_counts=true&employee_id=${employeeId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+
+                // Check if data is an object and contains total_certificates
+                if (data && typeof data === 'object' && 'total_certificates' in data) {
+                    // Update the death count in the HTML
+                    document.getElementById('permit-count').innerText = data.total_certificates || 0;
+                } else {
+                    throw new Error('Invalid response format');
+                }
+            } catch (error) {
+                console.error('Error fetching birth count:', error);
+                document.getElementById('permit-count').innerText = 'Error';
+            }
+        };
+
+        const fetchLegalCount = async () => {
+            const employeeId = localStorage.getItem('userId');
+            try {
+                const response = await fetch(`http://localhost/group69/api/legal.php?get_employee_counts=true&employee_id=${employeeId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+
+                // Check if data is an object and contains total_certificates
+                if (data && typeof data === 'object' && 'total_certificates' in data) {
+                    // Update the death count in the HTML
+                    document.getElementById('legal-admin-count').innerText = data.total_certificates || 0;
+                } else {
+                    throw new Error('Invalid response format');
+                }
+            } catch (error) {
+                console.error('Error fetching birth count:', error);
+                document.getElementById('legal-admin-count').innerText = 'Error';
+            }
+        };
+
         function checkAuthentication() {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -194,6 +259,8 @@ const fetchAnnouncements = async () => {
         fetchBirthCount();
         fetchDeathCount();
         fetchMarriageCount();
+        fetchPermitCount();
+        fetchLegalCount();
         fetchAnnouncements();
     });
 </script>

@@ -77,6 +77,27 @@ if ($method === 'GET') {
         exit; // Exit after handling employee count request
     }
 
+    if (isset($_GET['get_resident_counts']) && isset($_GET['userId'])) {
+        $userId = intval($_GET['userId']);
+      
+        
+        // SQL query to get the count of death registrations assigned to the employee
+        $sql = "SELECT COUNT(*) AS total_certificates 
+                FROM death_registration 
+                WHERE userId = $userId";
+        
+        $result = $conn->query($sql);
+        
+        if ($result) {
+            $data = $result->fetch_assoc();
+            echo json_encode(['total_certificates' => $data['total_certificates']]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
+        }
+        exit; // Exit after handling employee count request
+    }
+
     // Retrieve death certificates with optional employee filter and search query
     $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
     $employeeId = isset($_GET['employee_id']) ? intval($_GET['employee_id']) : null;
@@ -117,11 +138,7 @@ if ($method === 'POST') {
     // Create a new death certificate
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // Generate a unique reference number (Format: DR-YYYYMMDD-RANDOM)
-    $date = date("Ymd");
-    $randomNumber = mt_rand(1000, 9999);
-    $referenceNumber = "DR-" . $date . "-" . $randomNumber;
-
+    $referenceNumber = 'DR-' . strtoupper(uniqid());
     // Define expected fields, including userId and employeeId for the death registration
     $fields = [
         'userId', 'employee_id', 'deceased_first_name', 'deceased_middle_name', 'deceased_last_name', 

@@ -5,58 +5,61 @@ include '../../layout/admin/adminLayout.php';
 $homeContent = "
 <div class='container mx-auto w-full md:mt-1 px-[8px] h-[88vh] overflow-y-scroll'>
  <div class='container mx-auto'>
-    <div class='flex justify-start items-center gap-[10px] w-full h-auto mt-2 '>
-        <i class='fas fa-tasks text-[#93A3BC] text-[25px]'></i>
-        <h1 class='font-bold text-gray-700 text-[21px]'>Overview</h1>
+    <div class='flex items-center space-x-2 p-4'>
+        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+            <path stroke-linecap='round' stroke-linejoin='round' d='M3 3h18M3 3v18h18V3M12 12l6 6M12 12l-6 6'/>
+        </svg>
+        <h1 class='text-2xl font-bold text-gray-800'>DASHBOARD</h1>
     </div>
 
-    <div class='grid md:grid-cols-4 grid-cols-1 place-items-center px-2 gap-4 mt-[30px] '>
-          <!-- Total Birth Certificates -->
-          <div class='bg-red-400 w-full h-[120px] rounded-[8px] cardShadow flex flex-col justify-start items-start cursor-pointer'>
-            <div class='flex justify-around w-full items-center pt-3'>
-              <h1 class='font-[700] text-[16px] text-gray-700'>Total Birth Certificates</h1>
-               <i class='fas fa-baby text-[25px] text-[#d9512c]'></i>
+
+    <div class='grid grid-cols-1 md:grid-cols-6 gap-6 mt-5 w-[100%] mt-3 mx-auto mb-[5rem]'>
+            <div class='flex flex-col justify-center items-center bg-blue-400 p-4 rounded-lg shadow'>
+                <i class='fas fa-baby text-blue-500 text-[30px] mb-2'></i>
+                <h2 class='font-semibold text-gray-700'>Birth Total <span id='birthCount' class='font-bold'>0</span></h2>
             </div>
-            <div class='flex justify-center items-center w-full pt-5'>
-              <p id='birthCount' class='font-bold text-[18px] text-gray-900'>0</p>
+
+            <div class='flex flex-col justify-center items-center bg-red-400 p-4 rounded-lg shadow'>
+                <i class='fas fa-cross text-red-500 text-[30px] mb-2'></i>
+                <h2 class='font-semibold text-gray-700'>Death Total <span id='deathCount' class='font-bold'>0</span></h2>
             </div>
-          </div>
-          <!-- Total Marriage Certificates -->
-          <div class='bg-blue-400 w-full h-[120px] rounded-[8px] cardShadow flex flex-col justify-start items-start cursor-pointer'>
-            <div class='flex justify-around w-full items-center pt-3'>
-              <h1 class='font-[700] text-[16px] text-gray-700'>Total Marriage Certificates</h1>
-              <i class='fas fa-heart text-[25px] text-gray-500'></i>
+
+            <div class='flex flex-col justify-center items-center bg-green-400 p-4 rounded-lg shadow'>
+                <i class='fas fa-ring text-green-500 text-[30px] mb-2'></i>
+                <h2 class='font-semibold text-gray-700'>Marriage Total <span id='marriageCount' class='font-bold'>0</span></h2>
             </div>
-            <div class='flex justify-center items-center w-full pt-5'>
-              <p id='marriageCount'class='font-bold text-[18px] text-gray-900'>0</p>
+
+        
+            <div class='flex flex-col justify-center items-center bg-purple-400 p-4 rounded-lg shadow'>
+                <i class='fas fa-id-card text-purple-500 text-[30px] mb-2'></i>
+                <h2 class='font-semibold text-gray-700'>Permit Total <span id='permitCount' class='font-bold'>0</span></h2>
             </div>
-          </div>
-          <!-- Total Death Certificates -->
-          <div class='bg-red-400 w-full h-[120px] rounded-[8px] cardShadow flex flex-col justify-start items-start cursor-pointer'>
-            <div class='flex justify-around w-full items-center pt-3'>
-              <h1 class='font-[700] text-[16px] text-gray-700'>Total Death Certificates</h1>
-              <i class='fas fa-skull-crossbones text-[25px] text-[#d9512c]'></i>
+
+            
+            <div class='flex flex-col justify-center items-center bg-teal-400 p-4 rounded-lg shadow'>
+                <i class='fas fa-gavel text-teal-500 text-[30px] mb-2'></i>
+                <h2 class='font-semibold text-gray-700 text-center'>Legal Administrative Total <span id='legalCount' class='font-bold'>0</span></h2>
             </div>
-            <div class='flex justify-center items-center w-full pt-5'>
-              <p id='deathCount' class='font-bold text-[18px] text-gray-900'>0</p>
+
+            <div class='flex flex-col justify-center items-center bg-indigo-400 p-4 rounded-lg shadow'>
+                <i class='fas fa-users text-indigo-500 text-[30px] mb-2'></i>
+                <h2 class='font-semibold text-gray-700'>User Total <span id='userCount' class='font-bold'>0</span></h2>
             </div>
-          </div>
-          <!-- Users Card -->
-          <div class='bg-yellow-400 w-full h-[120px] rounded-[8px] cardShadow flex flex-col justify-start items-start cursor-pointer'>
-            <div class='flex justify-around w-full items-center pt-3'>
-              <h1 class='font-[700] text-[16px] text-gray-700'>Users</h1>
-              <i class='fas fa-users text-[25px] text-[#228f30]'></i>
-            </div>
-            <div class='flex justify-center items-center w-full pt-5'>
-              <p id='userCount' class='font-bold text-[18px] text-gray-900'>0</p>
-            </div>
-          </div>
+
     </div>
+
+<div class='flex items-center space-x-2 p-4'>
+    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+        <path stroke-linecap='round' stroke-linejoin='round' d='M3 17l4 4L12 13l4 4 4-4'/>
+    </svg>
+    <h1 class='text-2xl font-bold text-gray-800'>ANALYTICS</h1>
+</div>
+
 
     <!-- Charts Section -->
-    <div class='grid md:grid-cols-2 grid-cols-1 gap-4 mt-10 h-full'>
+    <div class='grid md:grid-cols-2 grid-cols-1 gap-4 mt-5 h-full'>
         <div class='bg-white p-4 rounded-md shadow-md h-[96%] md:flex'>
-            <h2 class='font-bold text-gray-700 text-[18px] mb-4'>Certificates</h2>
+            <h2 class='font-bold text-gray-700 text-[18px] mb-4'>Services</h2>
             <canvas id='doughnutChart'></canvas>
         </div>
         <div class='bg-white p-4 rounded-md shadow-md h-[96%]  '>
@@ -121,7 +124,27 @@ document.addEventListener('DOMContentLoaded', () => {
                         return 0;
                     }
                     return data.total || 0;
-                })
+                }),
+
+            fetch('http://localhost/group69/api/permit_request_api.php?count=true')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('Error fetching user count:', data.error);
+                        return 0;
+                    }
+                    return data.total || 0;
+            }),
+
+            fetch('http://localhost/group69/api/legal.php?count=true')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('Error fetching user count:', data.error);
+                        return 0;
+                    }
+                    return data.total || 0;
+            }),
         ]);
     };
 
@@ -140,23 +163,25 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Fetch all counts and then render the charts
-    fetchCounts().then(([birthCount, marriageCount, deathCount, userCount]) => {
+    fetchCounts().then(([birthCount, marriageCount, deathCount, userCount, permitCount, legalCount]) => {
         // Update the DOM elements with the counts
         document.getElementById('birthCount').textContent = birthCount;
         document.getElementById('marriageCount').textContent = marriageCount;
         document.getElementById('deathCount').textContent = deathCount;
-        document.getElementById('userCount').textContent = userCount; // Update user count
+        document.getElementById('userCount').textContent = userCount;
+        document.getElementById('permitCount').textContent = permitCount;
+        document.getElementById('legalCount').textContent = legalCount; 
 
         // Initialize Doughnut Chart after all counts have been fetched
         const ctxDoughnut = document.getElementById('doughnutChart').getContext('2d');
         new Chart(ctxDoughnut, {
             type: 'doughnut',
             data: {
-                labels: ['Birth', 'Marriage', 'Death'],
+                labels: ['Birth', 'Marriage', 'Death', 'permit', 'legal'],
                 datasets: [{
                     label: 'Certificates',
-                    data: [birthCount, marriageCount, deathCount],
-                    backgroundColor: ['#d9512c', '#1d4ed8',  '#facc15'],
+                    data: [birthCount, marriageCount, deathCount, permitCount, legalCount],
+                    backgroundColor: ['#60a5fa', '#34d399',  '#f87171 ', '#a78bfa', '#5eead4', '#6366f1'],
                     borderColor: ['#ffffff'],
                     borderWidth: 2
                 }]
@@ -189,9 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 datasets: [{
                     label: 'Users Count',
                     data: [admin, employee, resident],
-                    backgroundColor: ['#1d4ed8', '#facc15', '#d9512c'],
-                    borderColor: ['#ffffff', '#ffffff', '#ffffff'],
-                    borderWidth: 2
+                    backgroundColor: ['#8b5cf6', '#f472b6', '#fb923c', '#22d3ee'], // New colors
+
                 }]
             },
             options: {

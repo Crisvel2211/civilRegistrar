@@ -5,10 +5,14 @@ include '../../layout/resident/residentLayout.php';
 // Define the content for the marriage registration form
 $marriageContent = " 
     <div class='bg-gray-300 w-full h-[88vh] overflow-y-scroll'>
-        <div class='pt-2 mb-3'>
-            <h1 class='text-center font-bold text-[23px]'>MARRIAGE REGISTRATION FORM</h1>
+         <div class='flex items-center space-x-2 p-4'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M3 12h18M12 5l-3 3m3-3l3 3m0 9H6M9 17h6'/>
+            </svg>
+            <h1 class='text-2xl font-bold text-gray-800'>MARRIAGE RECORDS</h1>
         </div>
-        <div class='m-4 bg-white p-4 rounded-[8px]'>
+
+        <div class='m-4 bg-white p-4 rounded-[8px] mx-auto w-[88%]'>
             <form id='marriageCertificateForm' class='grid grid-cols-1 md:grid-cols-3 gap-2 w-full'>
                 
                 <!-- Hidden Input for userId -->
@@ -24,14 +28,14 @@ $marriageContent = "
                 <div class='col-span-3 md:col-span-1 w-full'>
                   <label class='text-[12.5px]'>Groom's First Name</label>
                   <div class='col-span-3 md:col-span-1'>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_first_name'  />
+                    <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='groom_first_name'  />
                   </div>
                 </div>
 
               <div class='col-span-3 md:col-span-1 w-full'>
                 <label class='text-[12.5px]'>Groom's Middle Name</label>
                 <div class='col-span-3 md:col-span-1'>  
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_middle_name'/>
+                    <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='groom_middle_name'/>
                 </div>
               
               </div>
@@ -39,7 +43,7 @@ $marriageContent = "
               <div class='col-span-3 md:col-span-1 w-full'>
                 <label class='text-[12.5px]'>Groom's Last Name</label>
                 <div class='col-span-3 md:col-span-1'>
-                 <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_last_name' />
+                 <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='groom_last_name' />
                 </div>
               
               </div>
@@ -49,7 +53,7 @@ $marriageContent = "
                <div class='col-span-3 md:col-span-1 w-full'>
                  <label class='text-[12.5px]'>Groom's Suffix (if applicable)</label>
                   <div class='col-span-3 md:col-span-1'>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_suffix' />
+                    <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='groom_suffix' />
                   </div>
                
                </div>
@@ -57,7 +61,7 @@ $marriageContent = "
                <div class='col-span-3 md:col-span-1 w-full'>
                  <label class='text-[12.5px]'>Bride's First Name</label>
                  <div class='col-span-3 md:col-span-1'>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_first_name' />
+                    <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='bride_first_name' />
                  </div>
 
                </div>
@@ -65,7 +69,7 @@ $marriageContent = "
                <div class='col-span-3 md:col-span-1 w-full'>
                  <label class='text-[12.5px]'>Bride's Middle Name</label>
                  <div class='col-span-3 md:col-span-1'>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_middle_name' />
+                    <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='bride_middle_name' />
                 </div>
                </div>
     
@@ -73,7 +77,7 @@ $marriageContent = "
              <div class='col-span-3 md:col-span-1 w-full'>
                <label class='text-[12.5px]'>Bride's Last Name</label>
                <div class='col-span-3 md:col-span-1'>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_last_name' />
+                    <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='bride_last_name' />
                 </div>
 
              </div>
@@ -81,7 +85,7 @@ $marriageContent = "
              <div class='col-span-3 md:col-span-1 w-full'>
                <label class='text-[12.5px]'>Bride's Maiden Name (if applicable)</label>
                <div class='col-span-3 md:col-span-1'>
-                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_maiden_name' />
+                <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='bride_maiden_name' />
                 </div>
              
              </div>
@@ -90,7 +94,7 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full'>
               <label class='text-[12.5px]'>Bride's Suffix (if applicable)</label>
               <div class='col-span-3 md:col-span-1'>
-                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_suffix' />
+                <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='bride_suffix' />
               </div>
             </div>
             
@@ -102,21 +106,21 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full'>
                 <label class='text-[12.5px]'>Date of Birth of Groom:</label>
                 <div class='col-span-3 md:col-span-1'>
-                    <input type='date' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_dob' />
+                    <input type='date' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='groom_dob' />
                 </div>
             </div>
 
             <div class='col-span-3 md:col-span-1 w-full'>
              <label class='text-[12.5px]'>Date of Birth of Bride:</label>
               <div class='col-span-3 md:col-span-1'>
-                    <input type='date' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_dob' />
+                    <input type='date' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='bride_dob' />
                 </div>
             </div>
 
             <div class='col-span-3 md:col-span-1 w-full'>
              <label class='text-[12.5px]'>Place of Birth of Groom:</label>
                <div class='col-span-3 md:col-span-1'>
-                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_birth_place' />
+                <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='groom_birth_place' />
                 </div>
             </div>
 
@@ -124,7 +128,7 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full'>
              <label class='text-[12.5px]'>Place of Birth of Bride:</label>
              <div class='col-span-3 md:col-span-1'>
-                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_birth_place' />
+                <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='bride_birth_place' />
                 </div>
             </div>
                        
@@ -137,14 +141,14 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full'>
              <label class='text-[12.5px]'>Marriage Date</label>
              <div class='col-span-3 md:col-span-1'>             
-                <input type='date' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='marriage_date' />
+                <input type='date' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='marriage_date' />
              </div>
             </div>
 
             <div class='col-span-3 md:col-span-1 w-full'>
               <label class='text-[12.5px]'>Marriage place</label>
               <div class='col-span-3 md:col-span-1'>
-                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='marriage_place' />
+                <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='marriage_place' />
             </div>
             </div>
 
@@ -157,7 +161,7 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full'>
               <label class='text-[12.5px]'>Groom’s Civil Status:</label>
                <div class='col-span-3 md:col-span-1'>
-                    <select name='groom_civil_status' class='outline-none border border-gray-700 p-1 rounded-md w-full'>
+                    <select name='groom_civil_status' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
                         <option value='Single'>Single</option>
                         <option value='Widowed'>Widowed</option>
                         <option value='Divorced'>Divorced</option>
@@ -170,7 +174,7 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full'>
                <label class='text-[12.5px]'>Bride’s Civil Status:</label>
                <div class='col-span-3 md:col-span-1'>
-                    <select name='bride_civil_status' class='outline-none border border-gray-700 p-1 rounded-md w-full'>
+                    <select name='bride_civil_status' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
                         <option value='Single'>Single</option>
                         <option value='Widowed'>Widowed</option>
                         <option value='Divorced'>Divorced</option>
@@ -188,14 +192,14 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full'>
               <label class='text-[12.5px]'>Nationality of Groom</label>
                 <div class='col-span-3 md:col-span-1'>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_nationality' />
+                    <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='groom_nationality' />
                 </div>
             </div>
 
             <div class='col-span-3 md:col-span-1 w-full'>
               <label class='text-[12.5px]'>Nationality of Bride</label>
                <div class='col-span-3 md:col-span-1'>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_nationality' />
+                    <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='bride_nationality' />
                 </div>
             </div>
             
@@ -207,7 +211,7 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full'>
               <label class='text-[12.5px]'>Full Name of Groom's Father:</label>
               <div class='col-span-3 md:col-span-1'>
-                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_father_name' />
+                <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='groom_father_name' />
                 </div>
             
             </div>
@@ -215,14 +219,14 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full'>
              <label class='text-[12.5px]'>Full Name of Groom's Mother:</label>
               <div class='col-span-3 md:col-span-1'>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_mother_name' />
+                    <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='groom_mother_name' />
               </div>
             </div>
 
             <div class='col-span-3 md:col-span-1 w-full'>
                <label class='text-[12.5px]'>Full Name of Bride's Father:</label>
                 <div class='col-span-3 md:col-span-1'>
-                    <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_father_name' />
+                    <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='bride_father_name' />
                 </div>
             
             </div>
@@ -230,7 +234,7 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full>
               <label class='text-[12.5px]'>Full Name of Bride's Mother:</label>
               <div class='col-span-3 md:col-span-1'>
-                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_mother_name' />
+                <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='bride_mother_name' />
                 </div>
 
             </div>
@@ -238,7 +242,7 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full'>
               <label class='text-[12.5px]'>Groom Witness</label>
               <div class='col-span-3 md:col-span-1'>
-                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='groom_witness' />
+                <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='groom_witness' />
               </div>
             
             </div>
@@ -246,7 +250,7 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full'>
               <label class='text-[12.5px]'>Bride Witness</label>
               <div class='col-span-3 md:col-span-1'>
-                <input type='text' class='outline-none border border-gray-700 p-1 rounded-md w-full' name='bride_witness' />
+                <input type='text' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' name='bride_witness' />
               </div>
             </div>
 
@@ -260,7 +264,7 @@ $marriageContent = "
             <div class='col-span-3 md:col-span-1 w-full'>
               <label for='employee' class='text-[12.5px]'>Select Employee</label>
               <div class='col-span-3 md:col-span-1'> 
-                    <select name='employee_id' id='employee' class='outline-none border border-gray-700 p-1 rounded-md w-full'>
+                    <select name='employee_id' id='employee' class='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
                         <option value=''>Select an Employee</option>
                         <!-- Dynamic employee options will be inserted here -->
                     </select>
@@ -270,7 +274,7 @@ $marriageContent = "
 
                  <!-- Submit Button -->
                 <div class='col-span-3 flex justify-center mt-2'>
-                    <button type='submit' class='bg-blue-500 text-white py-2 px-4 rounded-md'>Submit Registration</button>
+                    <button type='submit' class='bg-indigo-500 text-white py-2 px-4 rounded-md w-full'>Submit Registration</button>
                 </div>
 
             </form>
@@ -345,6 +349,9 @@ residentLayout($marriageContent);
             if (response.ok) {
                 showToast(result.message, 'success'); // Show success toast
                 this.reset(); // Clear the form
+                setTimeout(() => {
+                  window.location.href = "http://localhost/group69/pages/resident/marriageDoc.php";
+              }, 2000);
             } else {
                 showToast(result.error, 'error'); // Show error toast
             }

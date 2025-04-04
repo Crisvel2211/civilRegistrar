@@ -4,26 +4,35 @@ include '../../layout/employee/employeeLayout.php';
 
 $updateProfileContent = "   
     <div class='container mx-auto w-full h-[88vh] overflow-y-scroll'>
-        <div class='bg-white p-8 rounded-lg shadow-lg w-full'>
-            <h2 class='text-2xl font-bold text-center mb-6 text-gray-800'>Book an Appointment</h2>
+        <div class='flex items-center space-x-2 p-4'>
+        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+            <path stroke-linecap='round' stroke-linejoin='round' d='M16 4h2a2 2 0 012 2v12a2 2 0 01-2 2h-2m-4 0H8a2 2 0 01-2-2V6a2 2 0 012-2h4m-4 12h4'/>
+        </svg>
+        <h1 class='text-2xl font-bold text-gray-800'>RESPONSE TO RESIDENT</h1>
+    </div>
+
+
+
+        <div class='bg-white p-8 rounded-lg shadow-lg w-[80%] mx-auto mt-3'>
+        
             
-            <form id='appointmentform' enctype='multipart/form-data'>
+            <form id='appointmentform' enctype='multipart/form-data' class='grid grid-cols-2 gap-4'>
                 <!-- Resident ID (hidden input) -->
                 <input type='hidden' name='resident_id' id='resident_id' value=''>
-    
+
                 <!-- Resident Selection (Searchable Input) -->
-                <div class='mb-4'>
+                <div class='mb-4 '>
                     <label class='block text-gray-700 text-sm font-bold mb-2' for='resident'>
                         Resident Name
                     </label>
                     <input type='text' id='resident-search' class='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300' placeholder='Type to search resident' required>
-                    <ul id='resident-list' class='absolute bg-white border border-gray-300 rounded-lg w-[100%] z-10 hidden'></ul>
+                    <ul id='resident-list' class='absolute bg-white border border-gray-300 rounded-lg w-[46%] z-10 hidden mt-1'></ul>
                 </div>
-    
-                <!-- Appointment Type (Birth, Marriage, Death) -->
+
+                <!-- Appointment Type -->
                 <div class='mb-4'>
                     <label class='block text-gray-700 text-sm font-bold mb-2' for='appointment-type'>
-                        Appointment Type
+                        Response Type
                     </label>
                     <select id='appointment-type' name='appointment_type' class='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300' required>
                         <option value='' disabled selected>Select appointment type</option>
@@ -32,47 +41,48 @@ $updateProfileContent = "
                         <option value='death'>Death</option>
                     </select>
                 </div>
-    
+
                 <!-- Date -->
                 <div class='mb-4'>
                     <label class='block text-gray-700 text-sm font-bold mb-2' for='appointment-date'>
-                        Select Date
+                        Select Response Date
                     </label>
                     <input id='appointment-date' name='appointment_date' type='date' class='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300' required>
                 </div>
-    
+
                 <!-- Time -->
                 <div class='mb-4'>
                     <label class='block text-gray-700 text-sm font-bold mb-2' for='appointment-time'>
-                        Select Time
+                        Select Response Time
                     </label>
                     <input id='appointment-time' name='appointment_time' type='time' class='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300' required>
                 </div>
-    
-                <!-- Purpose of Appointment -->
-                <div class='mb-6'>
+
+                <!-- Purpose of Appointment (Full Width) -->
+                <div class='mb-6 '>
                     <label class='block text-gray-700 text-sm font-bold mb-2' for='purpose'>
-                        Purpose of Appointment
+                        Purpose of Response
                     </label>
                     <textarea id='purpose' name='purpose' placeholder='Verification, issuance of certificate, etc.' class='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300' rows='3' required></textarea>
                 </div>
-    
-                <!-- Upload Required Documents (Images) -->
-                <div class='mb-6'>
+
+                <!-- Upload Required Documents (Full Width) -->
+                <div class='mb-6 '>
                     <label class='block text-gray-700 text-sm font-bold mb-2' for='requirements'>
                         Upload Requirements (Images)
                     </label>
                     <input id='requirements' name='requirements[]' type='file' accept='image/*' class='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300' multiple required>
-                    <p class='text-gray-500 text-sm mt-2'>You can upload images like Birth Certificates, Marriage Documents, Death Certificates, etc.</p>
+                    
                 </div>
-    
-                <!-- Submit Button -->
-                <div class='flex justify-center'>
-                    <button type='button' id='confirm-appointment' class='bg-blue-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300'>
-                        Confirm Appointment
+
+                <!-- Submit Button (Full Width) -->
+                <div class='flex justify-center col-span-2'>
+                    <button type='button' id='confirm-appointment' class='bg-indigo-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300 w-full'>
+                        Submit
                     </button>
                 </div>
             </form>
+
         </div>
     </div>
 ";

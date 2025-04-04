@@ -14,6 +14,7 @@ function residentLayout($children) {
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
         <style>
         .active {
             display: flex;                       
@@ -125,16 +126,6 @@ function residentLayout($children) {
             </a>
            
         </div>
-        <a href='http://localhost/group69/pages/resident/verifyDocuments.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
-                </svg>
-            </div>
-            <div>
-                <h1 class='font-[500]'>Supporting Documents</h1>
-            </div>
-        </a>
 
         <a href='http://localhost/group69/pages/resident/appointment.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
             <div>
@@ -143,7 +134,29 @@ function residentLayout($children) {
                 </svg>
             </div>
             <div>
-                <h1 class='font-[500]'>Appointment </h1>
+                <h1 class='font-[500]'>Response from Employee</h1>
+            </div>
+        </a>
+        <a href='http://localhost/group69/pages/resident/records.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                </svg>
+            </div>
+            <div>
+            <h1 class="font-[500]">History of Requests, Certifications, & Permits</h1>
+
+            </div>
+        </a>
+
+        <a href='http://localhost/group69/pages/resident/getPayment.php' class="sidebar-link flex justify-start items-center mt-[.5rem] gap-4 p-2 dark:hover:bg-[#0314AA] rounded-md hover:bg-gray-100 hover:bg-opacity-[.12] px-5 text-[#9ca3af] hover:text-[#fff]">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-[25px] h-[25px]">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                </svg>
+            </div>
+            <div>
+                <h1 class='font-[500]'>Payment</h1>
             </div>
         </a>
     </div>
@@ -178,7 +191,7 @@ function residentLayout($children) {
 
                                 </span>
                             </div>
-                            <div id='notificationPanel' class='absolute bg-[#ffffff] right-[.5rem] w-[16.5rem] h-[16rem] mt-[12px] rounded-[15px] shadow-2xl z-[1000] hidden -bottom-[17rem]'>
+                            <div id='notificationPanel' class='absolute bg-[#ffffff] right-[.5rem] w-[16.5rem] h-[16rem] mt-[12px] rounded-[15px] shadow-2xl z-[1000] hidden -bottom-[17rem] overflow-hidden overflow-y-auto'>
                                 <div class='flex justify-between items-center bg-[#5046e5] bg-cover rounded-t-[15px] p-[18px]'>
                                     <h1 class='text-[#fff] font-[600]'>Notifications</h1>
                                 </div>
@@ -200,7 +213,7 @@ function residentLayout($children) {
                             
                             
 
-                            <div id='profilePanel' class='absolute bg-[#ffffff] right-[.5rem] w-[10rem] h-[10rem] mt-[12px] rounded-[5px] shadow-lg z-[1000] hidden'>
+                            <div id='profilePanel' class='absolute bg-[#ffffff] right-[.5rem] w-[12rem] h-[10rem] mt-[12px] rounded-[5px] shadow-lg z-[1000] hidden'>
                                 <div class='border-b-[.01px] border-[#e5e8eb] text-center'>
                                     <div class='p-2 my-[4px] w-full relative'>
                                         <p class='text-[14px] font-[400] text-[#324153]'>Signed in as</p>
@@ -793,7 +806,153 @@ function residentLayout($children) {
 
 
 
+ window.onload = function() {
+    const residentId = localStorage.getItem('userId');
+    const role = localStorage.getItem('role');
+    const notificationButton = document.getElementById('notificationButton');
+    const notificationPanel = document.getElementById('notificationPanel');
+
+    // Fetch Certificate Records
+    const fetchCertificateRecords = async () => {
+        try {
+            const responses = await Promise.all([ 
+                fetch(`http://localhost/group69/api/birth.php?residentId=${residentId}`),
+                fetch(`http://localhost/group69/api/marriage.php?residentId=${residentId}`),
+                fetch(`http://localhost/group69/api/death.php?residentId=${residentId}`),
+                fetch(`http://localhost/group69/api/permit_request_api.php?residentId=${residentId}`),
+                fetch(`http://localhost/group69/api/legal.php?residentId=${residentId}`)
+            ]);
+
+            const [birthRecords, marriageRecords, deathRecords, permitRecords, legalRecords] = await Promise.all(responses.map(res => {
+                if (!res.ok) throw new Error('Failed to fetch some records.');
+                return res.json();
+            }));
+
+            let pendingCount = 0;
+            const pendingNotifications = [];
+
+            const certificateRecordsContainer = document.getElementById('certificate-records');
+            certificateRecordsContainer.innerHTML = '';
+
+            const getStatusDetails = (status) => {
+                switch (status.toLowerCase()) {
+                    case 'pending':
+                        pendingCount++;
+                        return {
+                            class: 'bg-yellow-150 text-yellow-800',
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>`
+                        };
+                    case 'processing':
+                        return {
+                            class: 'bg-blue-150 text-blue-800',
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m0 14v1m8-9h1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
+                                </svg>`
+                        };
+                    case 'completed':
+                        return {
+                            class: 'bg-green-150 text-green-800',
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>`
+                        };
+                    default:
+                        return {
+                            class: 'bg-gray-150 text-gray-800',
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M12 6a9 9 0 110 18 9 9 0 010-18z" />
+                                </svg>`
+                        };
+                }
+            };
+
+            // Process all records
+            const addRecordsToTable = (records, recordType) => {
+                records.forEach(record => {
+                    const { class: statusClass, icon } = getStatusDetails(record.status);
+                    certificateRecordsContainer.innerHTML += `
+                        <tr>
+                            <td class="border-b p-2">${record.reference_number}</td>
+                            <td class="border-b p-2">${record[recordType]}</td>
+                            <td class="border-b p-2">${recordType.charAt(0).toUpperCase() + recordType.slice(1)}</td>
+                            <td class="border-b p-2 text-center">
+                                <span class="inline-flex items-center px-2 py-1 rounded ${statusClass}">
+                                    ${icon}<span>${record.status}</span>
+                                </span>
+                            </td>
+                        </tr>
+                    `;
+                    if (record.status.toLowerCase() === 'pending') {
+                        pendingNotifications.push(record);
+                    }
+                });
+            };
+
+            // Adding records to table
+            addRecordsToTable(birthRecords, 'child_first_name');
+            addRecordsToTable(marriageRecords, 'groom_first_name');
+            addRecordsToTable(deathRecords, 'deceased_first_name');
+            addRecordsToTable(permitRecords, 'resident_name');
+            addRecordsToTable(legalRecords, 'applicant_name');
+
+            // Store pending notifications in localStorage
+            localStorage.setItem('pendingNotifications', JSON.stringify(pendingNotifications));
+
+            // Update notification count
+            notificationButton.innerHTML = `
+                <span class="w-[21px] h-[21px] font-semibold cursor-pointer">
+                    <i class="fas fa-bell text-[22px] text-[#6B737E] cursor-pointer"></i>
+                    ${pendingCount > 0 ? `<span class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-[16px] h-[16px] text-[12px] flex justify-center items-center">${pendingCount}</span>` : ''}
+                </span>
+            `;
+
+        } catch (error) {
+            console.error('Error fetching certificate records:', error);
+        }
+    };
+
+    // Check Authentication and fetch data
+    function checkAuthentication() {
+        const token = localStorage.getItem('token');
+        if (!token) window.location.href = '../login.php';
+    }
+
+    checkAuthentication();
+    fetchCertificateRecords();
+};
+
+
+window.onload = function() {
+    const notificationButton = document.getElementById('notificationButton');
+    const notificationPanel = document.getElementById('notificationPanel');
+
+    // Retrieve pending notifications from localStorage
+    const pendingNotifications = JSON.parse(localStorage.getItem('pendingNotifications')) || [];
+
+    // Update notification button and panel with stored data
+    notificationButton.innerHTML = `
+        <span class="w-[21px] h-[21px] font-semibold cursor-pointer">
+            <i class="fas fa-bell text-[22px] text-[#6B737E] cursor-pointer"></i>
+            ${pendingNotifications.length > 0 ? `<span class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-[16px] h-[16px] text-[12px] flex justify-center items-center">${pendingNotifications.length}</span>` : ''}
+        </span>
+    `;
+
+    // Display the pending notifications in the notification panel
+    notificationPanel.innerHTML = pendingNotifications.map(notification => {
+        return `
+            <div class="notification-item p-2 border-b">
+                <strong>Status:</strong> ${notification.status}<br>
+                <strong>Reference Number:</strong> ${notification.reference_number}<br>
+                
+            </div>
+        `;
+    }).join('');
+};
+
 </script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     </body>
     </html>
     <?php

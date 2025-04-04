@@ -79,6 +79,26 @@ if ($method === 'GET') {
         exit; // Exit after handling employee count request
     }
 
+    if (isset($_GET['get_resident_counts']) && isset($_GET['userId'])) {
+        $userId = intval($_GET['userId']);
+      
+        // SQL query to get the count of death registrations assigned to the employee
+        $sql = "SELECT COUNT(*) AS total_certificates 
+                FROM marriage_registration 
+                WHERE userId= $userId";
+        
+        $result = $conn->query($sql);
+        
+        if ($result) {
+            $data = $result->fetch_assoc();
+            echo json_encode(['total_certificates' => $data['total_certificates']]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
+        }
+        exit; // Exit after handling employee count request
+    }
+
     // Retrieve marriage certificates with optional employee filter and search query
     $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
     $employeeId = isset($_GET['employee_id']) ? intval($_GET['employee_id']) : null;
@@ -155,8 +175,7 @@ if ($method === 'POST') {
         exit;
     }
 
-    // Generate a unique reference number
-    $referenceNumber = "MR-" . date("Ymd") . "-" . rand(1000, 9999);
+    $referenceNumber = 'MR-' . strtoupper(uniqid());
 
     // Insert into database
     $sql = "INSERT INTO marriage_registration (" . implode(', ', $fields) . ", reference_number, created_at) 

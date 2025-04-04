@@ -4,6 +4,12 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");
 
+// Include PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
 
 include 'db.php'; // Include your database connection
 
@@ -85,6 +91,29 @@ if ($method === 'GET') {
         exit; // Exit after handling employee count request
     }
 
+     // Get counts of death certificates based on assigned employee
+     if (isset($_GET['get_resident_counts']) && isset($_GET['userId'])) {
+        $userId = intval($_GET['userId']);
+       
+        
+        // SQL query to get the count of death registrations assigned to the employee
+        $sql = "SELECT COUNT(*) AS total_certificates 
+                FROM birth_registration 
+                WHERE userId = $userId";
+        
+        $result = $conn->query($sql);
+        
+        if ($result) {
+            $data = $result->fetch_assoc();
+            echo json_encode(['total_certificates' => $data['total_certificates']]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
+        }
+        exit; // Exit after handling employee count request
+    }
+
+
     // Retrieve birth certificates with optional employee filter and search query
     $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
     $employeeId = isset($_GET['employee_id']) ? intval($_GET['employee_id']) : null;
@@ -127,10 +156,8 @@ if ($method === 'POST') {
     // Create a new birth certificate
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // Generate a unique reference number (Format: BR-YYYYMMDD-RANDOM)
-    $date = date("Ymd");
-    $randomNumber = mt_rand(1000, 9999);
-    $referenceNumber = "BR-" . $date . "-" . $randomNumber;
+   
+    $referenceNumber = 'BR-' . strtoupper(uniqid());
 
     // Define expected fields
     $fields = [
@@ -167,11 +194,47 @@ if ($method === 'POST') {
     if ($conn->query($sql) === TRUE) {
         $birthId = $conn->insert_id;
 
-        echo json_encode([
-            'message' => 'Birth certificate registered successfully.',
-            'birthId' => $birthId,
-            'reference_number' => $referenceNumber
-        ]);
+         // Send email notification using PHPMailer
+         $mail = new PHPMailer(true);
+         try {
+             // Server settings
+             $mail->isSMTP();
+             $mail->Host       = 'smtp.gmail.com'; // Set the SMTP server to send through
+             $mail->SMTPAuth   = true;
+             $mail->Username   = 'sanchezlando333@gmail.com'; // SMTP username
+             $mail->Password   = 'ifkkfcdkadzhcggh'; // SMTP password
+             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+             $mail->Port       = 587;
+ 
+             // Recipients
+             $mail->setFrom('sanchezlando333@gmail.com', 'CivilRegistrar');
+             $mail->addAddress('sanchezlando333@gmail.com'); // Add a recipient
+ 
+             // Content
+             $mail->isHTML(true);
+             $mail->Subject = 'New Birth Registration Created';
+             $mail->Body    = "
+             A new birth registration has been created:
+             
+             Reference Number: $referenceNumber
+             Child: {$data['child_first_name']} {$data['child_last_name']}
+             Birth Date: {$data['child_date_of_birth']}
+             Birth Time: {$data['child_time_of_birth']}
+             Parent(s): {$data['father_first_name']} {$data['father_last_name']} and {$data['mother_first_name']} {$data['mother_last_name']}
+             Status: Pending
+             
+             Please verify the details in the system.";
+ 
+             $mail->send();
+ 
+             echo json_encode([
+                 'message' => 'Birth certificate registered successfully.',
+                 'birthId' => $birthId,
+                 'reference_number' => $referenceNumber
+             ]);
+         } catch (Exception $e) {
+             echo json_encode(['error' => 'Email could not be sent. Mailer Error: ' . $mail->ErrorInfo]);
+         }
     } else {
         http_response_code(500);
         echo json_encode(['error' => 'Database query failed: ' . $conn->error]);
@@ -220,7 +283,41 @@ if ($method === 'PUT') {
         
         // Execute the query
         if ($conn->query($sql) === TRUE) {
-            echo json_encode(['success' => true, 'message' => 'Birth registration status updated successfully']);
+            // Send email with PHPMailer
+            $mail = new PHPMailer(true);
+            try {
+                // Server settings
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com'; // Set the SMTP server to send through
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'sanchezlando333@gmail.com'; // SMTP username
+                $mail->Password   = 'ifkkfcdkadzhcggh'; // SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port       = 587;
+
+                // Recipients
+                $mail->setFrom('sanchezlando333@gmail.com', 'CivilRegistrar');
+                $mail->addAddress('sanchezlando333@gmail.com'); // Add a recipient
+
+                // Content
+                $mail->isHTML(true);
+                $mail->Subject = 'Birth Registration Status Updated';
+                $mail->Body    = "
+                The status of a birth registration has been updated:
+                 
+                ID: $id
+                Status: $status
+                
+                Please verify the details in the system.";
+
+                // Send the email
+                $mail->send();
+
+                echo json_encode(['success' => true, 'message' => 'Birth registration status updated successfully']);
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"]);
+            }
+            
         } else {
             http_response_code(500);
             echo json_encode(['success' => false, 'message' => 'Database query failed: ' . $conn->error]);

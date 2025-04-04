@@ -6,12 +6,20 @@ include '../../layout/admin/adminLayout.php';
 $homeContent = "
 <div class='flex flex-col container mx-auto w-full h-[88vh] overflow-y-scroll'>
     <!-- Main Container -->
+    <div class='flex items-center space-x-2 p-4'>
+        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-8 h-8 text-blue-600'>
+            <path stroke-linecap='round' stroke-linejoin='round' d='M17 20h5v-2h-5v2zm-6 0h-5v-2h5v2zm-5-3h5v-2H6v2zm0-3h5v-2H6v2zm0-3h5V8H6v2zm0-3h5V5H6v2zm6 3h5V8h-5v2zm6 0h5V8h-5v2z'/>
+        </svg>
+        <h1 class='text-2xl font-bold text-gray-800'>USERS</h1>
+    </div>
+
     <div class='container mx-auto my-10'>
-        <div class='bg-white p-6 rounded-lg shadow-lg'>
+    
+        <div class='bg-white p-6 rounded-lg shadow-lg w-[88%] mx-auto'>
             <!-- Search Box and Role Filter -->
-            <div class='mb-6 flex items-center space-x-4'>
-                <input type='text' id='searchInput' placeholder='Search by name' class='w-full p-2 border border-gray-300 rounded'>
-                <select id='roleFilter' class='p-2 border border-gray-300 rounded'>
+            <div class='mb-6 flex items-center justify-between w-full'>
+                <input type='text' id='searchInput' placeholder='Search by name' class='w-[80%] p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mr-4'>
+                <select id='roleFilter' class='w-[15%] p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mr-4'>
                     <option value=''>All</option>
                     <option value='admin'>Admin</option>
                     <option value='employee'>Employee</option>
@@ -22,7 +30,7 @@ $homeContent = "
             <!-- Users Table -->
             <div class='flex justify-between item-center mb-4'>
              <h2 class='text-2xl '>Lists Of User</h2>
-             <button id='addUserBtn' class='bg-gray-800 text-white px-4 py-2 rounded cursor-pointer hover:bg-gray-700'>Add User</button>
+             <button id='addUserBtn' class='bg-indigo-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-indigo-700'>Add User</button>
             </div>
            
             <div class='w-full overflow-x-auto md:overflow-none mt-2'>
@@ -70,7 +78,7 @@ $homeContent = "
                 </select>
             </div>
             <div class='flex justify-between mt-4'>
-                <input type='submit' value='Add User' id='submitButton' class='mt-4 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-800 cursor-pointer'>
+                <input type='submit' value='Add User' id='submitButton' class='mt-4 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 cursor-pointer'>
                 <button id='closeModalBtn' class='mt-4 bg-red-500 text-white px-4 py-2 rounded'>Close</button>
             </div>
         </form>
