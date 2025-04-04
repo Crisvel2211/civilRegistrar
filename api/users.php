@@ -19,7 +19,7 @@ include 'db.php'; // Include your database connection
 
 $method = $_SERVER['REQUEST_METHOD'];
 // Define the base URL for the uploaded images
-$base_url = 'http://localhost/group69/api/uploads/';
+$base_url = 'https://civilregistrar.lgu2.com/api/uploads/';
 
 if ($method === 'GET') {
     // Check for count parameter

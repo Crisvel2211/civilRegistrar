@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fetchCounts = () => {
         return Promise.all([
             // Fetch birth count from the API
-            fetch('http://localhost/group69/api/birth.php?count=true')
+            fetch('https://civilregistrar.lgu2.com/api/birth.php?count=true')
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }),
 
             // Fetch marriage count from the API
-            fetch('http://localhost/group69/api/marriage.php?count=true')
+            fetch('https://civilregistrar.lgu2.com/api/marriage.php?count=true')
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }),
 
             // Fetch death count from the API
-            fetch('http://localhost/group69/api/death.php?count=true')
+            fetch('https://civilregistrar.lgu2.com/api/death.php?count=true')
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }),
 
             // Fetch user count from the API
-            fetch('http://localhost/group69/api/users.php?count=true')
+            fetch('https://civilregistrar.lgu2.com/api/users.php?count=true')
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     return data.total || 0;
                 }),
 
-            fetch('http://localhost/group69/api/permit_request_api.php?count=true')
+            fetch('https://civilregistrar.lgu2.com/api/permit_request_api.php?count=true')
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     return data.total || 0;
             }),
 
-            fetch('http://localhost/group69/api/legal.php?count=true')
+            fetch('https://civilregistrar.lgu2.com/api/legal.php?count=true')
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch role-based counts
     const fetchRoleCounts = () => {
-        return fetch('http://localhost/group69/api/users.php?roleCounts=true')
+        return fetch('https://civilregistrar.lgu2.com/api/users.php?roleCounts=true')
             .then(response => response.json())
             .then(data => {
                 const { admin, employee, resident } = data;

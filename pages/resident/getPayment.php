@@ -70,7 +70,7 @@ residentLayout($updateProfileContent);
                 loadingRow.style.display = 'table-row';
             }
 
-            const response = await fetch('http://localhost/group69/api/getAllPayments.php');
+            const response = await fetch('https://civilregistrar.lgu2.com/api/getAllPayments.php');
 const data = await response.json();
 
 const paymentsTable = document.getElementById('payments-table');

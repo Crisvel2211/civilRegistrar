@@ -88,7 +88,7 @@ residentLayout($updateProfileContent);
         }
 
         try {
-            const response = await fetch('http://localhost/group69/api/verification.php', {
+            const response = await fetch('https://civilregistrar.lgu2.com/api/verification.php', {
                 method: 'POST',
                 body: formData,
             });
@@ -115,7 +115,7 @@ residentLayout($updateProfileContent);
             email: localStorage.getItem("email") || "default@example.com"
         };
 
-        fetch("http://localhost/group69/api/birthPaymentApi.php", {
+        fetch("https://civilregistrar.lgu2.com/api/birthPaymentApi.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(customerData)

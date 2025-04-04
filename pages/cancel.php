@@ -22,7 +22,7 @@
 
         <!-- Back Button -->
         <div class="mt-6">
-            <a href="http://localhost/group69/pages/resident/residentDashboard.php" class="bg-blue-500 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-blue-600">
+            <a href="https://civilregistrar.lgu2.com/pages/resident/residentDashboard.php" class="bg-blue-500 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-blue-600">
                 Go Back
             </a>
         </div>

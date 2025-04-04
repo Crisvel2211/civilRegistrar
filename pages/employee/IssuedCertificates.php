@@ -95,7 +95,7 @@ employeeLayout($updateProfileContent);
 
     window.onload = function() {
         // Fetch the residents data from the backend
-        fetch('http://localhost/group69/api/residents.php')
+        fetch('https://civilregistrar.lgu2.com/api/residents.php')
             .then(response => response.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -167,7 +167,7 @@ employeeLayout($updateProfileContent);
         formData.append('resident_id', residentId);
         formData.append('issued_type', issuedType);
 
-        fetch('http://localhost/group69/api/generate_certificate.php', {
+        fetch('https://civilregistrar.lgu2.com/api/generate_certificate.php', {
             method: 'POST',
             body: formData,
         })

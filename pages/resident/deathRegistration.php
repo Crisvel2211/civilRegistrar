@@ -229,7 +229,7 @@ residentLayout($deathContent);
 
         // Send the data to the server
         try {
-            const response = await fetch('http://localhost/group69/api/death.php', {
+            const response = await fetch('https://civilregistrar.lgu2.com/api/death.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -243,7 +243,7 @@ residentLayout($deathContent);
                 showToast(result.message, 'success'); // Show success toast
                 this.reset(); // Clear the form
                 setTimeout(() => {
-                  window.location.href = "http://localhost/group69/pages/resident/deathDoc.php";
+                  window.location.href = "https://civilregistrar.lgu2.com/pages/resident/deathDoc.php";
               }, 2000);
             } else {
                 showToast(result.error, 'error'); // Show error toast
@@ -259,7 +259,7 @@ residentLayout($deathContent);
     const selectElement = document.getElementById('employee');
 
 // Fetch the list of employees from the backend
-fetch('http://localhost/group69/api/employees.php') // Adjust the URL based on your API structure
+fetch('https://civilregistrar.lgu2.com/api/employees.php') // Adjust the URL based on your API structure
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');

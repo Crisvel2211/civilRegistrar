@@ -53,11 +53,11 @@ residentLayout($homeContent);
     const fetchCertificateRecords = async () => {
         try {
             const responses = await Promise.all([ 
-                fetch(`http://localhost/group69/api/birth.php?residentId=${residentId}`),
-                fetch(`http://localhost/group69/api/marriage.php?residentId=${residentId}`),
-                fetch(`http://localhost/group69/api/death.php?residentId=${residentId}`),
-                fetch(`http://localhost/group69/api/permit_request_api.php?residentId=${residentId}`),
-                fetch(`http://localhost/group69/api/legal.php?residentId=${residentId}`)
+                fetch(`https://civilregistrar.lgu2.com/api/birth.php?residentId=${residentId}`),
+                fetch(`https://civilregistrar.lgu2.com/api/marriage.php?residentId=${residentId}`),
+                fetch(`https://civilregistrar.lgu2.com/api/death.php?residentId=${residentId}`),
+                fetch(`https://civilregistrar.lgu2.com/api/permit_request_api.php?residentId=${residentId}`),
+                fetch(`https://civilregistrar.lgu2.com/api/legal.php?residentId=${residentId}`)
             ]);
 
             const [birthRecords, marriageRecords, deathRecords, permitRecords, legalRecords] = await Promise.all(responses.map(res => {

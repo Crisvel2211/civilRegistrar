@@ -141,7 +141,7 @@
             // Simulate a delay to show the spinner for 3 seconds (you can adjust the duration)
             await new Promise((resolve) => setTimeout(resolve, 2000));
 
-            const response = await fetch('http://localhost/group69/api/auth.php?action=login', {
+            const response = await fetch('https://civilregistrar.lgu2.com/api/auth.php?action=login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

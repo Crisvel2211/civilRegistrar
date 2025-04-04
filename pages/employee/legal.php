@@ -141,7 +141,7 @@ const fetchpermitRegistrations = () => {
     // Make sure to encode the search parameter for safe URL usage
     const encodedSearch = encodeURIComponent(search);
 
-    fetch(`http://localhost/group69/api/legal.php?employee_id=${employeeId}&search=${encodedSearch}&status=${status}`)
+    fetch(`https://civilregistrar.lgu2.com/api/legal.php?employee_id=${employeeId}&search=${encodedSearch}&status=${status}`)
         .then(response => response.json())
         .then(data => {
             if (Array.isArray(data)) {
@@ -208,7 +208,7 @@ document.getElementById('modalConfirmButton').addEventListener('click', () => {
             employee_id: employeeId
         };
 
-        fetch(`http://localhost/group69/api/legal.php`, {
+        fetch(`https://civilregistrar.lgu2.com/api/legal.php`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -237,7 +237,7 @@ function updateStatus(permitId) {
     currentpermitId = permitId; // Set the permit ID
 
     // Fetch the current permit registration data to get the current status
-    fetch(`http://localhost/group69/api/legal.php?id=${permitId}`)
+    fetch(`https://civilregistrar.lgu2.com/api/legal.php?id=${permitId}`)
         .then(response => response.json())
         .then(data => {
             if (data && data.status) {
@@ -309,7 +309,7 @@ document.getElementById('deleteModalConfirmButton').addEventListener('click', ()
     const employeeId = localStorage.getItem('userId');
 
     // Send the delete request
-    fetch(`http://localhost/group69/api/legal.php`, {
+    fetch(`https://civilregistrar.lgu2.com/api/legal.php`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -342,7 +342,7 @@ document.getElementById('deleteModalCancelButton').addEventListener('click', () 
 
     // Open the modal and populate details
     function viewpermit(permitId) {
-        fetch(`http://localhost/group69/api/legal.php?id=${permitId}`)
+        fetch(`https://civilregistrar.lgu2.com/api/legal.php?id=${permitId}`)
             .then(response => response.json())
             .then(data => {
                 if (data) {

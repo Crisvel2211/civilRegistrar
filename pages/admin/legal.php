@@ -64,7 +64,7 @@ const fetchpermitRegistrations = () => {
     // Make sure to encode the search parameter for safe URL usage
     const encodedSearch = encodeURIComponent(search);
 
-    fetch(`http://localhost/group69/api/legal.php?search=${encodedSearch}&status=${status}`)
+    fetch(`https://civilregistrar.lgu2.com/api/legal.php?search=${encodedSearch}&status=${status}`)
         .then(response => response.json())
         .then(data => {
             if (Array.isArray(data)) {
@@ -122,7 +122,7 @@ document.getElementById('modalConfirmButton').addEventListener('click', () => {
         };
 
         // Send the update request
-        fetch(`http://localhost/group69/api/legal.php`, {
+        fetch(`https://civilregistrar.lgu2.com/api/legal.php`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -202,7 +202,7 @@ document.getElementById('deleteModalConfirmButton').addEventListener('click', ()
     const employeeId = localStorage.getItem('userId');
 
     // Send the delete request
-    fetch(`http://localhost/group69/api/legal.php`, {
+    fetch(`https://civilregistrar.lgu2.com/api/legal.php`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -235,7 +235,7 @@ document.getElementById('deleteModalCancelButton').addEventListener('click', () 
 
 function viewpermit(permitId) {
     // Fetch the permit registration details
-    fetch(`http://localhost/group69/api/legal.php?id=${permitId}`)
+    fetch(`https://civilregistrar.lgu2.com/api/legal.php?id=${permitId}`)
         .then(response => response.json())
         .then(data => {
             if (data) {

@@ -28,7 +28,7 @@ include '../../layout/employee/employeeLayout.php';
 $singleDocumentContent = '';
 
 if ($document) {
-    $imageUrl = "http://localhost/group69/api/{$document['image']}"; // Use the image path directly
+    $imageUrl = "https://civilregistrar.lgu2.com/api/{$document['image']}"; // Use the image path directly
 
     $singleDocumentContent = "
         <div class='container mx-auto w-full h-[88vh] overflow-y-scroll'>
@@ -147,7 +147,7 @@ form.onsubmit = async (e) => {
 
     // Submit the form data to the PHP backend
     try {
-        const response = await fetch('http://localhost/group69/api/verify.php', {
+        const response = await fetch('https://civilregistrar.lgu2.com/api/verify.php', {
             method: 'POST',
             body: formData
         });

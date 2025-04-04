@@ -336,7 +336,7 @@ residentLayout($marriageContent);
 
         // Send the data to the server
         try {
-            const response = await fetch('http://localhost/group69/api/marriage.php', {
+            const response = await fetch('https://civilregistrar.lgu2.com/api/marriage.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -350,7 +350,7 @@ residentLayout($marriageContent);
                 showToast(result.message, 'success'); // Show success toast
                 this.reset(); // Clear the form
                 setTimeout(() => {
-                  window.location.href = "http://localhost/group69/pages/resident/marriageDoc.php";
+                  window.location.href = "https://civilregistrar.lgu2.com/pages/resident/marriageDoc.php";
               }, 2000);
             } else {
                 showToast(result.error, 'error'); // Show error toast
@@ -366,7 +366,7 @@ residentLayout($marriageContent);
     const selectElement = document.getElementById('employee');
 
 // Fetch the list of employees from the backend
-fetch('http://localhost/group69/api/employees.php') // Adjust the URL based on your API structure
+fetch('https://civilregistrar.lgu2.com/api/employees.php') // Adjust the URL based on your API structure
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');

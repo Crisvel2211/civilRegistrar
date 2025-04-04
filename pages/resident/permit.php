@@ -102,7 +102,7 @@ residentLayout($updateProfileContent);
         submitButton.disabled = true;
 
         try {
-            const response = await fetch('http://localhost/group69/api/permit_request_api.php', {
+            const response = await fetch('https://civilregistrar.lgu2.com/api/permit_request_api.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ residentLayout($updateProfileContent);
             email: localStorage.getItem("email") || "default@example.com"
         };
 
-        fetch("http://localhost/group69/api/permitPaymentApi.php", {
+        fetch("https://civilregistrar.lgu2.com/api/permitPaymentApi.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(customerData)
@@ -156,7 +156,7 @@ residentLayout($updateProfileContent);
     const selectElement = document.getElementById('employee');
 
     // Fetch the list of employees from the backend
-    fetch('http://localhost/group69/api/employees.php') // Adjust the URL based on your API structure
+    fetch('https://civilregistrar.lgu2.com/api/employees.php') // Adjust the URL based on your API structure
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');

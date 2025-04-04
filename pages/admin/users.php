@@ -120,7 +120,7 @@ adminLayout($homeContent);
 
     // Load users from the API
     function loadUsers(search = '', role = '') {
-        const url = `http://localhost/group69/api/users.php${search || role ? `?${search ? `search=${search}` : ''}${search && role ? '&' : ''}${role ? `role=${role}` : ''}` : ''}`;
+        const url = `https://civilregistrar.lgu2.com/api/users.php${search || role ? `?${search ? `search=${search}` : ''}${search && role ? '&' : ''}${role ? `role=${role}` : ''}` : ''}`;
 
         fetch(url, {
             method: 'GET',
@@ -172,7 +172,7 @@ adminLayout($homeContent);
 // Add user function using async/await
 async function addUser(name, email, password, role) {
     try {
-        const response = await fetch('http://localhost/group69/api/users.php', {
+        const response = await fetch('https://civilregistrar.lgu2.com/api/users.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -243,7 +243,7 @@ function updateUser(id, name, email, password, role) {
     const userRole = localStorage.getItem('role');
     const userId = localStorage.getItem('userId');
 
-    fetch('http://localhost/group69/api/users.php', {
+    fetch('https://civilregistrar.lgu2.com/api/users.php', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -275,7 +275,7 @@ function updateUser(id, name, email, password, role) {
 }
 
 function deleteUser(id) {
-    fetch('http://localhost/group69/api/users.php', {
+    fetch('https://civilregistrar.lgu2.com/api/users.php', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'

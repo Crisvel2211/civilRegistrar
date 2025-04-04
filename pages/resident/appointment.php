@@ -35,7 +35,7 @@ residentLayout($updateProfileContent);
         }
 
         try {
-            const response = await fetch(`http://localhost/group69/api/appointments.php?userId=${userId}`); // Pass userId as a query parameter
+            const response = await fetch(`https://civilregistrar.lgu2.com/api/appointments.php?userId=${userId}`); // Pass userId as a query parameter
             const appointments = await response.json();
 
             // Get the grid container

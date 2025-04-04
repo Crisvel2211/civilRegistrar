@@ -148,7 +148,7 @@ function startOTPTimer() {
 }
 
 function deletePendingUser(email) {
-    fetch('http://localhost/group69/api/auth.php?action=delete_pending_user', {
+    fetch('https://civilregistrar.lgu2.com/api/auth.php?action=delete_pending_user', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -258,7 +258,7 @@ function deletePendingUser(email) {
             try {
                 await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate delay
 
-                const response = await fetch('http://localhost/group69/api/auth.php?action=register', {
+                const response = await fetch('https://civilregistrar.lgu2.com/api/auth.php?action=register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, email, password, role: 'resident' })
@@ -305,7 +305,7 @@ function deletePendingUser(email) {
             }
 
             try {
-                const response = await fetch('http://localhost/group69/api/auth.php?action=verify_otp', {
+                const response = await fetch('https://civilregistrar.lgu2.com/api/auth.php?action=verify_otp', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, otp }) // Include email in the request

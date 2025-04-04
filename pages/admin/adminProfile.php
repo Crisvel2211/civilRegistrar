@@ -65,7 +65,7 @@ adminLayout($updateProfileContent);
 
     function loadUserProfile() {
         const userId = localStorage.getItem('userId'); // Get userId from local storage
-        fetch(`http://localhost/group69/api/users.php?id=${userId}`)
+        fetch(`https://civilregistrar.lgu2.com/api/users.php?id=${userId}`)
             .then(response => response.json())
             .then(user => {
                 document.getElementById('userName').value = user.name;
@@ -81,7 +81,7 @@ adminLayout($updateProfileContent);
     function updateUserProfile(id, name, email, password, role) {
         const userId = localStorage.getItem('userId');
         const userRole = localStorage.getItem('role'); // Get userId from local storage
-        fetch('http://localhost/group69/api/users.php', {
+        fetch('https://civilregistrar.lgu2.com/api/users.php', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
