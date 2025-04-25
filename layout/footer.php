@@ -20,9 +20,9 @@
                     <h2 class='font-[600]'>About us</h2>
                 </div>
                 <ul class='flex flex-col gap-1'>
-                    <li><a href="/group69/services.php">Services</a></li>
-                    <li><a href="/group69/about.php">About</a></li>
-                    <li><a href="/group69/contact.php">Contact Us</a></li>
+                    <li><a href="https://civilregistrar.lgu2.com/services.php">Services</a></li>
+                    <li><a href="https://civilregistrar.lgu2.com/about.php">About</a></li>
+                    <li><a href="https://civilregistrar.lgu2.com/contact.php">Contact Us</a></li>
                    
                 </ul>
             </div>

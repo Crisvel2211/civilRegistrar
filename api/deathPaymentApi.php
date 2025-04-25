@@ -36,8 +36,8 @@ $checkoutData = [
             "send_email_receipt" => true,
             "show_description" => true,
             "show_line_items" => true,
-            "success_url" => "https://civilregistrar.lgu2.com//pages/resident/deathRegistration.php",
-            "cancel_url" => "https://civilregistrar.lgu2.com//pages/cancel.php"
+            "success_url" => "https://civilregistrar.lgu2.com/pages/resident/deathRegistration.php",
+            "cancel_url" => "https://civilregistrar.lgu2.com/pages/cancel.php"
         ]
     ]
 ];

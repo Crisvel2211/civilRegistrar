@@ -37,6 +37,8 @@ $updateProfileContent = "
                         <option value='birth'>Birth</option>
                         <option value='marriage'>Marriage</option>
                         <option value='death'>Death</option>
+                        <option value='burial'>Burial </option>
+                        
                     </select>
                 </div>
 

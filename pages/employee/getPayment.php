@@ -84,7 +84,8 @@ employeeLayout($updateProfileContent);
             data.data.forEach(payment => {
                 const row = document.createElement('tr');
                 row.classList.add('border-b', 'border-gray-200');
-
+                
+                const newPaymentID = generatePaymentID();
                 const paymentSource = payment.attributes.source?.type || 'N/A'; // Extract type from source object
                 const amount = (payment.attributes.amount / 100).toFixed(2); // Assuming amount is in cents
                 const description = payment.attributes.description || 'No description available'; // Description field
@@ -92,7 +93,7 @@ employeeLayout($updateProfileContent);
                 const name = payment.attributes.billing?.name || 'No name provided'; // Name field
 
                 row.innerHTML = `
-                    <td class='py-3 px-6'>${payment.id}</td>
+                    <td class='py-3 px-6'>${newPaymentID}</td>
                     <td class='py-3 px-6'>₱${amount}</td>
                     <td class='py-3 px-6 capitalize'>${paymentSource}</td>  
                     <td class='py-3 px-6'>${description}</td> 
@@ -116,6 +117,13 @@ employeeLayout($updateProfileContent);
             alert("Failed to load payments.");
         }
     }
+
+function generatePaymentID() {
+    const prefix = 'PAY';
+    const randomNumber = Math.floor(1000 + Math.random() * 9000); // 4-digit number between 1000–9999
+    return `${prefix}-${randomNumber}`;
+}
+
 
     function filterPayments() {
     const searchValue = document.getElementById('searchInput').value.toLowerCase();

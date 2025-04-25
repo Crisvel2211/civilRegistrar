@@ -56,13 +56,7 @@ $homeContent = "
                         <h2 class='font-semibold text-gray-700 text-center'>Legal Administrative Total <span id='legal-admin-count' class='font-bold'>0</span></h2>
                     </div>
                 </div>
-                 <!-- Swiper Slide 5 -->
-                <div class='swiper-slide'>
-                    <div class='flex flex-col justify-center items-center bg-teal-400 p-4 rounded-lg shadow h-[150px] w-[150px]'>
-                        <i class='fas fa-gavel text-teal-500 text-[30px] mb-2'></i>
-                        <h2 class='font-semibold text-gray-700 text-center'>Legal Administrative Total <span id='legal-admin-count' class='font-bold'>0</span></h2>
-                    </div>
-                </div>
+                
 
             </div>
         </div>
@@ -145,7 +139,7 @@ const fetchAnnouncements = async () => {
             announcementsContainer.innerHTML = `
                 <div class="p-4 flex justify-center w-full">
                     <video class="h-[200px]" autoplay loop muted>
-                        <source src="https://civilregistrar.lgu2.com/images/announcements.webm" type="video/mp4">
+                        <source src="http://localhost/group69/images/announcements.webm" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>

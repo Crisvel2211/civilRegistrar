@@ -349,7 +349,7 @@ function adminLayout($children) {
     function logout() {
         localStorage.clear();
         showToast('You have successfully logged out.', 'success');
-        window.location.href = 'http://localhosthttps://civilregistrar.lgu2.com/index.php';
+        window.location.href = 'https://civilregistrar.lgu2.com/index.php';
     }
 
          function showToast(message, type) {

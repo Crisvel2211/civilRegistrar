@@ -5,7 +5,7 @@ include 'db.php';
 $method = $_SERVER['REQUEST_METHOD'];
 
 // Define the base URL for the uploaded images
-$base_url = 'https://civilregistrar.lgu2.com//api/uploads/';
+$base_url = 'https://civilregistrar.lgu2.com/api/uploads/';
 
 // Check the request method
 if ($method == 'GET') {

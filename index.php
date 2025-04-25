@@ -4,17 +4,17 @@ $slides = [
     [
         'heading' => 'Streamlining Civil Registration for a Better Future',
         'text' => 'Welcome to the Local Civil Registrar System, where we simplify the process of registration, verification, and issuance of certificates. Our user-friendly platform ensures a hassle-free experience for all.',
-        'image' => 'images/content2.jpg',
+        'image' => 'images/image1.png',
     ],
     [
         'heading' => 'Simplified and Hassle-free Process',
         'text' => 'Our platform makes it easier than ever to manage civil registration tasks. Whether you are registering for a birth, marriage, or any other certificate, we’ve got you covered.',
-        'image' => 'images/content2.jpg',
+        'image' => 'images/image2.png',
     ],
     [
         'heading' => 'Secure and Reliable Services',
         'text' => 'We prioritize the security of your personal information, offering a reliable and trustworthy service to meet all your civil registration needs.',
-        'image' => 'images/content2.jpg',
+        'image' => 'images/image3.png',
     ]
 ];
 ?>
@@ -119,8 +119,13 @@ $cardArray = [
                                 </h1>
                                 <p class="text-[16px]"><?php echo htmlspecialchars($slide['text']); ?></p>
                                 <div class="flex justify-center md:justify-start items-center gap-3 mt-6">
+                                  <a href="https://civilregistrar.lgu2.com/pages/login.php">
                                     <button class="p-2 bg-blue-600 rounded-sm text-white">Get Started</button>
+                                    </a>
+                                    <a href="https://civilregistrar.lgu2.com/pages/login.php">
                                     <button class="p-2 border border-gray-500 rounded-sm">Learn More</button>
+                                </a>
+
                                 </div>
                             </div>
                             <div class="flex justify-center items-center p-5">
@@ -141,7 +146,7 @@ $cardArray = [
         <div class="w-full grid md:grid-cols-2 grid-cols-1  h-auto md:mt-[8rem] mt-[4rem] px-2 md:px-0">
             <div class="flex justify-center items-center order-last md:order-first p-4">
                <div class="w-full h-auto flex md:justify-start md:items-start justify-center items-center ">
-                <img src='images/content2.jpg' alt='images' class=' md:w-[90%] w-full md:h-[355px] h-[270px] rounded-sm'/>
+                <img src='images/image4.png' alt='images' class=' md:w-[90%] w-full md:h-[355px] h-[270px] rounded-sm'/>
                </div>
             </div>
 

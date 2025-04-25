@@ -1,7 +1,7 @@
 <?php
 $servername = "Localhost";
-$username = "civi_civilRegistrar"; 
-$password = "qq#^8rI3jHG6kKGp"; 
+$username = "civi_group69"; 
+$password = "dH7tlg@9xlp%1iCm"; 
 $dbname = "civi_civilRegistrar"; 
 $socket = '/run/mysqld/mysqld.sock';
 

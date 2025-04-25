@@ -15,8 +15,11 @@ $updateProfileContent = "
         <div class='container mx-auto p-6 bg-white rounded-lg shadow-lg relative w-[88%] mt-[3rem]'>
         
             <!-- Search and Filter Section -->
-            <div class='flex items-center justify-between mb-6'>
-                <input type='text' id='searchInput' placeholder='Search by first name' class='w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mr-4'>
+             <div class='flex items-center justify-between mb-6 gap-2'>
+                <input type='text' id='searchInput' placeholder='Search by Reference Number' class='w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mr-4'>
+
+                <input type='text' id='dateFilter' placeholder='Select date' class='p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'>
+
                 
                 <select id='statusFilter' class='p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'>
                     <option value=''>All</option>
@@ -26,7 +29,7 @@ $updateProfileContent = "
                 </select>
             </div>
 
-            <!-- permit Registration Table -->
+            <!-- legal Registration Table -->
             <div class='w-full overflow-x-auto'> <!-- Wrapper for responsiveness -->
                 <table class='w-full table-auto bg-white'>
                     <thead class='bg-gray-200'>
@@ -88,7 +91,7 @@ $updateProfileContent = "
                 <div class='bg-white rounded-lg shadow-lg max-w-sm w-full p-6'>
                     <div class='text-center'>
                         <h2 class='text-xl font-semibold text-gray-800 mb-4'>Confirm Deletion</h2>
-                        <p class='text-gray-600 mb-6'>Are you sure you want to delete this permit registration? This action cannot be undone.</p>
+                        <p class='text-gray-600 mb-6'>Are you sure you want to delete this legal registration? This action cannot be undone.</p>
                     </div>
                     <div class='flex justify-between'>
                         <button id='deleteModalCancelButton' class='w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 rounded-md transition duration-300 mr-2'>Cancel</button>
@@ -98,8 +101,8 @@ $updateProfileContent = "
             </div>
 
 
-            <!-- View permit Modal -->
-            <div id='viewpermitModal' class='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden'>
+            <!-- View legal Modal -->
+            <div id='viewlegalModal' class='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden'>
                 <div class='bg-white rounded-lg shadow-lg max-w-lg w-full p-6'>
                     <!-- Modal Header -->
                     <div class='flex justify-between items-center border-b pb-3 mb-4'>
@@ -110,8 +113,8 @@ $updateProfileContent = "
                     </div>
                     
                     <!-- Modal Body -->
-                    <div id='permitDetailsContent' class='space-y-3 text-sm text-gray-700'>
-                        <!-- permit details will be dynamically populated here -->
+                    <div id='legalDetailsContent' class='space-y-3 text-sm text-gray-700'>
+                        <!-- legal details will be dynamically populated here -->
                     </div>
                     
                     <!-- Modal Footer -->
@@ -132,64 +135,85 @@ employeeLayout($updateProfileContent);
 <script src='https://cdn.jsdelivr.net/npm/toastify-js'></script>
 
 <script>
-// Fetch the list of permit registrations for the specific employee
-const fetchpermitRegistrations = () => {
-    const search = document.getElementById('searchInput').value;
+// Fetch the list of legal registrations for the specific employee
+document.addEventListener('DOMContentLoaded', function () {
+    flatpickr("#dateFilter", {
+    dateFormat: "Y-m-d", // Only the date (e.g., 2025-04-15)
+    allowInput: true
+});
+
+
+    // Hook filters
+    document.getElementById('searchInput').addEventListener('input', fetchlegalRegistrations);
+    document.getElementById('statusFilter').addEventListener('change', fetchlegalRegistrations);
+    document.getElementById('dateFilter').addEventListener('change', fetchlegalRegistrations);
+
+    fetchlegalRegistrations(); // Initial load
+});
+
+const fetchlegalRegistrations = () => {
+    const search = document.getElementById('searchInput').value.trim();
     const status = document.getElementById('statusFilter').value;
-    const employeeId = localStorage.getItem('userId'); // Replace with the logged-in employee's ID
+    const createdAt = document.getElementById('dateFilter').value; // <-- grab date
+    const employeeId = localStorage.getItem('userId');
 
-    // Make sure to encode the search parameter for safe URL usage
-    const encodedSearch = encodeURIComponent(search);
+    const params = new URLSearchParams();
 
-    fetch(`https://civilregistrar.lgu2.com/api/legal.php?employee_id=${employeeId}&search=${encodedSearch}&status=${status}`)
+    if (employeeId) params.append('employee_id', employeeId);
+    if (search) params.append('search', encodeURIComponent(search));
+    if (status) params.append('status', status);
+    if (createdAt) params.append('created_at', createdAt); // <-- add to query
+
+    fetch(`https://civilregistrar.lgu2.com/api/legal.php?${params.toString()}`)
         .then(response => response.json())
         .then(data => {
-            if (Array.isArray(data)) {
-                const tableBody = document.querySelector('#usersTable');
-                tableBody.innerHTML = ''; // Clear previous entries
+            const tableBody = document.querySelector('#usersTable');
+            tableBody.innerHTML = '';
 
-                data.forEach(permit => {
-                    console.log(permit.status);
-                    const row = `
-                        <tr class='border-b border-x border-gray-300'>
-                            <td class='px-4 py-2 border-r border-gray-300'>${permit.case_reference_no}</td>
-                            <td class='px-4 py-2 text-center border-r border-gray-300'>${permit.user_name}</td> <!-- Display user name here -->
-                            <td class='px-4 py-2 text-center border-r border-gray-300'>
-                                <span class='${(permit.status === 'processing') ? 'bg-blue-200 text-blue-800' : (permit.status === 'completed') ? 'bg-green-300 text-green-800' : (permit.status === 'pending') ? 'bg-yellow-300 text-yellow-800' : 'bg-gray-200 text-gray-800'} text-xs font-medium px-2.5 py-0.5 rounded'>
-                                    ${permit.status}
-                                </span>
-                            </td>
-
-                            <td class='px-4 py-2 text-center border-r border-gray-300'>
-                                <button class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 transition duration-300' onclick='viewpermit(${permit.id})'>View</button>
-                            </td>
-                            <td class='px-4 py-2 flex justify-around'>
-                                <button class='text-blue-500 hover:text-blue-400' onclick='updateStatus(${permit.id})'>
-                                    <i class='fas fa-sync-alt'></i> 
-                                </button>
-                                <button class='text-red-500 hover:text-red-400' onclick='confirmDelete(${permit.id})'>
-                                    <i class='fas fa-trash'></i>
-                                </button>
-                            </td>
-                        </tr>
-                    `;
-                    tableBody.innerHTML += row;
-                });
-            } else {
-                console.error('Error fetching data:', data);
+            if (!Array.isArray(data)) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-4">No records found.</td></tr>`;
+                return;
             }
+
+            data.forEach(legal => {
+                const row = `
+                    <tr class='border-b border-x border-gray-300'>
+                        <td class='px-4 py-2 border-r border-gray-300'>${legal.reference_number}</td>
+                        <td class='px-4 py-2 text-center border-r border-gray-300'>${legal.user_name}</td>
+                        <td class='px-4 py-2 text-center border-r border-gray-300'>
+                            <span class='${getStatusClass(legal.status)} text-xs font-medium px-2.5 py-0.5 rounded'>
+                                ${legal.status}
+                            </span>
+                        </td>
+                        <td class='px-4 py-2 text-center border-r border-gray-300'>
+                            <button class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 transition duration-300' onclick='viewlegal(${legal.id})'>View</button>
+                        </td>
+                        <td class='px-4 py-2 flex justify-around'>
+                            <button class='text-blue-500 hover:text-blue-400' onclick='updateStatus(${legal.id})'>
+                                <i class='fas fa-sync-alt'></i>
+                            </button>
+                            <button class='text-red-500 hover:text-red-400' onclick='confirmDelete(${legal.id})'>
+                                <i class='fas fa-trash'></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
         })
         .catch(error => console.error('Error:', error));
 };
 
+// Helper to style status
+function getStatusClass(status) {
+    if (status === 'processing') return 'bg-blue-200 text-blue-800';
+    if (status === 'completed') return 'bg-green-300 text-green-800';
+    if (status === 'pending') return 'bg-yellow-300 text-yellow-800';
+    return 'bg-gray-200 text-gray-800';
+}
 
 
-// Call the function when the page loads or filters are changed
-document.getElementById('searchInput').addEventListener('input', fetchpermitRegistrations);
-document.getElementById('statusFilter').addEventListener('change', fetchpermitRegistrations);
-fetchpermitRegistrations(); // Initial call to fetch data
-
-let currentpermitId = null; // Store the current permit ID
+let currentlegalId = null; // Store the current legal ID
 
 
 function closeUpdatebutton() {
@@ -203,7 +227,7 @@ document.getElementById('modalConfirmButton').addEventListener('click', () => {
 
     if (newStatus) {
         const updatedData = {
-            id: currentpermitId,
+            id: currentlegalId,
             status: newStatus,
             employee_id: employeeId
         };
@@ -219,7 +243,7 @@ document.getElementById('modalConfirmButton').addEventListener('click', () => {
         .then(data => {
             if (data.success) {
                 showToast(data.message, 'success');
-                fetchpermitRegistrations();
+                fetchlegalRegistrations();
             } else {
                 showToast(data.message || 'An error occurred', 'error');
             }
@@ -233,11 +257,11 @@ document.getElementById('modalConfirmButton').addEventListener('click', () => {
     }
 });
 
-function updateStatus(permitId) {
-    currentpermitId = permitId; // Set the permit ID
+function updateStatus(legalId) {
+    currentlegalId = legalId; // Set the legal ID
 
-    // Fetch the current permit registration data to get the current status
-    fetch(`https://civilregistrar.lgu2.com/api/legal.php?id=${permitId}`)
+    // Fetch the current legal registration data to get the current status
+    fetch(`https://civilregistrar.lgu2.com/api/legal.php?id=${legalId}`)
         .then(response => response.json())
         .then(data => {
             if (data && data.status) {
@@ -272,7 +296,7 @@ window.addEventListener('click', (e) => {
 });
 
 
-const viewModal =  document.getElementById('viewpermitModal')
+const viewModal =  document.getElementById('viewlegalModal')
 
 function closeViewbutton(){
     viewModal.classList.add('hidden');
@@ -298,9 +322,9 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// Confirm deletion of a permit registration
-function confirmDelete(permitId) {
-    currentpermitId = permitId; // Set the current permit ID for deletion
+// Confirm deletion of a legal registration
+function confirmDelete(legalId) {
+    currentlegalId = legalId; // Set the current legal ID for deletion
     deleteModal.classList.remove('hidden'); // Show delete confirmation modal
 }
 
@@ -314,14 +338,14 @@ document.getElementById('deleteModalConfirmButton').addEventListener('click', ()
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ id: currentpermitId, employee_id: employeeId }) // Include employee ID if needed
+        body: JSON.stringify({ id: currentlegalId, employee_id: employeeId }) // Include employee ID if needed
     })
     .then(response => response.json())
     .then(data => {
         // Check for success message
         if (data.message) {
             showToast(data.message, 'success'); // Show success message
-            fetchpermitRegistrations(); // Refresh the table after deletion
+            fetchlegalRegistrations(); // Refresh the table after deletion
         } else if (data.error) {
             showToast(data.error || 'An error occurred'); // Show error message
         }
@@ -341,12 +365,12 @@ document.getElementById('deleteModalCancelButton').addEventListener('click', () 
 
 
     // Open the modal and populate details
-    function viewpermit(permitId) {
-        fetch(`https://civilregistrar.lgu2.com/api/legal.php?id=${permitId}`)
+    function viewlegal(legalId) {
+        fetch(`https://civilregistrar.lgu2.com/api/legal.php?id=${legalId}`)
             .then(response => response.json())
             .then(data => {
                 if (data) {
-                    const permitDetailsContent = `
+                    const legalDetailsContent = `
                     <div class="grid grid-cols-2 gap-4">
                     <p><strong>Case Number:</strong> ${data.case_reference_no}</p>
                     <p><strong>Services Name:</strong> ${data.service_name}</p>
@@ -359,23 +383,23 @@ document.getElementById('deleteModalCancelButton').addEventListener('click', () 
                     <p><strong>Created At</strong> ${data.created_at}</p>
                     </div>
                     `;
-                    document.getElementById('permitDetailsContent').innerHTML = permitDetailsContent;
-                    document.getElementById('viewpermitModal').classList.remove('hidden');
+                    document.getElementById('legalDetailsContent').innerHTML = legalDetailsContent;
+                    document.getElementById('viewlegalModal').classList.remove('hidden');
                 } else {
-                    showToast('permit registration not found.', 'error');
+                    showToast('legal registration not found.', 'error');
                 }
             })
-            .catch(error => console.error('Error fetching permit registration details:', error));
+            .catch(error => console.error('Error fetching legal registration details:', error));
     }
 
     // Close the modal on button click
     function closeViewbutton() {
-        document.getElementById('viewpermitModal').classList.add('hidden');
+        document.getElementById('viewlegalModal').classList.add('hidden');
     }
 
     // Close modal when clicking outside the modal content
     window.addEventListener('click', (e) => {
-        const modal = document.getElementById('viewpermitModal');
+        const modal = document.getElementById('viewlegalModal');
         if (e.target === modal) {
             closeViewbutton();
         }
@@ -384,7 +408,7 @@ document.getElementById('deleteModalCancelButton').addEventListener('click', () 
 
 // Close modal on button click
 document.getElementById('viewModalCloseButton').addEventListener('click', () => {
-    document.getElementById('viewpermitModal').classList.add('hidden'); // Hide the modal
+    document.getElementById('viewlegalModal').classList.add('hidden'); // Hide the modal
 });
 
 

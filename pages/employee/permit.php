@@ -14,9 +14,11 @@ $updateProfileContent = "
 
         <div class='container mx-auto p-6 bg-white rounded-lg shadow-lg relative w-[88%] mt-[3rem]'>
         
-            <!-- Search and Filter Section -->
-            <div class='flex items-center justify-between mb-6'>
-                <input type='text' id='searchInput' placeholder='Search by first name' class='w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mr-4'>
+             <div class='flex items-center justify-between mb-6 gap-2'>
+                <input type='text' id='searchInput' placeholder='Search by Reference Number' class='w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mr-4'>
+
+                <input type='text' id='dateFilter' placeholder='Select date' class='p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'>
+
                 
                 <select id='statusFilter' class='p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'>
                     <option value=''>All</option>
@@ -132,62 +134,82 @@ employeeLayout($updateProfileContent);
 <script src='https://cdn.jsdelivr.net/npm/toastify-js'></script>
 
 <script>
-// Fetch the list of permit registrations for the specific employee
+document.addEventListener('DOMContentLoaded', function () {
+    flatpickr("#dateFilter", {
+    dateFormat: "Y-m-d", // Only the date (e.g., 2025-04-15)
+    allowInput: true
+});
+
+
+    // Hook filters
+    document.getElementById('searchInput').addEventListener('input', fetchpermitRegistrations);
+    document.getElementById('statusFilter').addEventListener('change', fetchpermitRegistrations);
+    document.getElementById('dateFilter').addEventListener('change', fetchpermitRegistrations);
+
+    fetchpermitRegistrations(); // Initial load
+});
+
 const fetchpermitRegistrations = () => {
-    const search = document.getElementById('searchInput').value;
+    const search = document.getElementById('searchInput').value.trim();
     const status = document.getElementById('statusFilter').value;
-    const employeeId = localStorage.getItem('userId'); // Replace with the logged-in employee's ID
+    const createdAt = document.getElementById('dateFilter').value; // <-- grab date
+    const employeeId = localStorage.getItem('userId');
 
-    // Make sure to encode the search parameter for safe URL usage
-    const encodedSearch = encodeURIComponent(search);
+    const params = new URLSearchParams();
 
-    fetch(`https://civilregistrar.lgu2.com/api/permit_request_api.php?employee_id=${employeeId}&search=${encodedSearch}&status=${status}`)
+    if (employeeId) params.append('employee_id', employeeId);
+    if (search) params.append('search', encodeURIComponent(search));
+    if (status) params.append('status', status);
+    if (createdAt) params.append('created_at', createdAt); // <-- add to query
+
+    fetch(`https://civilregistrar.lgu2.com/api/permit_request_api.php?${params.toString()}`)
         .then(response => response.json())
         .then(data => {
-            if (Array.isArray(data)) {
-                const tableBody = document.querySelector('#usersTable');
-                tableBody.innerHTML = ''; // Clear previous entries
+            const tableBody = document.querySelector('#usersTable');
+            tableBody.innerHTML = '';
 
-                data.forEach(permit => {
-                    console.log(permit.status);
-                    const row = `
-                        <tr class='border-b border-x border-gray-300'>
-                            <td class='px-4 py-2 border-r border-gray-300'>${permit.reference_number}</td>
-                            <td class='px-4 py-2 text-center border-r border-gray-300'>${permit.user_name}</td> <!-- Display user name here -->
-                            <td class='px-4 py-2 text-center border-r border-gray-300'>
-                                <span class='${(permit.status === 'processing') ? 'bg-blue-200 text-blue-800' : (permit.status === 'completed') ? 'bg-green-300 text-green-800' : (permit.status === 'pending') ? 'bg-yellow-300 text-yellow-800' : 'bg-gray-200 text-gray-800'} text-xs font-medium px-2.5 py-0.5 rounded'>
-                                    ${permit.status}
-                                </span>
-                            </td>
-
-                            <td class='px-4 py-2 text-center border-r border-gray-300'>
-                                <button class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 transition duration-300' onclick='viewpermit(${permit.id})'>View</button>
-                            </td>
-                            <td class='px-4 py-2 flex justify-around'>
-                                <button class='text-blue-500 hover:text-blue-400' onclick='updateStatus(${permit.id})'>
-                                    <i class='fas fa-sync-alt'></i> 
-                                </button>
-                                <button class='text-red-500 hover:text-red-400' onclick='confirmDelete(${permit.id})'>
-                                    <i class='fas fa-trash'></i>
-                                </button>
-                            </td>
-                        </tr>
-                    `;
-                    tableBody.innerHTML += row;
-                });
-            } else {
-                console.error('Error fetching data:', data);
+            if (!Array.isArray(data)) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-4">No records found.</td></tr>`;
+                return;
             }
+
+            data.forEach(permit => {
+                const row = `
+                    <tr class='border-b border-x border-gray-300'>
+                        <td class='px-4 py-2 border-r border-gray-300'>${permit.reference_number}</td>
+                        <td class='px-4 py-2 text-center border-r border-gray-300'>${permit.user_name}</td>
+                        <td class='px-4 py-2 text-center border-r border-gray-300'>
+                            <span class='${getStatusClass(permit.status)} text-xs font-medium px-2.5 py-0.5 rounded'>
+                                ${permit.status}
+                            </span>
+                        </td>
+                        <td class='px-4 py-2 text-center border-r border-gray-300'>
+                            <button class='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-400 transition duration-300' onclick='viewpermit(${permit.id})'>View</button>
+                        </td>
+                        <td class='px-4 py-2 flex justify-around'>
+                            <button class='text-blue-500 hover:text-blue-400' onclick='updateStatus(${permit.id})'>
+                                <i class='fas fa-sync-alt'></i>
+                            </button>
+                            <button class='text-red-500 hover:text-red-400' onclick='confirmDelete(${permit.id})'>
+                                <i class='fas fa-trash'></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
         })
         .catch(error => console.error('Error:', error));
 };
 
+// Helper to style status
+function getStatusClass(status) {
+    if (status === 'processing') return 'bg-blue-200 text-blue-800';
+    if (status === 'completed') return 'bg-green-300 text-green-800';
+    if (status === 'pending') return 'bg-yellow-300 text-yellow-800';
+    return 'bg-gray-200 text-gray-800';
+}
 
-
-// Call the function when the page loads or filters are changed
-document.getElementById('searchInput').addEventListener('input', fetchpermitRegistrations);
-document.getElementById('statusFilter').addEventListener('change', fetchpermitRegistrations);
-fetchpermitRegistrations(); // Initial call to fetch data
 
 let currentpermitId = null; // Store the current permit ID
 

@@ -103,6 +103,7 @@ if ($method === 'GET') {
     $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
     $employeeId = isset($_GET['employee_id']) ? intval($_GET['employee_id']) : null;
     $status = isset($_GET['status']) ? $conn->real_escape_string($_GET['status']) : '';
+    $createdAt = isset($_GET['created_at']) ? $conn->real_escape_string($_GET['created_at']) : '';
 
     // Update the SQL query to include the join
     $sql = "SELECT br.*, u.name AS user_name 
@@ -122,6 +123,15 @@ if ($method === 'GET') {
     // Filter by status if provided
     if ($status) {
         $sql .= " AND br.status = '$status'";
+    }
+    if (!empty($createdAt)) {
+        if (strpos($createdAt, ':') !== false) {
+            // Full datetime
+            $sql .= " AND br.created_at = '$createdAt'";
+        } else {
+            // Just date
+            $sql .= " AND DATE(br.created_at) = '$createdAt'";
+        }
     }
 
     $result = $conn->query($sql);

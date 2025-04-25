@@ -86,6 +86,7 @@ data.data.slice(0, 5).forEach(payment => {
     const row = document.createElement('tr');
     row.classList.add('border-b', 'border-gray-200');
 
+    const newPaymentID = generatePaymentID();
     const paymentSource = payment.attributes.source?.type || 'N/A';
     const amount = (payment.attributes.amount / 100).toFixed(2);
     const description = payment.attributes.description || 'No description available';
@@ -93,7 +94,7 @@ data.data.slice(0, 5).forEach(payment => {
     const name = payment.attributes.billing?.name || 'No name provided';
 
     row.innerHTML = `
-        <td class='py-3 px-6'>${payment.id}</td>
+        <td class='py-3 px-6'>${newPaymentID}</td>
         <td class='py-3 px-6'>₱${amount}</td>
         <td class='py-3 px-6 capitalize'>${paymentSource}</td>  
         <td class='py-3 px-6'>${description}</td> 
@@ -105,6 +106,13 @@ data.data.slice(0, 5).forEach(payment => {
 
     paymentsTable.appendChild(row);
 });
+
+function generatePaymentID() {
+    const prefix = 'PAY';
+    const randomNumber = Math.floor(1000 + Math.random() * 9000); // 4-digit number between 1000–9999
+    return `${prefix}-${randomNumber}`;
+}
+
 
 
             // Attach event listener to search input
